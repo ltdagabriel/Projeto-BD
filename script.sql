@@ -1,143 +1,182 @@
 drop schema if exists projetobd;
 create schema projetobd;
 use projetobd;
-create table Faixa_Etaria(
-	codigo integer primary key,
-    idade varchar(30)
+CREATE TABLE Faixa_Etaria (
+    idade VARCHAR(30) PRIMARY KEY
 );
-create table obra(
-    codigo integer primary key,     
-    titulo varchar (30),
-    sinopse varchar(300),
-    Faixa_Etaria_codigo integer not null, 
-    data_lançamento date,
-    foreign key(Faixa_Etaria_codigo) references Faixa_Etaria(codigo)
-    
+CREATE TABLE obra (
+    codigo INTEGER PRIMARY KEY,
+    titulo VARCHAR(30),
+    sinopse VARCHAR(300),
+    Faixa_Etaria_idade VARCHAR(30) NOT NULL,
+    data_lancamento DATE,
+    FOREIGN KEY (Faixa_Etaria_idade)
+        REFERENCES Faixa_Etaria (idade)
 );
-create table genero(
-	codigo integer primary key,
-    nome varchar(20)
+CREATE TABLE genero (
+    nome VARCHAR(20) PRIMARY KEY
 );
-create table genero_obra(
-	genero_codigo integer,
-    obra_codigo integer,
-    primary key (genero_codigo,obra_codigo),
-    foreign key (obra_codigo) references obra(codigo),
-    foreign key (genero_codigo) references genero(codigo)
+CREATE TABLE genero_obra (
+    genero_nome VARCHAR(20),
+    obra_codigo INTEGER,
+    PRIMARY KEY (genero_NOME , obra_codigo),
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo),
+    FOREIGN KEY (genero_NOME)
+        REFERENCES genero (nome)
 );
-create table filme(
-    obra_codigo integer not null,
-    trailer varchar(300),
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE filme (
+    obra_codigo INTEGER NOT NULL,
+    trailer VARCHAR(300),
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-
-create table serie(
-	stattus varchar(100),
-    obra_codigo integer primary key,
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE serie (
+    stattus VARCHAR(100),
+    obra_codigo INTEGER PRIMARY KEY,
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-
-create table temporada(
-    numero integer,
-    n_episodios integer,
-    trailer varchar(300),
-    serie_codigo integer,
-    constraint temporada_key primary key(numero,serie_codigo),
-    foreign key(serie_codigo) references serie(obra_codigo)
+CREATE TABLE temporada (
+    numero INTEGER,
+    n_episodios INTEGER,
+    trailer VARCHAR(300),
+    serie_codigo INTEGER,
+    CONSTRAINT temporada_key PRIMARY KEY (numero , serie_codigo),
+    FOREIGN KEY (serie_codigo)
+        REFERENCES serie (obra_codigo)
 );
-
-create table episodio(
-    nome varchar(100),
-    numero integer,
-    sinopse varchar(200),
-    constraint episodio_key primary key(nome,numero),
-    temporada_numero integer not null,
-    foreign key(temporada_numero) references temporada(numero)
+CREATE TABLE episodio (
+    nome VARCHAR(100),
+    numero INTEGER,
+    sinopse VARCHAR(200),
+    CONSTRAINT episodio_key PRIMARY KEY (nome , numero),
+    temporada_numero INTEGER NOT NULL,
+    FOREIGN KEY (temporada_numero)
+        REFERENCES temporada (numero)
 );
-create table usuario(
-	id integer primary key,
-    nome varchar(30),
-    senha varchar(20),
-    email varchar(50) unique
+CREATE TABLE usuario (
+    id INTEGER PRIMARY KEY,
+    nome VARCHAR(30),
+    senha VARCHAR(20),
+    email VARCHAR(50) UNIQUE
 );
-create table administrador(
-	usuario_id integer not null,
-    codigo integer not null,
-    primary key(usuario_id,codigo),
-    foreign key(usuario_id) references usuario(id)
+CREATE TABLE administrador (
+    usuario_id INTEGER NOT NULL,
+    codigo INTEGER NOT NULL,
+    PRIMARY KEY (usuario_id , codigo),
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuario (id)
 );
-create table assistiu(
-	usuario_id integer not null,
-    obra_codigo integer not null,
-    datta datetime,
-    primary key(usuario_id,obra_codigo, datta),
-    foreign key(usuario_id) references usuario(id),
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE assistiu (
+    usuario_id INTEGER NOT NULL,
+    obra_codigo INTEGER NOT NULL,
+    datta DATETIME,
+    PRIMARY KEY (usuario_id , obra_codigo , datta),
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuario (id),
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-create table deseja_assistir(
-	usuario_id integer not null,
-    obra_codigo integer not null,
-    datta datetime,
-    primary key(usuario_id,obra_codigo, datta),
-    foreign key(usuario_id) references usuario(id),
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE deseja_assistir (
+    usuario_id INTEGER NOT NULL,
+    obra_codigo INTEGER NOT NULL,
+    datta DATETIME,
+    PRIMARY KEY (usuario_id , obra_codigo , datta),
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuario (id),
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-
-create table favorita(
-	usuario_id integer not null,
-    obra_codigo integer not null,
-    primary key(usuario_id,obra_codigo),
-    foreign key(usuario_id) references usuario(id),
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE favorita (
+    usuario_id INTEGER NOT NULL,
+    obra_codigo INTEGER NOT NULL,
+    PRIMARY KEY (usuario_id , obra_codigo),
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuario (id),
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-
-create table comentario(
-	usuario_id integer not null,
-    obra_codigo integer not null,
-    datta datetime not null,
-    texto varchar(300),
-    primary key(usuario_id,obra_codigo, datta),
-    foreign key(usuario_id) references usuario(id),
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE comentario (
+    usuario_id INTEGER NOT NULL,
+    obra_codigo INTEGER NOT NULL,
+    datta DATETIME NOT NULL,
+    texto VARCHAR(300),
+    PRIMARY KEY (usuario_id , obra_codigo , datta),
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuario (id),
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-create table idioma(
-	nome varchar(30),
-    sigla_pais varchar(2),
-    primary key(nome,sigla_pais),
-	obra_codigo integer not null,
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE idioma (
+    nome VARCHAR(30),
+    sigla_pais VARCHAR(2),
+    PRIMARY KEY (nome , sigla_pais),
+    obra_codigo INTEGER NOT NULL,
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-create table legenda(
-	nome varchar(30),
-    sigla_pais varchar(2),
-    primary key(nome,sigla_pais),
-	obra_codigo integer not null,
-    foreign key (obra_codigo) references obra(codigo)
+CREATE TABLE legenda (
+    nome VARCHAR(30),
+    sigla_pais VARCHAR(2),
+    PRIMARY KEY (nome , sigla_pais),
+    obra_codigo INTEGER NOT NULL,
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo)
 );
-create table personagem(
-	nome varchar(100) primary key
+CREATE TABLE personagem (
+    nome VARCHAR(100) PRIMARY KEY
 );
-
-create table personagem_obra(
-	personagem_nome varchar(100),
-	obra_codigo integer not null,
-    primary key(personagem_nome, obra_codigo),
-    foreign key (obra_codigo) references obra(codigo),
-    foreign key (personagem_nome) references personagem(nome)
+CREATE TABLE personagem_obra (
+    personagem_nome VARCHAR(100),
+    obra_codigo INTEGER NOT NULL,
+    PRIMARY KEY (personagem_nome , obra_codigo),
+    FOREIGN KEY (obra_codigo)
+        REFERENCES obra (codigo),
+    FOREIGN KEY (personagem_nome)
+        REFERENCES personagem (nome)
 );
-
-create table ator(
-	codigo integer primary key,
-    nome varchar(100),
-    idade integer,
-    sexo varchar(20),
-    biografia varchar(300)
+CREATE TABLE ator (
+    codigo INTEGER PRIMARY KEY,
+    nome VARCHAR(100),
+    idade INTEGER,
+    sexo VARCHAR(20),
+    biografia VARCHAR(300)
 );
-
-create table personagem_ator(
-	ator_codigo integer,
-	personagem_nome varchar(100) not null,
-    primary key (ator_codigo, personagem_nome),
-    foreign key (personagem_nome) references personagem(nome),
-    foreign key (ator_codigo) references ator(codigo)
+CREATE TABLE personagem_ator (
+    ator_codigo INTEGER,
+    personagem_nome VARCHAR(100) NOT NULL,
+    PRIMARY KEY (ator_codigo , personagem_nome),
+    FOREIGN KEY (personagem_nome)
+        REFERENCES personagem (nome),
+    FOREIGN KEY (ator_codigo)
+        REFERENCES ator (codigo)
 );
+insert into genero(nome) values 
+			('acao'),
+			('animacao'),
+			('aventura'),
+			('comedia'),
+			('drama'),
+			('terror'),
+			('suspense'),
+			('misterio'),
+			('fantasia');
+insert into usuario(id,nome,senha,email) values
+			(1,'Gabriel','123456','gabriel@abc.com'),
+			(2,'Caio','123456','caio@abc.com');
+insert into personagem(nome) values 
+			('Jon Snow'),
+			('Gregor Clegane'),
+			('Daenerys Targaryen'),
+			('Arya Stark');
+insert into faixa_etaria(idade) values
+			('Maiores de 17 anos'),
+			('Maiores de 18 anos');
+insert into obra(codigo,titulo,sinopse,faixa_etaria_idade,data_lancamento) values
+			(1,'Game of Trhones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','Maiores de 17 anos',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+insert into personagem_obra(personagem_nome,obra_codigo) values
+			('Jon Snow',1),
+			('Gregor Clegane',1),
+			('Daenerys Targaryen',1),
+			('Arya Stark',1);
