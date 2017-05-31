@@ -156,7 +156,7 @@ insert into personagem(nome) values
 			('Jon Snow'),
 			('Gregor Clegane'),
 			('Daenerys Targaryen'),
-			('Arya Stark');
+			('Arya Stark'),
 			('Sansa Stark');
 insert into faixa_etaria(idade) values
 			('Livre'),
@@ -195,18 +195,20 @@ insert into ator(codigo, nome, idade, sexo, biografia) values
 			(002, 'Sophie Turner', 21, 'feminino', 'Sophie Turner é uma atriz britânica, mais conhecida por interpretar Sansa Stark na série de televisão Game of Thrones.'),
 			(003, 'Kit Harington', 31, 'masculino', 'Christopher Catesby "Kit" Harington é um ator inglês de televisão, teatro e cinema. Mais conhecido por interpretar Jon Snow, um dos protagonistas da série Game Of Thrones transmitida desde 2011 pela emissora norte-americana HBO.');
 			
-insert into personagem_atorpersonagem_ator(ator_codigo, personagem_nome) values
+insert into personagem_ator(ator_codigo, personagem_nome) values
 			(001, 'Daenerys Targaryen'),
 			(002, 'Sansa Stark'),
 			(003, 'Jon Snow');
+insert into filme(obra_codigo) values
+			(2);
 
-<<<<<<< HEAD
-=======
-insert into filme(obra_codigo, trailer) values
-			(2,'algum link aqui');
->>>>>>> origin/master
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
     (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
 From obra O,serie S
 where O.codigo=S.obra_codigo;
+
+select O.titulo as 'Titulo',
+	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento'
+From obra O,filme F
+where O.codigo=F.obra_codigo;
