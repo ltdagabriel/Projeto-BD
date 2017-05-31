@@ -39,7 +39,6 @@ CREATE TABLE serie (
 );
 CREATE TABLE temporada (
     numero INTEGER,
-    n_episodios INTEGER,
     trailer VARCHAR(300),
     serie_codigo INTEGER,
     CONSTRAINT temporada_key PRIMARY KEY (numero , serie_codigo),
@@ -50,10 +49,14 @@ CREATE TABLE episodio (
     nome VARCHAR(100),
     numero INTEGER,
     sinopse VARCHAR(200),
-    CONSTRAINT episodio_key PRIMARY KEY (nome , numero),
+    datta date,
+    CONSTRAINT episodio_key PRIMARY KEY (numero,temporada_numero),
     temporada_numero INTEGER NOT NULL,
     FOREIGN KEY (temporada_numero)
-        REFERENCES temporada (numero)
+        REFERENCES temporada (numero),
+	temporada_codigo integer,
+    FOREIGN KEY (temporada_codigo)
+        REFERENCES temporada (serie_codigo)
 );
 CREATE TABLE usuario (
     id INTEGER PRIMARY KEY,
@@ -174,9 +177,32 @@ insert into faixa_etaria(idade) values
 			('Maiores de 17 anos'),
 			('Maiores de 18 anos');
 insert into obra(codigo,titulo,sinopse,faixa_etaria_idade,data_lancamento) values
-			(1,'Game of Trhones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','Maiores de 17 anos',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+			(1,'Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','Maiores de 17 anos',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+insert into genero_obra(genero_nome,obra_codigo) values
+			('drama',1),
+            ('acao',1),
+			('fantasia',1);
 insert into personagem_obra(personagem_nome,obra_codigo) values
 			('Jon Snow',1),
 			('Gregor Clegane',1),
 			('Daenerys Targaryen',1),
 			('Arya Stark',1);
+insert into serie(stattus,obra_codigo) values
+			('Em lançamento',1);
+insert into temporada(numero,serie_codigo) values
+			(1,1),
+			(2,1);
+insert into episodio(nome,numero,datta,temporada_numero,temporada_codigo) values
+			('Winter Is Coming',1,STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),1,1),
+			('The Kingsroad',2,STR_TO_DATE( "24/04/2011", "%d/%m/%Y" ),1,1),
+			('Lord Snow',3,STR_TO_DATE( "1/05/2011", "%d/%m/%Y" ),1,1),
+			('Cripples, Bastards, and Broken Things',4,STR_TO_DATE( "8/05/2011", "%d/%m/%Y" ),1,1),
+			('The North Remembers',1,STR_TO_DATE( "1/04/2012", "%d/%m/%Y" ),2,1),
+			('The Night Lands',2,STR_TO_DATE( "08/04/2012", "%d/%m/%Y" ),2,1),
+			('What Is Dead May Never Die',3,STR_TO_DATE( "15/04/2012", "%d/%m/%Y" ),2,1),
+			('Garden of Bones',4,STR_TO_DATE( "22/04/2012", "%d/%m/%Y" ),2,1);
+select O.titulo as 'Titulo',
+	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
+    (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
+From obra O,serie S
+where O.codigo=S.obra_codigo;
