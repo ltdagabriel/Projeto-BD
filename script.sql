@@ -7,7 +7,7 @@ CREATE TABLE Faixa_Etaria (
 CREATE TABLE obra (
     codigo INTEGER PRIMARY KEY,
     titulo VARCHAR(30),
-    sinopse VARCHAR(300),
+    sinopse VARCHAR(1000),
     Faixa_Etaria_idade VARCHAR(30) NOT NULL,
     data_lancamento DATE,
     FOREIGN KEY (Faixa_Etaria_idade)
@@ -27,7 +27,7 @@ CREATE TABLE genero_obra (
 );
 CREATE TABLE filme (
     obra_codigo INTEGER NOT NULL,
-    trailer VARCHAR(300),
+    trailer VARCHAR(1000),
     FOREIGN KEY (obra_codigo)
         REFERENCES obra (codigo)
 );
@@ -39,7 +39,7 @@ CREATE TABLE serie (
 );
 CREATE TABLE temporada (
     numero INTEGER,
-    trailer VARCHAR(300),
+    trailer VARCHAR(1000),
     serie_codigo INTEGER,
     CONSTRAINT temporada_key PRIMARY KEY (numero , serie_codigo),
     FOREIGN KEY (serie_codigo)
@@ -48,7 +48,7 @@ CREATE TABLE temporada (
 CREATE TABLE episodio (
     nome VARCHAR(100),
     numero INTEGER,
-    sinopse VARCHAR(200),
+    sinopse VARCHAR(1000),
     datta date,
     CONSTRAINT episodio_key PRIMARY KEY (numero,temporada_numero),
     temporada_numero INTEGER NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE comentario (
     usuario_id INTEGER NOT NULL,
     obra_codigo INTEGER NOT NULL,
     datta DATETIME NOT NULL,
-    texto VARCHAR(300),
+    texto VARCHAR(1000),
     PRIMARY KEY (usuario_id , obra_codigo , datta),
     FOREIGN KEY (usuario_id)
         REFERENCES usuario (id),
@@ -128,7 +128,7 @@ CREATE TABLE ator (
     nome VARCHAR(100),
     idade INTEGER,
     sexo VARCHAR(20),
-    biografia VARCHAR(300)
+    biografia VARCHAR(1000)
 );
 CREATE TABLE personagem_ator (
     ator_codigo INTEGER,
@@ -166,10 +166,7 @@ insert into faixa_etaria(idade) values
 insert into obra(codigo,titulo,sinopse,faixa_etaria_idade,data_lancamento) values
 			(1,'Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','Maiores de 17 anos',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
 			(2,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
-			(3,'Van Helsing','Van Helsing é uma produção do canal Syfy que acompanha a filha do lendário caçador de monstros Abraham Van Helsing. A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, é ressuscitada e descobre que os vampiros tomaram conta do planeta — e que ela é aquela que possui um poder único sobre eles. Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','Maiores de 14 anos',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),
-			(4,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
-			(5,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
-			(6,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ));
+			(3,'Van Helsing',' A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','Maiores de 14 anos',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ));			
 insert into genero_obra(genero_nome,obra_codigo) values
 			('drama',1),
             ('acao',1),
@@ -207,19 +204,33 @@ insert into personagem_ator(ator_codigo, personagem_nome) values
 insert into filme(obra_codigo) values
 			(2);
 
-insert into comentario(usuario_id, obra_codigo, datta, texto) values
+insert into comentario(usuario_id,obra_codigo, datta, texto) values
 			(2, 2, STR_TO_DATE( "31/05/2017", "%d/%m/%Y" ), 'Moana eh muito legal!');
 			(2, 2, STR_TO_DATE( "31/05/2017", "%d/%m/%Y" ), 'Brincadeira eu só gostei das musicas q!');
 
 insert into assistiu (usuario_id, obra_codigo, datta) values
-			(2, 2, STR_TO_DATE( "7/01/2017", "%d/%m/%Y" ), 'Moana eh muito legal!'));
+			(2, 2, STR_TO_DATE( "7/01/2017", "%d/%m/%Y" ));
+-- Series            
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
     (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
 From obra O,serie S
 where O.codigo=S.obra_codigo;
 
+-- Filmes
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento'
 From obra O,filme F
 where O.codigo=F.obra_codigo;
+
+-- Quem Assistiu Moana
+select U.nome
+from usuario U,obra O,assistiu A 
+where O.codigo=A.obra_codigo and
+	A.usuario_id=U.id and
+    O.titulo='Moana';
+select U.nome, C.texto, DATE_FORMAT( C.datta, "%d/%m/%Y" ) as 'Data'
+from usuario U,obra O,comentario C 
+where O.codigo=C.obra_codigo and
+	C.usuario_id=U.id and
+    O.titulo='Moana';
