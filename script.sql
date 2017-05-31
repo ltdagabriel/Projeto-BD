@@ -173,7 +173,9 @@ insert into personagem(nome) values
 			('Gregor Clegane'),
 			('Daenerys Targaryen'),
 			('Arya Stark');
+			('Sansa Stark');
 insert into faixa_etaria(idade) values
+			('Livre'),
 			('Maiores de 17 anos'),
 			('Maiores de 18 anos');
 insert into obra(codigo,titulo,sinopse,faixa_etaria_idade,data_lancamento) values
@@ -186,7 +188,8 @@ insert into personagem_obra(personagem_nome,obra_codigo) values
 			('Jon Snow',1),
 			('Gregor Clegane',1),
 			('Daenerys Targaryen',1),
-			('Arya Stark',1);
+			('Arya Stark',1),
+			('Sansa Stark',1);
 insert into serie(stattus,obra_codigo) values
 			('Em lançamento',1);
 insert into temporada(numero,serie_codigo) values
@@ -201,6 +204,16 @@ insert into episodio(nome,numero,datta,temporada_numero,temporada_codigo) values
 			('The Night Lands',2,STR_TO_DATE( "08/04/2012", "%d/%m/%Y" ),2,1),
 			('What Is Dead May Never Die',3,STR_TO_DATE( "15/04/2012", "%d/%m/%Y" ),2,1),
 			('Garden of Bones',4,STR_TO_DATE( "22/04/2012", "%d/%m/%Y" ),2,1);
+
+insert into ator(codigo, nome, idade, sexo, biografia) values
+			(001, 'Emilia Clarke', 31, 'feminino', 'Emilia Isabelle Euphemia Rose Clarke é uma atriz inglesa conhecida pela sua interpretação da personagem Daenerys Targaryen na série de televisão Game of Thrones, da HBO.'),
+			(002, 'Sophie Turner', 21, 'feminino', 'Sophie Turner é uma atriz britânica, mais conhecida por interpretar Sansa Stark na série de televisão Game of Thrones.'),
+			(003, 'Kit Harington', 31, 'masculino', 'Christopher Catesby "Kit" Harington é um ator inglês de televisão, teatro e cinema. Mais conhecido por interpretar Jon Snow, um dos protagonistas da série Game Of Thrones transmitida desde 2011 pela emissora norte-americana HBO.');
+			
+insert into representado(ator_codigo, personagem_nome) values
+			(001, 'Daenerys Targaryen'),
+			(002, 'Sansa Stark'),
+			(003, 'Jon Snow');
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
     (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
