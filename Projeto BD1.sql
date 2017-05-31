@@ -89,7 +89,7 @@ create table idioma(
     foreign key (obra_codigo) references obra(codigo)
 );
 create table legenda(
-	nome varchar(30),
+	idioma varchar(30),
     sigla_pais varchar(2),
     primary key(nome,sigla_pais),
 	obra_codigo integer not null,
