@@ -202,6 +202,9 @@ insert into personagem_ator(ator_codigo, personagem_nome) values
 insert into filme(obra_codigo) values
 			(2);
 
+insert into comentario(usuario_id, obra_codigo, datta, texto) values
+			(2, 2, STR_TO_DATE( "31/05/2017", "%d/%m/%Y" ), 'Moana eh muito legal!');
+
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
     (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
