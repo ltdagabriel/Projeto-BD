@@ -111,22 +111,6 @@ CREATE TABLE comentario (
     FOREIGN KEY (obra_codigo)
         REFERENCES obra (codigo)
 );
-CREATE TABLE idioma (
-    nome VARCHAR(30),
-    sigla_pais VARCHAR(2),
-    PRIMARY KEY (nome , sigla_pais),
-    obra_codigo INTEGER NOT NULL,
-    FOREIGN KEY (obra_codigo)
-        REFERENCES obra (codigo)
-);
-CREATE TABLE legenda (
-    nome VARCHAR(30),
-    sigla_pais VARCHAR(2),
-    PRIMARY KEY (nome , sigla_pais),
-    obra_codigo INTEGER NOT NULL,
-    FOREIGN KEY (obra_codigo)
-        REFERENCES obra (codigo)
-);
 CREATE TABLE personagem (
     nome VARCHAR(100) PRIMARY KEY
 );
@@ -214,6 +198,8 @@ insert into representado(ator_codigo, personagem_nome) values
 			(001, 'Daenerys Targaryen'),
 			(002, 'Sansa Stark'),
 			(003, 'Jon Snow');
+
+insert into 
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
     (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
