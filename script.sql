@@ -163,7 +163,8 @@ insert into faixa_etaria(idade) values
 			('Maiores de 17 anos'),
 			('Maiores de 18 anos');
 insert into obra(codigo,titulo,sinopse,faixa_etaria_idade,data_lancamento) values
-			(1,'Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','Maiores de 17 anos',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+			(1,'Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','Maiores de 17 anos',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			(2,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ));
 insert into genero_obra(genero_nome,obra_codigo) values
 			('drama',1),
             ('acao',1),
@@ -199,7 +200,8 @@ insert into representado(ator_codigo, personagem_nome) values
 			(002, 'Sansa Stark'),
 			(003, 'Jon Snow');
 
-insert into 
+insert into filme(obra_codigo, trailer) values
+			(2,'algum link aqui');
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
     (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
