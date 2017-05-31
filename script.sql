@@ -160,11 +160,16 @@ insert into personagem(nome) values
 			('Sansa Stark');
 insert into faixa_etaria(idade) values
 			('Livre'),
+			('Maiores de 14 anos'),
 			('Maiores de 17 anos'),
 			('Maiores de 18 anos');
 insert into obra(codigo,titulo,sinopse,faixa_etaria_idade,data_lancamento) values
 			(1,'Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','Maiores de 17 anos',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
-			(2,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ));
+			(2,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
+			(3,'Van Helsing','Van Helsing é uma produção do canal Syfy que acompanha a filha do lendário caçador de monstros Abraham Van Helsing. A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, é ressuscitada e descobre que os vampiros tomaram conta do planeta — e que ela é aquela que possui um poder único sobre eles. Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','Maiores de 14 anos',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),
+			(4,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
+			(5,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
+			(6,'Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ));
 insert into genero_obra(genero_nome,obra_codigo) values
 			('drama',1),
             ('acao',1),
