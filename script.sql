@@ -194,12 +194,11 @@ insert into ator(codigo, nome, idade, sexo, biografia) values
 			(002, 'Sophie Turner', 21, 'feminino', 'Sophie Turner é uma atriz britânica, mais conhecida por interpretar Sansa Stark na série de televisão Game of Thrones.'),
 			(003, 'Kit Harington', 31, 'masculino', 'Christopher Catesby "Kit" Harington é um ator inglês de televisão, teatro e cinema. Mais conhecido por interpretar Jon Snow, um dos protagonistas da série Game Of Thrones transmitida desde 2011 pela emissora norte-americana HBO.');
 			
-insert into representado(ator_codigo, personagem_nome) values
+insert into personagem_atorpersonagem_ator(ator_codigo, personagem_nome) values
 			(001, 'Daenerys Targaryen'),
 			(002, 'Sansa Stark'),
 			(003, 'Jon Snow');
 
-insert into 
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
     (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
