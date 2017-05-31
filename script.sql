@@ -209,6 +209,7 @@ insert into filme(obra_codigo) values
 
 insert into comentario(usuario_id, obra_codigo, datta, texto) values
 			(2, 2, STR_TO_DATE( "31/05/2017", "%d/%m/%Y" ), 'Moana eh muito legal!');
+			(2, 2, STR_TO_DATE( "31/05/2017", "%d/%m/%Y" ), 'Brincadeira eu só gostei das musicas q!');
 
 insert into assistiu (usuario_id, obra_codigo, datta) values
 			(2, 2, STR_TO_DATE( "7/01/2017", "%d/%m/%Y" ), 'Moana eh muito legal!'));
