@@ -151,7 +151,10 @@ insert into genero(nome) values
 			('fantasia');
 insert into usuario(id,nome,senha,email) values
 			(1,'Gabriel','123456','gabriel@abc.com'),
-			(2,'Caio','123456','caio@abc.com');
+			(2,'Caio','123456','caio@abc.com'),
+			(3,'adm','adm','adm@adm.com');
+insert into administrador values
+			(3,1);
 insert into personagem(nome) values 
 			('Jon Snow'),
 			('Gregor Clegane'),
@@ -178,10 +181,26 @@ insert into personagem_obra(personagem_nome,obra_codigo) values
 			('Arya Stark',1),
 			('Sansa Stark',1);
 insert into serie(stattus,obra_codigo) values
-			('Em lançamento',1);
+			('Incompleto',1),
+			('Renovada',3);
 insert into temporada(numero,serie_codigo) values
 			(1,1),
-			(2,1);
+			(2,1),
+			(1,3);
+insert into episodio(numero,datta,temporada_numero,temporada_codigo) values
+			(1,STR_TO_DATE( "31/07/2016", "%d/%m/%Y" ),1,3),
+			(2,STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ),1,3),
+			(3,STR_TO_DATE( "30/09/2016", "%d/%m/%Y" ),1,3),
+			(4,STR_TO_DATE( "7/10/2016", "%d/%m/%Y" ),1,3),
+			(5,STR_TO_DATE( "14/10/2016", "%d/%m/%Y" ),1,3),
+			(6,STR_TO_DATE( "21/10/2016", "%d/%m/%Y" ),1,3),
+			(7,STR_TO_DATE( "28/10/2016", "%d/%m/%Y" ),1,3),
+			(8,STR_TO_DATE( "4/11/2016", "%d/%m/%Y" ),1,3),
+			(9,STR_TO_DATE( "11/11/2016", "%d/%m/%Y" ),1,3),
+			(10,STR_TO_DATE( "18/11/2016", "%d/%m/%Y" ),1,3),
+			(11,STR_TO_DATE( "25/11/2016", "%d/%m/%Y" ),1,3),
+			(12,STR_TO_DATE( "2/12/2016", "%d/%m/%Y" ),1,3),
+			(13,STR_TO_DATE( "9/12/2016", "%d/%m/%Y" ),1,3);
 insert into episodio(nome,numero,datta,temporada_numero,temporada_codigo) values
 			('Winter Is Coming',1,STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),1,1),
 			('The Kingsroad',2,STR_TO_DATE( "24/04/2011", "%d/%m/%Y" ),1,1),
@@ -214,10 +233,11 @@ insert into assistiu (usuario_id, obra_codigo, datta) values
 -- Series            
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
-    (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada'
+    (select count(*) from temporada T where T.serie_codigo=S.obra_codigo) as 'Numero de Temporada',
+    S.stattus as 'Status'
 From obra O,serie S
 where O.codigo=S.obra_codigo;
-
+/*
 -- Filmes
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento'
@@ -236,5 +256,5 @@ from usuario U,obra O,comentario C
 where O.codigo=C.obra_codigo and
 	C.usuario_id=U.id and
     O.titulo='Moana'
-
 order by C.datta desc;
+*/
