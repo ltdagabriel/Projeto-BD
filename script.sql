@@ -205,8 +205,9 @@ insert into filme(obra_codigo) values
 			(2);
 
 insert into comentario(usuario_id,obra_codigo, datta, texto) values
-			(2, 2, STR_TO_DATE( "31/05/2017", "%d/%m/%Y" ), 'Moana eh muito legal!');
-			(2, 2, STR_TO_DATE( "31/05/2017", "%d/%m/%Y" ), 'Brincadeira eu só gostei das musicas q!');
+			(2, 2, STR_TO_DATE( "31/05/2017-13:20:13", "%d/%m/%Y-%T" ), 'Moana eh muito legal!'),
+			(2, 2, STR_TO_DATE( "31/05/2017-13:20:50", "%d/%m/%Y-%T" ), 'Brincadeira eu só gostei das musicas q!'),
+			(1, 2, STR_TO_DATE( "31/05/2017-21:00:50", "%d/%m/%Y-%T" ), 'Tenho que assistir!');
 
 insert into assistiu (usuario_id, obra_codigo, datta) values
 			(2, 2, STR_TO_DATE( "7/01/2017", "%d/%m/%Y" ));
@@ -229,8 +230,11 @@ from usuario U,obra O,assistiu A
 where O.codigo=A.obra_codigo and
 	A.usuario_id=U.id and
     O.titulo='Moana';
+-- comentarios de Moana
 select U.nome, C.texto, DATE_FORMAT( C.datta, "%d/%m/%Y" ) as 'Data'
 from usuario U,obra O,comentario C 
 where O.codigo=C.obra_codigo and
 	C.usuario_id=U.id and
-    O.titulo='Moana';
+    O.titulo='Moana'
+
+order by C.datta desc;
