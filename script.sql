@@ -237,7 +237,7 @@ select O.titulo as 'Titulo',
     S.stattus as 'Status'
 From obra O,serie S
 where O.codigo=S.obra_codigo;
-/*
+
 -- Filmes
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento'
@@ -257,4 +257,3 @@ where O.codigo=C.obra_codigo and
 	C.usuario_id=U.id and
     O.titulo='Moana'
 order by C.datta desc;
-*/
