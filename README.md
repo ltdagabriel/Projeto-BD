@@ -1,11 +1,12 @@
-## Parte um 
+## Projeto BD Passos
 
-* MER Desenhar 
-* Modelo relacional Usando workbench
+> MER Desenhar
+![MER](MER.pdf)
+> Modelo relacional Usando workbench
 
 ## Site
-
-- https://ltdagabriel.github.io/Projeto-BD/site/
+> Em construção
+> [Telas](https://ltdagabriel.github.io/Projeto-BD/site/)
 
 ## Falta
 
