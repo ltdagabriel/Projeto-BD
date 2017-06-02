@@ -1,4 +1,8 @@
 # Projeto-BD
+## Parte um 
+* MER Desenhar 
+* Modelo relacional Usando workbench
+## Falta
 - Conectar sistema web com banco de dados
 - Modificar dados 
 - retorno de dados
@@ -9,5 +13,3 @@
 - Mysql
 - HTML, CSS, Javascript, framework
 - Java
-# - MER Desenhar 
-# - Modelo relacional Usando workbench
