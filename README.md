@@ -5,7 +5,7 @@
 
 ## Site
 
-* https://ltdagabriel.github.io/Projeto-BD/site/
+- https://ltdagabriel.github.io/Projeto-BD/site/
 
 ## Falta
 
