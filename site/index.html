@@ -35,46 +35,12 @@
 		</div>
 	</div>
 	<div class="dropdown">
-		<a class="dropbtn" onclick="carrega('#conteudo','cadastro.html')" >Registro</a>
+		<button onclick="cadastro.html" class="dropbtn">Registrar</button>
 	</div>
 	
 </div>
 <div id='conteudo'>
-	<div id='conteudo' class="col-md-12 col-sm-12 com-lg-12 container">
-		<form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
-			  <table width="625" border="0">
-				<tr>
-				  <td width="69">Nome:</td>
-				  <td width="546"><input name="nome" type="text" id="nome" size="70" maxlength="60" />
-					<span class="style1">*</span></td>
-				</tr>
-				<tr>
-				  <td>Email:</td>
-				  <td><input name="email" type="text" id="email" size="70" maxlength="60" />
-				  <span class="style1">*</span></td>
-				</tr>
-				<tr>
-				  <td>Login:</td>
-				  <td><input name="login" type="text" id="login" maxlength="12" />
-					<span class="style1">*</span></td>
-				</tr>
-				<tr>
-				  <td>Senha:</td>
-				  <td><input name="senha" type="password" id="senha" maxlength="12" />
-					  <span class="style1">*</span></td>
-				</tr>
-				<tr>
-				  <td colspan="2"><p>
-					<input name="cadastrar" type="submit" id="cadastrar" value="Concluir meu Cadastro!" /> 
-					<br />
-					  <input name="limpar" type="reset" id="limpar" value="Limpar Campos preenchidos!" />
-					  <br />
-					  <span class="style1">* Campos com * s&atilde;o obrigat&oacute;rios!          </span></p>
-				  <p>&nbsp; </p></td>
-				</tr>
-			  </table>
-		</form>
-	</div>
+	
 </div>
 	<script src="style/js/jquery.js"></script>
 	<script type='text/javascript'  src ="style\js\include.js">	</script>
