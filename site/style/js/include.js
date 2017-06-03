@@ -18,6 +18,31 @@ window.onclick = function(event) {
     }
   }
 }
-function carrega(destino,link){
-	$(destino).load(link);
+function validaCampo()
+{
+if(document.cadastro.nome.value=="")
+	{
+	alert("O Campo nome ÃÂ© obrigatÃÂ³rio!");
+	return false;
+	}
+else
+	if(document.cadastro.email.value=="")
+	{
+	alert("O Campo email ÃÂ© obrigatÃÂ³rio!");
+	return false;
+	}
+else
+	if(document.cadastro.login.value=="")
+	{
+	alert("O Campo Login ÃÂ© obrigatÃÂ³rio!");
+	return false;
+	}
+else	
+if(document.cadastro.senha.value=="")
+	{
+	alert("Digite uma senha!");
+	return false;
+	}
+else
+return true;
 }

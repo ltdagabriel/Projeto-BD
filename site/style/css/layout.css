@@ -15,6 +15,11 @@
     position: relative;
     display: inline-block;
 }
+#menu{
+	position: relative;
+	width:96%;
+	position:2%;
+}
 
 .dropdown-content {
     display: none;
