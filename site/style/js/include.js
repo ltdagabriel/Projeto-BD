@@ -18,3 +18,6 @@ window.onclick = function(event) {
     }
   }
 }
+function carrega(destino,link){
+	$(destino).load(link);
+}
