@@ -52,62 +52,60 @@ CREATE TABLE episodio (
     datta date,
     CONSTRAINT episodio_key PRIMARY KEY (numero,temporada_numero),
     temporada_numero INTEGER NOT NULL,
-    FOREIGN KEY (temporada_numero)
-        REFERENCES temporada (numero),
 	temporada_codigo integer,
-    FOREIGN KEY (temporada_codigo)
-        REFERENCES temporada (serie_codigo)
+    FOREIGN KEY (temporada_codigo,temporada_numero)
+        REFERENCES temporada (serie_codigo,numero)
 );
 CREATE TABLE usuario (
-    id INTEGER PRIMARY KEY,
+    login VARCHAR(30) PRIMARY KEY,
     nome VARCHAR(30),
     senha VARCHAR(20),
     email VARCHAR(50) UNIQUE
 );
 CREATE TABLE administrador (
-    usuario_id INTEGER NOT NULL,
+    usuario_login VARCHAR(30) NOT NULL,
     codigo INTEGER NOT NULL,
-    PRIMARY KEY (usuario_id , codigo),
-    FOREIGN KEY (usuario_id)
-        REFERENCES usuario (id)
+    PRIMARY KEY (usuario_login , codigo),
+    FOREIGN KEY (usuario_login)
+        REFERENCES usuario (login)
 );
 CREATE TABLE assistiu (
-    usuario_id INTEGER NOT NULL,
+    usuario_login VARCHAR(30) NOT NULL,
     obra_codigo INTEGER NOT NULL,
     datta DATETIME,
     PRIMARY KEY (usuario_id , obra_codigo , datta),
-    FOREIGN KEY (usuario_id)
-        REFERENCES usuario (id),
+    FOREIGN KEY (usuario_login)
+        REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
         REFERENCES obra (codigo)
 );
 CREATE TABLE deseja_assistir (
-    usuario_id INTEGER NOT NULL,
+    usuario_login VARCHAR(30) NOT NULL,
     obra_codigo INTEGER NOT NULL,
     datta DATETIME,
     PRIMARY KEY (usuario_id , obra_codigo , datta),
-    FOREIGN KEY (usuario_id)
-        REFERENCES usuario (id),
+    FOREIGN KEY (usuario_login)
+        REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
         REFERENCES obra (codigo)
 );
 CREATE TABLE favorita (
-    usuario_id INTEGER NOT NULL,
+    usuario_login VARCHAR(30) NOT NULL,
     obra_codigo INTEGER NOT NULL,
     PRIMARY KEY (usuario_id , obra_codigo),
-    FOREIGN KEY (usuario_id)
-        REFERENCES usuario (id),
+    FOREIGN KEY (usuario_login)
+        REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
         REFERENCES obra (codigo)
 );
 CREATE TABLE comentario (
-    usuario_id INTEGER NOT NULL,
+	usuario_login VARCHAR(30) NOT NULL,
     obra_codigo INTEGER NOT NULL,
     datta DATETIME NOT NULL,
     texto VARCHAR(1000),
     PRIMARY KEY (usuario_id , obra_codigo , datta),
-    FOREIGN KEY (usuario_id)
-        REFERENCES usuario (id),
+    FOREIGN KEY (usuario_login)
+        REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
         REFERENCES obra (codigo)
 );
