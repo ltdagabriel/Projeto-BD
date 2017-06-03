@@ -6,10 +6,9 @@
 - [x] 3 CruD 
 
 ## Site
-- [ ] Em construção
 - [ ] [Telas](https://ltdagabriel.github.io/Projeto-BD/site/)
 
-# Linguam usada
+# Linguagem usada
 
 - [ ] Mysql
 - [ ] HTML, CSS, Javascript, framework
