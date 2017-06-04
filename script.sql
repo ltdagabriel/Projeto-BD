@@ -50,7 +50,7 @@ CREATE TABLE episodio (
     numero INTEGER,
     sinopse VARCHAR(1000),
     datta date,
-    CONSTRAINT episodio_key PRIMARY KEY (numero,temporada_numero),
+    CONSTRAINT episodio_key PRIMARY KEY (numero,temporada_numero,temporada_codigo),
     temporada_numero INTEGER NOT NULL,
 	temporada_codigo integer,
     FOREIGN KEY (temporada_codigo,temporada_numero)
@@ -73,7 +73,7 @@ CREATE TABLE assistiu (
     usuario_login VARCHAR(30) NOT NULL,
     obra_codigo INTEGER NOT NULL,
     datta DATETIME,
-    PRIMARY KEY (usuario_id , obra_codigo , datta),
+    PRIMARY KEY (usuario_login , obra_codigo , datta),
     FOREIGN KEY (usuario_login)
         REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
@@ -83,7 +83,7 @@ CREATE TABLE deseja_assistir (
     usuario_login VARCHAR(30) NOT NULL,
     obra_codigo INTEGER NOT NULL,
     datta DATETIME,
-    PRIMARY KEY (usuario_id , obra_codigo , datta),
+    PRIMARY KEY (usuario_login , obra_codigo , datta),
     FOREIGN KEY (usuario_login)
         REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
@@ -92,7 +92,7 @@ CREATE TABLE deseja_assistir (
 CREATE TABLE favorita (
     usuario_login VARCHAR(30) NOT NULL,
     obra_codigo INTEGER NOT NULL,
-    PRIMARY KEY (usuario_id , obra_codigo),
+    PRIMARY KEY (usuario_login , obra_codigo),
     FOREIGN KEY (usuario_login)
         REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
@@ -103,7 +103,7 @@ CREATE TABLE comentario (
     obra_codigo INTEGER NOT NULL,
     datta DATETIME NOT NULL,
     texto VARCHAR(1000),
-    PRIMARY KEY (usuario_id , obra_codigo , datta),
+    PRIMARY KEY (usuario_login , obra_codigo , datta),
     FOREIGN KEY (usuario_login)
         REFERENCES usuario (login),
     FOREIGN KEY (obra_codigo)
@@ -147,10 +147,10 @@ insert into genero(nome) values
 			('suspense'),
 			('misterio'),
 			('fantasia');
-insert into usuario(id,nome,senha,email) values
-			(1,'Gabriel','123456','gabriel@abc.com'),
-			(2,'Caio','123456','caio@abc.com'),
-			(3,'adm','adm','adm@adm.com');
+insert into usuario(login,nome,senha,email) values
+			('1','Gabriel','123456','gabriel@abc.com'),
+			('2','Caio','123456','caio@abc.com'),
+			('3','adm','adm','adm@adm.com');
 insert into administrador values
 			(3,1);
 insert into personagem(nome) values 
@@ -221,13 +221,13 @@ insert into personagem_ator(ator_codigo, personagem_nome) values
 insert into filme(obra_codigo) values
 			(2);
 
-insert into comentario(usuario_id,obra_codigo, datta, texto) values
-			(2, 2, STR_TO_DATE( "31/05/2017-13:20:13", "%d/%m/%Y-%T" ), 'Moana eh muito legal!'),
-			(2, 2, STR_TO_DATE( "31/05/2017-13:20:50", "%d/%m/%Y-%T" ), 'Brincadeira eu só gostei das musicas q!'),
-			(1, 2, STR_TO_DATE( "31/05/2017-21:00:50", "%d/%m/%Y-%T" ), 'Tenho que assistir!');
+insert into comentario(usuario_login,obra_codigo, datta, texto) values
+			('2', 2, STR_TO_DATE( "31/05/2017-13:20:13", "%d/%m/%Y-%T" ), 'Moana eh muito legal!'),
+			('2', 2, STR_TO_DATE( "31/05/2017-13:20:50", "%d/%m/%Y-%T" ), 'Brincadeira eu só gostei das musicas q!'),
+			('1', 2, STR_TO_DATE( "31/05/2017-21:00:50", "%d/%m/%Y-%T" ), 'Tenho que assistir!');
 
-insert into assistiu (usuario_id, obra_codigo, datta) values
-			(2, 2, STR_TO_DATE( "7/01/2017", "%d/%m/%Y" ));
+insert into assistiu (usuario_login, obra_codigo, datta) values
+			('2', 2, STR_TO_DATE( "7/01/2017", "%d/%m/%Y" ));
 -- Series            
 select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento',
@@ -241,17 +241,18 @@ select O.titulo as 'Titulo',
 	DATE_FORMAT( O.data_lancamento, "%d/%m/%Y" ) as 'Data de Lancamento'
 From obra O,filme F
 where O.codigo=F.obra_codigo;
-
+/*login
 -- Quem Assistiu Moana
 select U.nome
 from usuario U,obra O,assistiu A 
 where O.codigo=A.obra_codigo and
-	A.usuario_id=U.id and
+	A.usuario_login=U.id and
     O.titulo='Moana';
 -- comentarios de Moana
 select U.nome, C.texto, DATE_FORMAT( C.datta, "%d/%m/%Y" ) as 'Data'
 from usuario U,obra O,comentario C 
 where O.codigo=C.obra_codigo and
-	C.usuario_id=U.id and
+	C.usuario_login=U.id and
     O.titulo='Moana'
-order by C.datta desc;
+order by C.datta desc;*/
+select * from episodio;

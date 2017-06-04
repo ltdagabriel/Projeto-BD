@@ -34,8 +34,8 @@ if (!$banco)
  
  
  
-$query = "INSERT INTO `clientes` ( `nome` , `email` , `sexo` , `ddd` , `telefone` , `endereço` , `cidade` , `estado` , `bairro` , `país` , `login` , `senha` , `news` , `id` ) 
-VALUES ('$nome', '$email', '$sexo', '$ddd', '$tel', '$endereco', '$cidade', '$estado', '$bairro', '$pais', '$login', '$senha', '$news', '')";
+$query = "INSERT INTO `usuario` ( `nome` , `email` , `login` , `senha` ) 
+VALUES ('$nome', '$email','$login', '$senha',)";
  
 mysql_query($query,$conexao);
  

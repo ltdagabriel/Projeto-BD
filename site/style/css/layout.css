@@ -1,3 +1,7 @@
+body{
+	margin-left:10%;
+	margin-right:10%;
+}
 .dropbtn {
     background-color: powderblue;
     color: white;
@@ -5,6 +9,10 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
+}
+.espaco{
+	padding: 5%;
+	
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -15,11 +23,7 @@
     position: relative;
     display: inline-block;
 }
-#menu{
-	position: relative;
-	width:96%;
-	position:2%;
-}
+
 
 .dropdown-content {
     display: none;
