@@ -68,6 +68,7 @@
 	</div>
 </div>
 <div id='conteudo'>
+	<h1> Lista de Episódios</h1>
 	<?php
 	// cria a instrução SQL que vai selecionar os dados
 	$sql = "SELECT numero, nome, datta FROM episodio";
@@ -78,7 +79,7 @@
     // output data of each row
 		while($row = $dados->fetch_assoc()) {
 			echo "
-				<div clas='col-lg-3 col-md-3 col-sm-6'>
+				<div class='col-lg-3 col-md-3 col-sm-6'>
 				Episodio: " . $row["numero"]. " - Nome: " . $row["nome"]. " Lançado em: " . $row["datta"]. "</div>";
 		}
 	} else {
