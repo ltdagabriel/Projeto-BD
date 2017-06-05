@@ -1,6 +1,6 @@
-drop schema if exists projetobd;
-create schema projetobd;
-use projetobd;
+drop schema if exists MyRobbie;
+create schema MyRobbie;
+use MyRobbie;
 CREATE TABLE Faixa_Etaria (
     idade VARCHAR(30) PRIMARY KEY
 );
@@ -26,7 +26,7 @@ CREATE TABLE genero_obra (
         REFERENCES genero (nome)
 );
 CREATE TABLE filme (
-    obra_codigo INTEGER NOT NULL,
+    obra_codigo INTEGER PRIMARY KEY,
     trailer VARCHAR(1000),
     FOREIGN KEY (obra_codigo)
         REFERENCES obra (codigo)
