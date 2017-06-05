@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include("conector.php"); ?>
 <html lang="pt-BR">
 <html>
 <head>
@@ -68,12 +68,30 @@
 	</div>
 </div>
 <div id='conteudo'>
-	
+	<?php
+	// cria a instrução SQL que vai selecionar os dados
+	$sql = "SELECT numero, nome, datta FROM episodio";
+	// executa a query
+	$dados = $con->query($sql) or die(mysql_error());
+
+	if ($dados->num_rows > 0) {
+    // output data of each row
+		while($row = $dados->fetch_assoc()) {
+			echo "
+				<div clas='col-lg-3 col-md-3 col-sm-6'>
+				Episodio: " . $row["numero"]. " - Nome: " . $row["nome"]. " Lançado em: " . $row["datta"]. "</div>";
+		}
+	} else {
+		echo "0 results";
+	}
+	$con->close();
+?>
 </div>
 	<script src="style/js/jquery.js"></script>
 	<script type='text/javascript'  src ="style\js\include.js">	</script>
 	<script src="style/js/bootstrap.js"></script>
 	<script src="style/js/bootstrap.min.js"></script>
 	<script src="style/js/navbar-animation-fix.js"></script>
+	
 </body>
 </html> 
