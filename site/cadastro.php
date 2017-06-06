@@ -7,39 +7,43 @@
  
 <body>
 <?php 
-//PREENCHA OS DADOS DE CONEXÃO A SEGUIR:
- 
-$host= 'localhost';
-$bd= 'root';
-$senhabd= 'root';
- 
-$userbd = $bd; 
- 
- 
-// RECEBENDO OS DADOS PREENCHIDOS DO FORMULÁRIO !
-$nome	= $_POST ["nome"];	//atribuição do campo "nome" vindo do formulário para variavel	
-$email	= $_POST ["email"];	//atribuição do campo "email" vindo do formulário para variavel
-$login	= $_POST ["login"];	//atribuição do campo "login" vindo do formulário para variavel
-$senha	= $_POST ["senha"];	//atribuição do campo "senha" vindo do 
-//Gravando no banco de dados !
- 
-//conectando com o localhost - mysql
-$conexao = mysql_connect($host,$bd, $senhabd);
-if (!$conexao)
-	die ("Erro de conexão com localhost, o seguinte erro ocorreu -> ".mysql_error());
-//conectando com a tabela do banco de dados
-$banco = mysql_select_db($bd,$conexao);
-if (!$banco)
-	die ("Erro de conexão com banco de dados, o seguinte erro ocorreu -> ".mysql_error());
- 
- 
- 
-$query = "INSERT INTO `usuario` ( `nome` , `email` , `login` , `senha` ) 
-VALUES ('$nome', '$email','$login', '$senha',)";
- 
-mysql_query($query,$conexao);
- 
-echo "Seu cadastro foi realizado com sucesso!<br>Agradecemos a atenção.";
-?> 
+
+$host = "localhost";
+	$db   = "myrobbie";
+	$user = "gabriel";
+	$pass = "";
+
+$login = $_POST['login'];
+$nome = $_POST['nome'];
+$email = $_POST['email'];
+$senha = MD5($_POST['senha']);
+
+$connect = new mysqli($host, $user, $pass,$db); 
+$query_select = "SELECT login FROM usuario WHERE login = '$login'";
+$select = $connect->query($query_select);
+$array = $select->fetch_assoc();
+$logarray = $array['login'];
+
+  if($login == "" || $login == null){
+    echo"<script language='javascript' type='text/javascript'>alert('O campo login deve ser preenchido');window.location.href='cadastro.html';</script>";
+
+    }else{
+      if($logarray == $login){
+
+        echo"<script language='javascript' type='text/javascript'>alert('Esse login já existe');window.location.href='cadastro.html';</script>";
+        die();
+
+      }else{
+        $query = "INSERT INTO usuario (login,senha,nome,email) VALUES ('$login','$senha','$nome','$email')";
+        $insert = $connect->query($query);
+        
+        if($insert){
+          echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='login.html'</script>";
+        }else{
+          echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";
+        }
+      }
+    }
+?>
 </body>
 </html>

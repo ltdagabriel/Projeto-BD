@@ -2,6 +2,14 @@ body{
 	margin-left:10%;
 	margin-right:10%;
 }
+.centerLogin{
+    width: 500px;
+    height: auto;
+    margin-top: 150px;
+    border:3px solid royalblue;
+    border-radius:3px;
+    background-color: #FFF;
+}
 .dropbtn {
     background-color: powderblue;
     color: white;
