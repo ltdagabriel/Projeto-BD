@@ -40,7 +40,7 @@ $logarray = $array['login'];
         if($insert){
             $_SESSION['login']=$login;
             $_SESSION['senha']=$senha;
-            setcookie("login",$login);
+            setcookie("login",$nome);
             echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='index.html'</script>";
         }else{
           echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";

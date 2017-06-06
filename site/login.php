@@ -1,7 +1,7 @@
 <?php 
   $login = $_POST['login'];
   $entrar = $_POST['entrar'];
-  $senha = md5($_POST['senha']);
+  $senha = $_POST['senha'];
   
     $host = "localhost";
     $db   = "myrobbie";
@@ -11,13 +11,15 @@
     $con = new mysqli($host, $user, $pass,$db);   
     
   if (isset($entrar)) {
-            
-      $verifica = $con->query("SELECT * FROM usuario WHERE login = '$login' AND senha = '$senha'") or die("erro ao selecionar");
-        if ($verifica->fetch_assoc() ){
+      $query_select = "SELECT nome FROM usuario WHERE login = '$login'  AND senha = '$senha'";
+      $verifica = $con->query($query_select) or die("erro ao selecionar");
+      $array = $verifica->fetch_assoc();
+      $logarray = $array['nome'];
+        if (!isset($array)){
           echo"<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='index.php';</script>";
           die();
         }else{
-          setcookie("login",$login);
+          setcookie("login",$logarray);
           header("Location:index.php");
         }
     }
