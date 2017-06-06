@@ -1,4 +1,13 @@
-<?php include("conector.php"); ?>
+<?php 
+include("conector.php"); 
+if(isset($_COOKIE['login'])){
+    $login_cookie = $_COOKIE['login'];
+}
+ else {
+    $login_cookie = NULL;
+}
+
+?>
 <html lang="pt-BR">
 <html>
 <head>
@@ -19,18 +28,37 @@
 	<div id="logo" class="logo col-lg-6 col-md-6 col-sm-6 text-center">
 		<a href="index.php"><h1>My Hobbie Filmes e Series</h1></a>
 	</div>
-	<div class=" espaco col-lg-4 col-md-4 col-sm-4">
-		<div class="logo col-lg-6 col-md-6 col-sm-6 text-center">
-		<a class="text-center btn btn-default" href="Login.html">
-			Logar
-		</a>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 text-center">
-		<a class="text-center btn btn-default" role="button" href="cadastro.html">
-			Cadastro
-		</a>
-		</div>
-	</div>
+	<?php 
+        if(!isset($login_cookie)){
+        ?>
+        <div class=" espaco col-lg-6 col-md-6 col-sm-6">
+		<form class="form-inline" name="cadastro" method="post" action="login.php">
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputName3">Login</label>
+                      <input type="login" name="login" class="form-control" id="exampleInputName3" placeholder="Login">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputPassword3">Password</label>
+                      <input type="password" name="senha" class="form-control" id="exampleInputPassword3" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> Lembrar
+                      </label>
+                    </div>
+                    <button type="submit" name="entrar" class="btn btn-default">Entrar</button>
+                </form>
+        </div>
+	<?php
+        }
+        else{
+            echo"Bem Vindo $login_cookie";
+            echo" <form class='form-inline' name='deslogar' method='post' action='deslogar.php'> ";
+            echo" <button type='submit' name='entrar' class='btn btn-default'>Deslogar</button>";
+            echo" </form>";
+        }
+            
+        ?>
 </div>
 <div id='menu' class="col-lg-12 col-md-12 container navbar ">
 	<div class="col-lg-12 col-md-12 container">
@@ -73,7 +101,7 @@
 		echo "0 results";
 	}
 	$con->close();
-?>
+        ?>
 </div>
 	<script src="style/js/jquery.js"></script>
 	<script type='text/javascript'  src ="style\js\include.js">	</script>

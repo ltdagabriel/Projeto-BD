@@ -16,7 +16,7 @@ $host = "localhost";
 $login = $_POST['login'];
 $nome = $_POST['nome'];
 $email = $_POST['email'];
-$senha = MD5($_POST['senha']);
+$senha = $_POST['senha'];
 
 $connect = new mysqli($host, $user, $pass,$db); 
 $query_select = "SELECT login FROM usuario WHERE login = '$login'";
@@ -38,7 +38,10 @@ $logarray = $array['login'];
         $insert = $connect->query($query);
         
         if($insert){
-          echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='login.html'</script>";
+            $_SESSION['login']=$login;
+            $_SESSION['senha']=$senha;
+            setcookie("login",$login);
+            echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='index.html'</script>";
         }else{
           echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";
         }
