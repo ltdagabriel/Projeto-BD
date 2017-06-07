@@ -2,14 +2,6 @@
 <html lang="pt-BR">
 <head>
     <?php 
-        
-	// definições de host, database, usuário e senha
-	$host = "localhost";
-	$db   = "myrobbie";
-	$user = "gabriel";
-	$pass = "";
-	// conecta ao banco de dados
-	$con = new mysqli($host, $user, $pass,$db); 
 
         if(isset($_COOKIE['login'])){
             $login_cookie = $_COOKIE['login'];
@@ -133,32 +125,43 @@
                 <div class="panel-collapse">
                   <div class="panel-body">
                     <?php
-                        // cria a instrução SQL que vai selecionar os dados
-                        $sql = "SELECT numero, nome, datta,sinopse FROM episodio";
+        
+                        // definições de host, database, usuário e senha
+                        $host = "localhost";
+                        $db   = "myrobbie";
+                        $user = "gabriel";
+                        $pass = "";
+                        // conecta ao banco de dados
+                        $con = new mysqli($host, $user, $pass,$db); 
+
+                          // cria a instrução SQL que vai selecionar os dados
+                        $sql = "SELECT obra_titulo,numero, nome, datta,sinopse,foto FROM episodio order by data_adicionado desc";
                         // executa a query
                         $dados = $con->query($sql) or die(mysql_error());
 
                         if ($dados->num_rows > 0) {
-                                while($row = $dados->fetch_assoc()) {
-                                        
+                            while($row = $dados->fetch_assoc()) {
+
+                            ?>
+                                <div class="row">
+                                  <div class="col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                      <?php
+                                      echo "<img src='".$row["foto"]."' alt='...'>";
+                                      ?>
+                                      <div class="caption">
+                                        <h3>Thumbnail label</h3>
+                                        <p>...</p>
+                                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                            <?php
+                                            echo "<h3> Episodio " . $row["numero"]. " - " . $row["nome"]. "</h3 <p>" . $row["sinopse"]."</p> <p>".$row["datta"]."</p>" ;
                                             ?>
-                                                <div class="row">
-                                                  <div class="col-sm-6 col-md-4">
-                                                    <div class="thumbnail">
-                                                      <!--<img src="..." alt="...">-->
-                                                      <div class="caption">
-                                                        <h3>Thumbnail label</h3>
-                                                        <p>...</p>
-                                                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                                                            <?php
-                                                            echo "<h3> Episodio " . $row["numero"]. " - " . $row["nome"]. "</h3 <p>" . $row["sinopse"]."</p> <p>".$row["datta"]."</p>" ;
-                                                            ?>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <?php
-                                }
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            <?php
+                            }
                         } else {
                                 echo "0 results";
                         }
@@ -166,7 +169,58 @@
                      ?>
                   </div>
                 </div>
-            </div>         
+            </div>  
+            
+            <div class="panel panel-default">
+                <h4 style="padding-left:5em">Lista de todos as Obras</h4>
+                <div class="panel-collapse">
+                  <div class="panel-body">
+                    <?php
+                        // definições de host, database, usuário e senha
+                        $host = "localhost";
+                        $db   = "myrobbie";
+                        $user = "gabriel";
+                        $pass = "";
+                        // conecta ao banco de dados
+                        $con = new mysqli($host, $user, $pass,$db); 
+                        
+                        // cria a instrução SQL que vai selecionar os dados
+                        $sql2 = "SELECT titulo,foto,sinopse,faixa_etaria_idade,data_lancamento FROM obra order by data_adicionado desc";
+                        // executa a query
+                        $dados = $con->query($sql2);
+
+                        if ($dados->num_rows > 0) {
+                            while($row = $dados->fetch_assoc()) {
+
+                            ?>
+                                <div class="row">
+                                  <div class="col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                      <?php
+                                      echo "<img src='".$row["foto"]."' alt='...'>";
+                                      ?>
+                                      <div class="caption">
+                                        <h3>Thumbnail label</h3>
+                                        <p>...</p>
+                                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                            <?php
+                                            echo "<h3>" . $row["titulo"]. "Idade: " . $row["faixa_etaria_idade"]. "</h3 <p>" . $row["sinopse"]."</p> <p>".$row["data_lancamento"]."</p>" ;
+                                            ?>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            <?php
+                            }
+                        } else {
+                                echo "0 results";
+                        }
+                        $con->close();
+                     ?>
+                  </div>
+                </div>
+            </div> 
+            
         </div>
     </div>
  </div>
@@ -283,22 +337,26 @@
              </div>
 
             <div class="modal-body">
-                <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
+                <form id="cadastro" name="cadastro" method="post" action="cadastroSerie.php" onsubmit="return validaCampo(); return false;">
                     <div class="form-group">
                             <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
-                            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo da Serie">
+                            <input name="titulo" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo da Serie">
                     </div>
                     <div class="form-group">
-                            <label for="exampleInputEmail2">Sinopse <a style="color:red">*</a></label>
-                            <input name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="Sinopse da Serie">
+                            <label for="exampleInputName2">Sinopse <a style="color:red">*</a></label>
+                            <input name="sinopse" type="text" class="form-control" id="exampleInputEmail2" placeholder="Sinopse da Serie">
                     </div>
                     <div class="form-group">
                             <label for="exampleInputName2">Data de Lancamento: <a style="color:red">*</a></label>
-                            <input name="login" type="text" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
+                            <input name="data" type="datetime" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
                     </div>
                     <div class="form-group">
-                            <label for="inputPassword3">Faixa Etaria: <a style="color:red">*</a></label>
-                            <select class="form-control">
+                            <label for="exampleInputLink2">Imagem de Capa <a style="color:red">*</a></label>
+                            <input name="foto" type="url" class="form-control" id="exampleInputName2" placeholder="http://asd.com">
+                    </div>
+                    <div class="form-group">
+                            <label>Faixa Etaria: <a style="color:red">*</a></label>
+                            <select name="classificacao" class="form-control">
                                     <option>Livre</option>
                                     <option>+12</option>
                                     <option>+14</option>
@@ -306,6 +364,20 @@
                                     <option>+18</option>
                             </select>					
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="exampleInputLink2">Genero<a style="color:red">*</a></label>
+                            <label class="checkbox-inline">
+                              <input name="genero1" type="checkbox" id="inlineCheckbox1" value="option1"> Ação
+                            </label>
+                            <label class="checkbox-inline">
+                              <input name="genero2" type="checkbox" id="inlineCheckbox2" value="option2"> Drama
+                            </label>
+                            <label class="checkbox-inline">
+                              <input name="genero3" type="checkbox" id="inlineCheckbox3" value="option3"> Terror
+                            </label>
+                    </div>
+                    
                     <div class="form-inline">
                             <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
