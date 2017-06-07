@@ -1,0 +1,81 @@
+<html>
+
+<style>
+
+input.hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+#profile-image1 {
+    cursor: pointer;
+     width: 100px;
+     height: 100px;
+     border:2px solid #03b1ce ;}
+.tital{ font-size:16px; font-weight:500;}
+.bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0}	
+
+</style>
+
+<body>
+<div class="container">
+
+<div class="panel panel-default">
+  <div class="panel-heading">  <h4 >Perfil do Usuario</h4></div>
+   <div class="panel-body">
+       
+    <div class="box box-info">
+        
+            <div class="box-body">
+                     <div class="col-sm-6">
+                     <div  align="left"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                
+                <input id="profile-image-upload" class="hidden" type="file">
+<div style="color:#999;" >clique aqui para alterar a imagem do perfil</div>
+                <!--Upload Image Js And Css-->
+            </div>
+              <br>
+              <!-- /input-group -->
+            </div>
+            <div class="col-sm-6">
+            <h4 style="color:#00b1b1;">Caio Nakai </h4></span>   
+            </div>
+
+<div class="col-sm-5 col-xs-6 tital " >Data de entrada:</div><div class="col-sm-7">15 Jun 2016</div>
+
+  <div class="clearfix"></div>
+<div class="bot-border"></div>
+
+<div class="col-sm-5 col-xs-6 tital " >Data de Nascimento:</div><div class="col-sm-7">11 Jun 1998</div>
+
+  <div class="clearfix"></div>
+<div class="bot-border"></div>
+
+<div class="col-sm-5 col-xs-6 tital " >Nacionalidade:</div><div class="col-sm-7">BR</div>
+
+ <div class="clearfix"></div>
+<div class="bot-border"></div>
+
+
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+        </div>
+       
+            
+    </div> 
+    </div>
+</div>  
+<script>
+$(function() {
+    $('#profile-image1').on('click', function() {
+        $('#profile-image-upload').click();
+    });
+});       
+</script> 
+       
+   </div>
+</div>
+</body>
+</html>
