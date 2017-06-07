@@ -2,7 +2,15 @@
 <html lang="pt-BR">
 <head>
     <?php 
-        include("conector.php"); 
+        
+	// definições de host, database, usuário e senha
+	$host = "localhost";
+	$db   = "myrobbie";
+	$user = "gabriel";
+	$pass = "";
+	// conecta ao banco de dados
+	$con = new mysqli($host, $user, $pass,$db); 
+
         if(isset($_COOKIE['login'])){
             $login_cookie = $_COOKIE['login'];
         }
@@ -118,26 +126,47 @@
     </div>
 
     <div id='conteudo'>
-        <div id="last" class="collapse-in">	
-            <h2> Lista de Episódios</h2>
-            <?php
-            // cria a instrução SQL que vai selecionar os dados
-            $sql = "SELECT numero, nome, datta FROM episodio";
-            // executa a query
-            $dados = $con->query($sql) or die(mysql_error());
+        <div class="panel-group" id="accordion"">
+         
+            <div class="panel panel-default">
+                <h4 style="padding-left:5em">Lista de todos os episódios</h4>
+                <div class="panel-collapse">
+                  <div class="panel-body">
+                    <?php
+                        // cria a instrução SQL que vai selecionar os dados
+                        $sql = "SELECT numero, nome, datta,sinopse FROM episodio";
+                        // executa a query
+                        $dados = $con->query($sql) or die(mysql_error());
 
-            if ($dados->num_rows > 0) {
-        // output data of each row
-                    while($row = $dados->fetch_assoc()) {
-                            echo "
-                                    <div class='col-lg-3 col-md-3 col-sm-6'>
-                                    Episodio: " . $row["numero"]. " - Nome: " . $row["nome"]. " Lançado em: " . $row["datta"]. "</div>";
-                    }
-            } else {
-                    echo "0 results";
-            }
-            $con->close();
-            ?>
+                        if ($dados->num_rows > 0) {
+                                while($row = $dados->fetch_assoc()) {
+                                        
+                                            ?>
+                                                <div class="row">
+                                                  <div class="col-sm-6 col-md-4">
+                                                    <div class="thumbnail">
+                                                      <!--<img src="..." alt="...">-->
+                                                      <div class="caption">
+                                                        <h3>Thumbnail label</h3>
+                                                        <p>...</p>
+                                                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                                            <?php
+                                                            echo "<h3> Episodio " . $row["numero"]. " - " . $row["nome"]. "</h3 <p>" . $row["sinopse"]."</p> <p>".$row["datta"]."</p>" ;
+                                                            ?>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <?php
+                                }
+                        } else {
+                                echo "0 results";
+                        }
+                        $con->close();
+                     ?>
+                  </div>
+                </div>
+            </div>         
         </div>
     </div>
  </div>
