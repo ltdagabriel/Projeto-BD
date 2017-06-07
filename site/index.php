@@ -57,54 +57,7 @@
                         </div>
                         <button type="submit" name="entrar" class="btn btn-default">Entrar</button>
                     </form>
-                <a type="button" data-toggle="modal" data-target=".bs-example-modal-lg">Registre-se</a>
-                <!-- Large modal -->
-                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                  <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Cadastre-se</h4>
-                         </div>
-                        
-                        <div class="modal-body">
-                            <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
-                                <div class="form-group">
-                                        <label for="exampleInputName2">Nome: <a style="color:red">*</a></label>
-                                        <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Seu nome">
-                                </div>
-                                <div class="form-group">
-                                        <label for="exampleInputEmail2">Email <a style="color:red">*</a></label>
-                                        <input name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="seuemail@exemplo.com">
-                                </div>
-                                <div class="form-group">
-                                        <label for="exampleInputName2">Login: <a style="color:red">*</a></label>
-                                        <input name="login" type="text" class="form-control" id="exampleInputName2" placeholder="Seu login">
-                                </div>
-                                <div class="form-group">
-                                        <label for="inputPassword3">Senha: <a style="color:red">*</a></label>
-                                        <input name="senha" type="password" class="form-control" id="inputPassword3" placeholder="Digite sua senha">
-                                </div>
-                                <div class="form-inline">
-                                        <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                  <button name="cadastrar" type="submit" class="btn btn-default">Enviar</button>
-                                                </div>
-                                        </div>
-                                        <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                  <button name="limpar" type="reset" class="btn btn-default">Limpar</button>
-                                                </div>
-                                        </div>
-                                        <div class="form-group">
-                                        <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios!          </span>
-                                        </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                  </div>
-                </div>  
+                <a type="button" data-toggle="modal" data-target="#CadastroUsuario">Registre-se</a>  
             </div>
             <?php
             }
@@ -153,9 +106,9 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#">Link</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
+                  <li><a type="button" data-toggle="modal" data-target="#CadastroObra">Obra</a></li>
                   <li><a href="#">Another action</a></li>
                   <li><a href="#">Something else here</a></li>
                   <li role="separator" class="divider"></li>
@@ -192,5 +145,108 @@
         </div>
     </div>
  </div>
+    <!-- Cadastro de usuario -->
+    <div id="CadastroUsuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CadastroUsuario">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cadastre-se</h4>
+             </div>
+
+            <div class="modal-body">
+                <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
+                    <div class="form-group">
+                            <label for="exampleInputName2">Nome: <a style="color:red">*</a></label>
+                            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputEmail2">Email <a style="color:red">*</a></label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="seuemail@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputName2">Login: <a style="color:red">*</a></label>
+                            <input name="login" type="text" class="form-control" id="exampleInputName2" placeholder="Seu login">
+                    </div>
+                    <div class="form-group">
+                            <label for="inputPassword3">Senha: <a style="color:red">*</a></label>
+                            <input name="senha" type="password" class="form-control" id="inputPassword3" placeholder="Digite sua senha">
+                    </div>
+                    <div class="form-inline">
+                            <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button name="cadastrar" type="submit" class="btn btn-default">Enviar</button>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button name="limpar" type="reset" class="btn btn-default">Limpar</button>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                            <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios!          </span>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- Cadastro de obra -->
+    
+    <div id="CadastroObra" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="CadastroObra">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cadastro de Obras</h4>
+             </div>
+
+            <div class="modal-body">
+                <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
+                    <div class="form-group">
+                            <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
+                            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo da Obra">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputEmail2">Sinopse <a style="color:red">*</a></label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="Sinopse da Obra">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputName2">Data de Lancamento: <a style="color:red">*</a></label>
+                            <input name="login" type="text" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
+                    </div>
+                    <div class="form-group">
+                            <label for="inputPassword3">Faixa Etaria: <a style="color:red">*</a></label>
+                            <select class="form-control">
+                                    <option>Livre</option>
+                                    <option>+12</option>
+                                    <option>+14</option>
+                                    <option>+16</option>
+                                    <option>+18</option>
+                            </select>					
+                    </div>
+                    <div class="form-inline">
+                            <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button name="cadastrar" type="submit" class="btn btn-default">Enviar</button>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button name="limpar" type="reset" class="btn btn-default">Limpar</button>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                            <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios!          </span>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+   
 </body>
 </html> 
