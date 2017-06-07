@@ -43,11 +43,11 @@
             <div class=" col-lg-8 col-md-8 col-sm-8">
                     <form class="form-inline" name="cadastro" method="post" action="login.php">
                         <div class="form-group">
-                          <label class="sr-only" for="exampleInputName3">Login</label>
+                          <label class="sr-only" for="exampleInputName3">Usuario</label>
                           <input type="login" name="login" class="form-control" id="exampleInputName3" placeholder="Login">
                         </div>
                         <div class="form-group">
-                          <label class="sr-only" for="exampleInputPassword3">Password</label>
+                          <label class="sr-only" for="exampleInputPassword3">Senha</label>
                           <input type="password" name="senha" class="form-control" id="exampleInputPassword3" placeholder="Password">
                         </div>
                         <div class="checkbox">
@@ -64,7 +64,7 @@
             else{
                 echo"Bem Vindo $login_cookie";
                 echo" <form class='form-inline' name='deslogar' method='post' action='deslogar.php'> ";
-                echo" <button type='submit' name='entrar' class='btn btn-default'>Deslogar</button>";
+                echo" <button type='submit' name='entrar' class='btn btn-default'>Sair</button>";
                 echo" </form>";
             } 
             ?>
@@ -82,37 +82,33 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="#">Inicio</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Link</a></li>
               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ASD<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filmes<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                  <li><a href="#">??</a></li>
+                  <li><a href="#">Mais Vistos</a></li>
+                  <li><a href="#">Mais Favoritados</a></li>
+                  <li><a href="#">Lancamentos</a></li>
                   </ul>
               </li>
             </ul>
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-right">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="Pesquise Aqui">
               </div>
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" class="btn btn-default">Pesquisar</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Link</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a type="button" data-toggle="modal" data-target="#CadastroObra">Obra</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
+                  <li><a type="button" data-toggle="modal" data-target="#CadastroFilme">Filme</a></li>
+                  <li><a type="button" data-toggle="modal" data-target="#CadastroSerie">Serie</a></li>
                 </ul>
               </li>
             </ul>
@@ -192,25 +188,25 @@
         </div>
       </div>
     </div>
-    <!-- Cadastro de obra -->
+    <!-- Cadastro de Filme -->
     
-    <div id="CadastroObra" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="CadastroObra">
+    <div id="CadastroFilme" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="CadastroFilme">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Cadastro de Obras</h4>
+                <h4 class="modal-title">Cadastro de Filmes</h4>
              </div>
 
             <div class="modal-body">
                 <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
                     <div class="form-group">
                             <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
-                            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo da Obra">
+                            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo do Filme">
                     </div>
                     <div class="form-group">
                             <label for="exampleInputEmail2">Sinopse <a style="color:red">*</a></label>
-                            <input name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="Sinopse da Obra">
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="Sinopse do Filme">
                     </div>
                     <div class="form-group">
                             <label for="exampleInputName2">Data de Lancamento: <a style="color:red">*</a></label>
@@ -246,6 +242,62 @@
         </div>
       </div>
     </div>
+	
+     <!-- Cadastro de Serie -->
+    
+    <div id="CadastroSerie" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="CadastroSerie">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cadastro de Series</h4>
+             </div>
+
+            <div class="modal-body">
+                <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
+                    <div class="form-group">
+                            <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
+                            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo da Serie">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputEmail2">Sinopse <a style="color:red">*</a></label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="Sinopse da Serie">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputName2">Data de Lancamento: <a style="color:red">*</a></label>
+                            <input name="login" type="text" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
+                    </div>
+                    <div class="form-group">
+                            <label for="inputPassword3">Faixa Etaria: <a style="color:red">*</a></label>
+                            <select class="form-control">
+                                    <option>Livre</option>
+                                    <option>+12</option>
+                                    <option>+14</option>
+                                    <option>+16</option>
+                                    <option>+18</option>
+                            </select>					
+                    </div>
+                    <div class="form-inline">
+                            <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button name="cadastrar" type="submit" class="btn btn-default">Enviar</button>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button name="limpar" type="reset" class="btn btn-default">Limpar</button>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                            <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios!          </span>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+	
     
    
 </body>
