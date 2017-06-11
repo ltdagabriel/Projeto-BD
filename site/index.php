@@ -35,15 +35,20 @@
 <div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >
     <div class="container">
         
-        <div id="header" class="col-lg-12 col-md-12 col-sm-12">
-            <?php include("includes/header.php");?>
+        <div class="row">
+            <div id="header" class="col-lg-12 col-md-12 col-sm-12">
+                <?php include("includes/header.php");?>
+            </div>
         </div>
-        <div id='menu' class="col-lg-12 col-md-12">
-            <?php include("includes/menu.php");?>
+        <div class="row">
+            <div id='menu' class="col-lg-12 col-md-12">
+                <?php include("includes/menu.php");?>
+            </div>
         </div>
         <div class="row container">
             <div id='conteudo'>
                 <?php include("CRUDDS/Select_All_Filmes.php");?>
+                <?php include("CRUDDS/Select_All_Seriados.php");?>
             </div>
         </div>
     </div>

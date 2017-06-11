@@ -1,14 +1,14 @@
 <?php
-    require_once("classes/ConectBD/filme.php");        
+    require_once("classes/ConectBD/serie.php");        
     require_once("classes/ConectBD/obra.php");        
 ?>
 <div class="panel panel-default ">
-    <h4 style="padding-left: 5px">Filmes Adicionados</h4>
+    <h4 style="padding-left: 5px">Seriado Adicionados</h4>
     <div class="panel-collapse">
       <div class="panel-body">
         <?php
-        $filme=new filmeDAO();
-        $array= $filme->Retorna_Todos();
+        $serie=new serieDAO();
+        $array= $serie->Retorna_Todos();
         if($array){
             while($row = $array->fetch(PDO::FETCH_ASSOC)){
                 ?>
@@ -34,7 +34,7 @@
                                                 <input value="<?php echo $row["data_lancamento"];?>" name="data" type="text" class="form-control">
                                             </div>
                                         </div>
-                                        <button name="delete" type="submit" class="btn btn-default">Excluir</button>
+                                        <button name="delete2" type="submit" class="btn btn-default">Excluir</button>
                                     </form>
                                     <?php
                                    }
@@ -52,14 +52,14 @@
     </div>
 </div>
 <?php
-if (isset($_POST['delete'])) {
+if (isset($_POST['delete2'])) {
     $obra= new obraDAO();
     $titulo=$_POST['titulo'];
     $data= $_POST['data'];
     
     ?>
     <script language='javascript' type='text/javascript'>
-        var r=confirm('O Filme <?php echo$titulo;?> será removido');
+        var r=confirm('O Seriado <?php echo$titulo;?> será removido');
         if(r==true){
             <?php $obra->delete($titulo,$data);?>
             window.location.href='index.php';
