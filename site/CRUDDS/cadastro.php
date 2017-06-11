@@ -2,9 +2,6 @@
 require_once ("classes/ConectBD/usuario.php");
 require_once("classes/Entidades/usuario.php");
 
-$usuarioDAO = new usuarioDAO();
-$usuario = new usuario();
-
 ?>
 <script type="text/javascript">
     function validarSenha(senha1, senha2, campo) {
@@ -70,6 +67,9 @@ $usuario = new usuario();
 
 <?php
 if (isset($_POST['cadastrar'])) {
+    $usuarioDAO = new usuarioDAO();
+    $usuario = new usuario();
+
     $usuario->set_nome($_POST['nome']);
     $usuario->set_email($_POST['email']);
     $usuario->set_login($_POST['login']);

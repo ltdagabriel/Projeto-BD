@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Inicio</a>
+        <a class="navbar-brand" href="index.php">Inicio</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,8 +37,8 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a type="button" data-toggle="modal" data-target="#CadastroFilme">Filme</a></li>
-                  <li><a type="button" data-toggle="modal" data-target="#CadastroSerie">Serie</a></li>
+                  <li><a type="button" href="Cadastro_Filme.php">Filme</a></li>
+                  <li><a type="button" href="Cadastro_Serie.php">Serie</a></li>
                 </ul>
               </li>
             </ul>

@@ -1,27 +1,9 @@
 <?php
 require_once ("classes/ConectBD/obra.php");
 require_once("classes/Entidades/obra.php");
-
-$usuarioDAO = new usuarioDAO();
-$usuario = new usuario();
-
+require_once("classes/Entidades/filme.php");
 ?>
-<script type="text/javascript">
-    function validarSenha(senha1, senha2, campo) {
-        var resultado = document.getElementById(campo);
-
-        senhaPrimaria = document.getElementById(senha1).value;
-        senhaSecundaria = document.getElementById(senha2).value;
-        if (senhaPrimaria == senhaSecundaria) {
-            resultado.innerHTML = "Senhas iguais";
-            resultado.style.color = "green";
-        } else {
-            resultado.innerHTML = "Senhas Incorretas";
-            resultado.style.color = "red";
-        }
-    }
-</script>
-<form id="cadastro" name="cadastro" method="post" action="cadastroFilme.php">
+<form id="cadastro" name="cadastro" method="post">
     <div class="form-group">
             <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
             <input name="titulo" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo do Filme">
@@ -31,8 +13,8 @@ $usuario = new usuario();
             <textarea name="sinopse" class="form-control" rows="3"></textarea>
     </div>
     <div class="form-group">
-            <label for="exampleInputName2">Data de Lancamento: <a style="color:red">*</a></label>
-            <input name="data" type="datetime" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
+            <label for="exampleInputData2">Data de Lancamento: <a style="color:red">*</a></label>
+            <input name="data" type="date" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
     </div>
     <div class="form-group">
             <label for="exampleInputLink2">Imagem de Capa</label>
@@ -45,7 +27,7 @@ $usuario = new usuario();
     <div class="form-group">
             <label>Faixa Etaria: <a style="color:red">*</a></label>
             <select name="classificacao" class="form-control">
-                    <option>Nada</option>
+                    <option>Selecione</option>
                     <option>Livre</option>
                     <option>+12</option>
                     <option>+14</option>
@@ -87,57 +69,52 @@ $usuario = new usuario();
 
 <?php
 if (isset($_POST['cadastrar'])) {
-    $usuario->set_nome($_POST['nome']);
-    $usuario->set_email($_POST['email']);
-    $usuario->set_login($_POST['login']);
-    $usuario->set_senha($_POST['senha2']);
-    $usuario->set_foto($_POST['foto']);
-    
-    if($usuario->get_login() == "" || $usuario->get_login() == null){
-        ?>
+    $obraDAO = new obraDAO();
+    $obra = new obra();
+
+    $obra->set_Titulo($_POST['titulo']);
+    $obra->set_Sinopse($_POST['sinopse']);
+    $obra->set_Data_Lancamento($_POST['data']);
+    $obra->set_Foto($_POST['foto']);
+    $obra->set_Filme(new filme($_POST['video'],$_POST['titulo'],$_POST['data']));
+    $obra->set_FEtaria($_POST['classificacao']);
+    if($obra->get_FEtaria()=="Selecione"){
+         ?>
             <script language='javascript' type='text/javascript'>
-                alert('O campo login deve ser preenchido');window.location.href='cadastro.php';
+                alert('Selecione uma Faixa Etaria');window.location.href='Cadastro_Filme.php';
             </script>";
         <?php
     }
-    else if($_POST['senha2']!=$_POST['senha1'] || $_POST['senha1']=="" || $_POST['senha1'] ==null){
-         ?>
-        <script language='javascript' type='text/javascript'>
-            alert('Senhas incorreta');window.location.href='cadastro.php';
-        </script>";
-        <?php
-    }
-    else if($_POST['nome']=="" || $_POST['nome']==null){
+    else if ($obra->get_Titulo()=="" || $obra->get_Titulo()==null){
         ?>
-        <script language='javascript' type='text/javascript'>
-            alert('Campo nome deve ser Preenchido');window.location.href='cadastro.php';
-        </script>";
+            <script language='javascript' type='text/javascript'>
+                alert('O campo "Titulo" deve ser preenchido');window.location.href='Cadastro_Filme.php';
+            </script>";
         <?php
     }
-    else if($_POST['email']=="" || $_POST['email']==null){
+    else if($obra->get_DataLancamento()=="" || $obra->get_DataLancamento()==null){
         ?>
-        <script language='javascript' type='text/javascript'>
-            alert('Campo E-Mail deve ser Preenchido');window.location.href='cadastro.php';
-        </script>";
+            <script language='javascript' type='text/javascript'>
+                alert('O campo "Data de Lançamento" deve ser preenchido');window.location.href='Cadastro_Filme.php';
+            </script>";
         <?php
     }
-    else
-    {
-        if(!$usuarioDAO->consultarUsername($usuario->get_login())){
-            if ($usuarioDAO->cadastrar($usuario)) {
-                ?>
-                <script language='javascript' type='text/javascript'>
-                    alert('Cadastrado com sucesso');window.location.href='index.php';
-                </script>";
-                <?php
-            }     
+    else{
+        if(!$obraDAO->consultartitulo($obra->get_Titulo(), $obra->get_DataLancamento())){
+            if ($obraDAO->cadastrar($obra)) {
+                    ?>
+                    <script language='javascript' type='text/javascript'>
+                        alert('Cadastrado com sucesso');window.location.href='index.php';
+                    </script>";
+                    <?php
+                }
         }
         else{
-             ?>
-                <script language='javascript' type='text/javascript'>
-                    alert('Login em uso');window.location.href='cadastro.php';
-                </script>";
-            <?php
+        ?>
+            <script language='javascript' type='text/javascript'>
+                alert('Filme ja se encontar na "Base de Dados"');window.location.href='Cadastro_Filme.php';
+            </script>";
+        <?php
         }
     }
 }

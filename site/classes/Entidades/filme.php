@@ -24,6 +24,11 @@ class filme {
     public function set_data($data) {
         $this->obra_data=$data;
     }
+    function __construct($trailer,$obra_titulo,$obra_data){
+        $this->trailer=$trailer;
+        $this->obra_data=$obra_data;
+        $this->obra_titulo=$obra_titulo;
+    }
 
 }
 

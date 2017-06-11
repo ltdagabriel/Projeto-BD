@@ -52,68 +52,7 @@
              </div>
 
             <div class="modal-body">
-                <form id="cadastro" name="cadastro" method="post" action="cadastroFilme.php">
-                    <div class="form-group">
-                            <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
-                            <input name="titulo" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo do Filme">
-                    </div>
-                    <div class="form-group">
-                            <label for="exampleInputName2">Sinopse</label>
-                            <textarea name="sinopse" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                            <label for="exampleInputName2">Data de Lancamento: <a style="color:red">*</a></label>
-                            <input name="data" type="datetime" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
-                    </div>
-                    <div class="form-group">
-                            <label for="exampleInputLink2">Imagem de Capa</label>
-                            <input name="foto" type="url" class="form-control" id="exampleInputName2" placeholder="http://asd.com">
-                    </div>
-                    <div class="form-group">
-                            <label for="exampleInputLink2">Video</label>
-                            <input name="video" type="url" class="form-control" id="exampleInputName2" placeholder="youtube.com/asdasd">
-                    </div>
-                    <div class="form-group">
-                            <label>Faixa Etaria: <a style="color:red">*</a></label>
-                            <select name="classificacao" class="form-control">
-                                    <option>Nada</option>
-                                    <option>Livre</option>
-                                    <option>+12</option>
-                                    <option>+14</option>
-                                    <option>+16</option>
-                                    <option>+18</option>
-                            </select>					
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="exampleInputLink2">Genero</label>
-                            <label class="checkbox-inline">
-                              <input name="genero1" type="checkbox" id="inlineCheckbox1" value="option1"> Ação
-                            </label>
-                            <label class="checkbox-inline">
-                              <input name="genero2" type="checkbox" id="inlineCheckbox2" value="option2"> Drama
-                            </label>
-                            <label class="checkbox-inline">
-                              <input name="genero3" type="checkbox" id="inlineCheckbox3" value="option3"> Terror
-                            </label>
-                    </div>
-                    
-                    <div class="form-inline">
-                            <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                      <button name="cadastrar" type="submit" class="btn btn-default">Enviar</button>
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                      <button name="limpar" type="reset" class="btn btn-default">Limpar</button>
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                            <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios!          </span>
-                            </div>
-                    </div>
-                </form>
+                
             </div>
         </div>
       </div>

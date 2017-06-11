@@ -3,7 +3,7 @@
 <head>
 <?php
     session_start();
-    if($_SESSION['logado']==1){
+    if($_SESSION['logado']!=1){
         header ("Location: index.php");
     }
 ?>
@@ -34,7 +34,7 @@
     <div id='conteudo'>
         <div class="container">
             <div class="row">
-                <?php include("CRUDDS/cadastro_obra.php");?>
+                <?php include("CRUDDS/cadastro_serie.php");?>
             </div>
         </div>
     </div>

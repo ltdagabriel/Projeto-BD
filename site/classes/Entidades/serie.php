@@ -1,6 +1,6 @@
 <?php
 
-class filme {
+class serie {
 
     private $status;
     private $obra_titulo;
@@ -23,6 +23,11 @@ class filme {
     }
     public function set_data($data) {
         $this->obra_data=$data;
+    }
+    function __construct($status,$obra_titulo,$obra_data){
+        $this->status=$status;
+        $this->obra_data=$obra_data;
+        $this->obra_titulo=$obra_titulo;
     }
 
 }
