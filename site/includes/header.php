@@ -9,6 +9,7 @@ if (isset($_POST['loginSubmit'])) {
     if ($usuarioDAO->login($_POST['username'], $_POST['senha'])) {
 
     $_SESSION['logado'] = '1';
+    $_SESSION['user'] = $_POST['username'];
     $_SESSION['nome'] = $usuarioDAO->RetornaNome($_POST['username']);
 	  
 	  header ("Location: index.php");
@@ -39,10 +40,12 @@ if (isset($_GET['erro'])) {
     }
 }
 
-if ($_SESSION['logado'] == 1) {
-   header ("Location: index.php");
-}
 /* end Realizar Login */
+/* Sair*/
+if (isset($_POST['sair'])){
+    $_SESSION['logado'] = '0';
+    $_SESSION['nome'] = "";
+}
 ?>
 
 <div id="logo" class="logo col-lg-4 col-md-4 col-sm-4 text-center">
@@ -69,15 +72,22 @@ if($_SESSION['logado'] != 1){
             </div>
             <button type="submit" name="loginSubmit" class="btn btn-default">Entrar</button>
         </form>
-    <a type="button" data-toggle="modal" data-target="#CadastroUsuario">Registre-se</a>  
+    <a type="button" id="registre-se" href="Cadastro.php">Registre-se</a>  
 </div>
 <?php
 }
 else{
-    echo"Bem Vindo $login_cookie";
-    echo" <form class='form-inline' name='deslogar' method='post' action='deslogar.php'> ";
-    echo" <button type='submit' name='entrar' class='btn btn-default'>Sair</button>";
-    echo" </form>";
+    echo"Bem Vindo ". $_SESSION['nome'];
+    ?>
+    <div class="container">
+        <div class="row">
+            <form class="form-inline" name="deslogar" method="post">
+                <button type="submit" name="sair" class="btn btn-default">Sair</button>
+            </form>
+        </div>
+    </div>
+    
+    <?php
 } 
 ?>
 </div>

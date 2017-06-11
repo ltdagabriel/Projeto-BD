@@ -12,9 +12,20 @@
 	<meta name="author" content="Caio">
 	<meta name="author" content="Gabriel">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <?php include("includes/css.php");?>
-        <?php include("includes/js.php");?>
-</head>
+        <link rel="stylesheet" href ="style\css\layout.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="style/js/include.js"></script>
+        <script src="style/js/jquery-1.10.2.js"></script>
+        <script src="style/js/jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                    $("#registre-se").click(function(event) {
+                            $("#conteudo").load("CRUDDS/cadastro.php");
+                    });
+            });
+        </script>
 <body>
     
 <div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >
@@ -29,21 +40,7 @@
         <?php include("includes/conteudo_index.php");?>
     </div>
 </div>
-    <!-- Cadastro de usuario -->
-    <div id="CadastroUsuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CadastroUsuario">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Cadastre-se</h4>
-             </div>
-
-            <div class="modal-body">
-                <?php include("CRUDDS/cadastro.php");?>
-            </div>
-        </div>
-      </div>
-    </div>
+    
     <!-- Cadastro de Filme -->
     
     <div id="CadastroFilme" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="CadastroFilme">

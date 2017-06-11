@@ -48,11 +48,10 @@ class usuarioDAO {
     }
     function login($us_username, $us_senha) {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM usuario WHERE  (senha = :us_senha OR senha= :md5us_senha) and ( email = :us_username OR login = :us_username)");
+            $stmt = $this->pdo->prepare("SELECT * FROM usuario WHERE  senha = :us_senha and login = :us_username");
 
             $param = array(
                 ":us_username" => $us_username,
-                ":md5us_senha" => md5($us_senha),
                 ":us_senha" => $us_senha
             );
 
@@ -72,7 +71,7 @@ class usuarioDAO {
 	public function RetornaNome($username){
 		try{
 			
-			$stmt = $this->pdo->prepare("SELECT nome FROM usuario WHERE email = :username OR login = :username");
+			$stmt = $this->pdo->prepare("SELECT nome FROM usuario WHERE login = :username");
 			$param = array(
 				":username"  => $username
 			);

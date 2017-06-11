@@ -1,52 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html lang="pt-BR">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-</head>
- 
-<body>
-<?php 
-
-$host = "localhost";
-	$db   = "myrobbie";
-	$user = "gabriel";
-	$pass = "";
-
-$login = $_POST['login'];
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$senha = $_POST['senha'];
-
-$connect = new mysqli($host, $user, $pass,$db); 
-$query_select = "SELECT login FROM usuario WHERE login = '$login'";
-$select = $connect->query($query_select);
-$array = $select->fetch_assoc();
-$logarray = $array['login'];
-
-  if($login == "" || $login == null){
-    echo"<script language='javascript' type='text/javascript'>alert('O campo login deve ser preenchido');window.location.href='cadastro.html';</script>";
-
-    }else{
-      if($logarray == $login){
-
-        echo"<script language='javascript' type='text/javascript'>alert('Esse login já existe');window.location.href='cadastro.html';</script>";
-        die();
-
-      }else{
-        $query = "INSERT INTO usuario (login,senha,nome,email) VALUES ('$login','$senha','$nome','$email')";
-        $insert = $connect->query($query);
-        
-        if($insert){
-            $_SESSION['login']=$login;
-            $_SESSION['senha']=$senha;
-            setcookie("login",$nome);
-            echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='index.php'</script>";
-        }else{
-          echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";
-        }
-      }
+<?php
+    session_start();
+    if($_SESSION['logado']==1){
+        header ("Location: index.php");
     }
 ?>
+	<title>MyHobbieFIlmeSeries</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Informações sobre filmes e séries.">
+	<meta name="author" content="Caio">
+	<meta name="author" content="Gabriel">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href ="style\css\layout.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="style/js/include.js"></script>
+        <script src="style/js/jquery-1.10.2.js"></script>
+        <script src="style/js/jquery.js"></script>
+<body>
+    
+    <div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >
+    <div id="header" class="col-lg-12 col-md-12 col-sm-12">
+        <?php include("includes/header.php");?>
+    </div>
+    <div id='menu' class="col-lg-12 col-md-12">
+        <?php include("includes/menu.php");?>
+    </div>
+
+    <div id='conteudo'>
+        <div class="container">
+            <div class="row">
+                <?php include("CRUDDS/cadastro.php");?>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-</html>
+</html> 

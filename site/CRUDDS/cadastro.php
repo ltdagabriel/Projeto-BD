@@ -6,7 +6,21 @@ $usuarioDAO = new usuarioDAO();
 $usuario = new usuario();
 
 ?>
+<script type="text/javascript">
+    function validarSenha(senha1, senha2, campo) {
+        var resultado = document.getElementById(campo);
 
+        senhaPrimaria = document.getElementById(senha1).value;
+        senhaSecundaria = document.getElementById(senha2).value;
+        if (senhaPrimaria == senhaSecundaria) {
+            resultado.innerHTML = "Senhas iguais";
+            resultado.style.color = "green";
+        } else {
+            resultado.innerHTML = "Senhas Incorretas";
+            resultado.style.color = "red";
+        }
+    }
+</script>
 <form id="cadastro" name="cadastro" method="post">
     <div class="form-group">
             <label for="exampleInputName2">Nome: <a style="color:red">*</a></label>
@@ -26,11 +40,12 @@ $usuario = new usuario();
     </div>
     <div class="form-group">
         <label for="inputPassword3">Senha: <a style="color:red">*</a></label>
-        <input name="senha1" id="senha1" type="password" class="form-control" placeholder="******">
+        <input name="senha1" id="senha1" type="password" onChange="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
+        <p></p>
     </div>
     <div class="form-group">
         <label for="inputPassword3">Confirmar senha: <a style="color:red">*</a></label>
-        <input name="senha2" id="senha2" type="password" onKeyUp="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
+        <input name="senha2" id="senha2" type="password" onChange="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
     </div>
     <div class="form-inline">
         <div class="form-group">
@@ -60,23 +75,53 @@ if (isset($_POST['cadastrar'])) {
     $usuario->set_login($_POST['login']);
     $usuario->set_senha($_POST['senha2']);
     $usuario->set_foto($_POST['foto']);
-           
-    if (!$usuarioDAO->consultarUsername($_POST['login'])) {
-
-        if ($usuarioDAO->cadastrar($usuario)) {
-            ?>
-            <script type = "text/javascript">
-                document.getElementById("resultadoCadastro").innerHTML = "Cadastrado com sucesso.";
-                document.getElementById("resultadoCadastro").style.color = "green";</script>
+    
+    if($usuario->get_login() == "" || $usuario->get_login() == null){
+        ?>
+            <script language='javascript' type='text/javascript'>
+                alert('O campo login deve ser preenchido');window.location.href='cadastro.php';
+            </script>";
+        <?php
+    }
+    else if($_POST['senha2']!=$_POST['senha1'] || $_POST['senha1']=="" || $_POST['senha1'] ==null){
+         ?>
+        <script language='javascript' type='text/javascript'>
+            alert('Senhas incorreta');window.location.href='cadastro.php';
+        </script>";
+        <?php
+    }
+    else if($_POST['nome']=="" || $_POST['nome']==null){
+        ?>
+        <script language='javascript' type='text/javascript'>
+            alert('Campo nome deve ser Preenchido');window.location.href='cadastro.php';
+        </script>";
+        <?php
+    }
+    else if($_POST['email']=="" || $_POST['email']==null){
+        ?>
+        <script language='javascript' type='text/javascript'>
+            alert('Campo E-Mail deve ser Preenchido');window.location.href='cadastro.php';
+        </script>";
+        <?php
+    }
+    else
+    {
+        if(!$usuarioDAO->consultarUsername($usuario->get_login())){
+            if ($usuarioDAO->cadastrar($usuario)) {
+                ?>
+                <script language='javascript' type='text/javascript'>
+                    alert('Cadastrado com sucesso');window.location.href='index.php';
+                </script>";
+                <?php
+            }     
+        }
+        else{
+             ?>
+                <script language='javascript' type='text/javascript'>
+                    alert('Login em uso');window.location.href='cadastro.php';
+                </script>";
             <?php
         }
-    }   
-    else {
-        ?>
-        <script type="text/javascript">
-            document.getElementById("resultadoCadastro").innerHTML = "O Login ja esta em uso.";
-            document.getElementById("resultadoCadastro").style.color = "red";</script>
-        <?php
     }
 }
 ?>

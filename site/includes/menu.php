@@ -30,15 +30,21 @@
           </div>
           <button type="submit" class="btn btn-default">Pesquisar</button>
         </form>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a type="button" data-toggle="modal" data-target="#CadastroFilme">Filme</a></li>
-              <li><a type="button" data-toggle="modal" data-target="#CadastroSerie">Serie</a></li>
+         <?php
+            if($_SESSION['logado']==1){
+             ?>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a type="button" data-toggle="modal" data-target="#CadastroFilme">Filme</a></li>
+                  <li><a type="button" data-toggle="modal" data-target="#CadastroSerie">Serie</a></li>
+                </ul>
+              </li>
             </ul>
-          </li>
-        </ul>
+            <?php
+            }
+        ?>
       </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
