@@ -12,13 +12,14 @@
         if($array){
             while($row = $array->fetch(PDO::FETCH_ASSOC)){
                 ?>
-                    <div class="row">
+                    
                       <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
                           <img src="<?php echo $row["foto"];?>" alt="<?php echo $row["titulo"];?>" class="img-responsive">
                           <div class="caption">
-                            <h3><?php echo $row["titulo"]." Recomendado para".$row["Faixa_Etaria_Idade"];?></h3>
+                            <h3><?php echo $row["titulo"];?></h3>
                             <p><?php echo $row["sinopse"];?></p>
+                            <p><?php echo " recomendado para ".strtr($row["Faixa_Etaria_Idade"],array('+' => 'maiores de','Livre' => "todos",'12'=>"12 anos",'14'=>"14 anos",'16'=>"16 anos",'18'=>"18 anos"));?></p>
                             <p>
                                 <a href="info_obra.php/titulo=<?php echo $row["titulo"];?>&data=<?php echo $row["data_lancamento"];?>" class="btn btn-primary" role="button">Mais Informações</a>
                                 <?php 
@@ -42,7 +43,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    
                 <?php
             }
         }
@@ -53,6 +54,17 @@
 <?php
 if (isset($_POST['delete'])) {
     $obra= new obraDAO();
-    $obra->delete($_POST['titulo'],$_POST['data']);
-}
+    $titulo=$_POST['titulo'];
+    $data= $_POST['data'];
+    
+    ?>
+    <script language='javascript' type='text/javascript'>
+        var r=confirm('O Filme <?php echo$titulo;?> será removido');
+        if(r==true){
+            <?php $obra->delete($titulo,$data);?>
+            window.location.href='index.php';
+        }
+    </script>";
+    <?php
+    }
 ?>

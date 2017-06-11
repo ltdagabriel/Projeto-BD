@@ -40,7 +40,12 @@ class obra {
         $this->sinopse=$sinopse;
     }
     public function set_Foto($foto){
-        $this->foto=$foto;
+        if($foto=="" || $foto==null){
+            $this->foto="https://ilhafutebol.files.wordpress.com/2011/07/verminho.jpg";
+        }
+        else{  
+            $this->foto=$foto;
+        }
     }
     public function set_FEtaria($F_Etaria){
         $this->Faixa_Etaria=$F_Etaria;
