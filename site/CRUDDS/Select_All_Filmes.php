@@ -11,7 +11,7 @@
         $array= $filme->Retorna_Todos();
         if($array){
             while($row = $array->fetch(PDO::FETCH_ASSOC)){
-                ?>
+			?>
                     
                       <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
@@ -23,8 +23,8 @@
                             <p>
                                 <a href="info_obra.php/titulo=<?php echo $row["titulo"];?>&data=<?php echo $row["data_lancamento"];?>" class="btn btn-primary" role="button">Mais Informações</a>
                                 <?php 
-                                   if($_SESSION['logado']==1){
-                                    ?>
+                       if($_SESSION['logado']==1){
+                ?>
                                     <form method="post">
                                         <div class="collapse">
                                             <div class="form-group">
