@@ -1,6 +1,7 @@
 <?php
 require_once ("classes/ConectBD/obra.php");
 require_once("classes/Entidades/obra.php");
+require_once("classes/ConectBD/filme.php");
 require_once("classes/Entidades/filme.php");
 ?>
 <form id="cadastro" name="cadastro" method="post">
@@ -72,11 +73,14 @@ if (isset($_POST['cadastrar'])) {
     $obraDAO = new obraDAO();
     $obra = new obra();
 
+    $filmeDAO= new filmeDAO();
+    $filme=new filme($_POST['video'],$_POST['titulo'],$_POST['data']);
+    
     $obra->set_Titulo($_POST['titulo']);
     $obra->set_Sinopse($_POST['sinopse']);
     $obra->set_Data_Lancamento($_POST['data']);
     $obra->set_Foto($_POST['foto']);
-    $obra->set_Filme(new filme($_POST['video'],$_POST['titulo'],$_POST['data']));
+    
     $obra->set_FEtaria($_POST['classificacao']);
     if($obra->get_FEtaria()=="Selecione"){
          ?>
@@ -102,12 +106,14 @@ if (isset($_POST['cadastrar'])) {
     else{
         if(!$obraDAO->consultartitulo($obra->get_Titulo(), $obra->get_DataLancamento())){
             if ($obraDAO->cadastrar($obra)) {
+                if($filmeDAO->cadastrar($filme)){
                     ?>
                     <script language='javascript' type='text/javascript'>
                         alert('Cadastrado com sucesso');window.location.href='index.php';
                     </script>";
                     <?php
                 }
+            }
         }
         else{
         ?>

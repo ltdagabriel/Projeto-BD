@@ -37,7 +37,11 @@
     </div>
 
     <div id='conteudo'>
-        <?php include("includes/conteudo_index.php");?>
+        <div class="container">
+            <div class="row">
+                <?php include("CRUDDS/Select_All_Filmes.php");?>
+            </div>
+        </div>
     </div>
 </div>
     

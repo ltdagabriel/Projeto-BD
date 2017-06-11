@@ -11,8 +11,6 @@ class obra {
     private $data_lancamento;
     private $data_add;
     private $hora_add;
-    private $filme;
-    private $serie;
 
     public function get_Titulo() {
         return $this->titulo;
@@ -35,20 +33,6 @@ class obra {
     public function get_HoraAdd() {
         return $this->hora_add;
     }
-    public function get_Obra() {
-        if (isFilme()){
-            return $this->filme;
-        }
-        if (isSerie()){
-            return $this->serie;
-        }
-    }
-    public function isFilme() {
-        return ($this->filme!=null);
-    }
-    public function isSerie() {
-        return ($this->serie!=null);
-    }
     public function set_Titulo($titulo){
         $this->titulo=$titulo;
     }
@@ -69,12 +53,6 @@ class obra {
     }
     public function set_Hora_Add($hora){
         $this->hora_add=$hora;
-    }
-    public function set_Filme(filme $filme){
-        $this->filme=$filme;
-    }
-    public function set_Serie(serie $serie){
-        $this->serie=$serie;
     }
 
 }

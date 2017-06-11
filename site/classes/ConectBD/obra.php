@@ -24,16 +24,7 @@ class obraDAO {
                 ":hora" => date("h:i:s")
             );
             
-            $stmt->execute($param);
-            if($entObra->isSerie()){
-                $seriado=new serieDAO();
-                return $seriado->cadastrar($entObra->get_Obra());
-            }
-            if($entObra->isFilme()){
-                $filme= new filmeDAO();
-                return $filme->cadastrar($entObra->get_Obra());
-            }
-            
+            return $stmt->execute($param);            
         } catch (PDOException $ex) {
             echo " Falha ao Cadastrar: {$ex->getMessage()} ";
         }
@@ -53,6 +44,22 @@ class obraDAO {
             return ($stmt->rowCount() > 0);
         } catch (PDOException $ex) {
             echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
+    function delete($titulo,$data){
+        try{
+
+                $stmt = $this->pdo->prepare("DELETE FROM obra WHERE titulo = :titulo and data_lancamento = :data");
+                $param = array(
+                        ":titulo"  => $titulo,
+                        ":data"  => $data
+                );
+
+                $stmt->execute($param);
+
+        }catch (PDOException $ex) {
+            echo "Deu para apagar Não: {$ex->getMessage()}";
+			return null;
         }
     }
 	

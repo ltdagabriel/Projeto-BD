@@ -50,54 +50,6 @@
         </div>
     </div>  
 
-    <div class="panel panel-default ">
-        <h4 style="padding-left:5em">Lista de todos as Obras</h4>
-        <div class="panel-collapse">
-          <div class="panel-body">
-            <?php
-                // definições de host, database, usuário e senha
-                $host = "localhost";
-                $db   = "myrobbie";
-                $user = "gabriel";
-                $pass = "";
-                // conecta ao banco de dados
-                $con = new mysqli($host, $user, $pass,$db); 
-
-                // cria a instrução SQL que vai selecionar os dados
-                $sql2 = "SELECT titulo,foto,sinopse,faixa_etaria_idade,data_lancamento FROM obra order by data_adicionado desc";
-                // executa a query
-                $dados = $con->query($sql2);
-
-                if ($dados->num_rows > 0) {
-                    while($row = $dados->fetch_assoc()) {
-
-                    ?>
-                        <div class=" col-sm-6 col-md-4">
-                          <div class="">
-                            <div class="thumbnail">
-                              <?php
-                              echo "<img src='".$row["foto"]."' alt='".$row["titulo"]."'>";
-                              $obra_titulo=$row["titulo"];
-                              $obra_data=$row["data_lancamento"];
-
-                              ?>
-                              <div class="caption">
-                                   <?php
-                                    echo "<h3>" . $row["titulo"]. "</h3 <p>" . $row["sinopse"]."</p>" ;
-                                    ?>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    <?php
-                    }
-                } else {
-                        echo "0 results";
-                }
-                $con->close();
-             ?>
-          </div>
-        </div>
-    </div> 
+     
 
 </div>

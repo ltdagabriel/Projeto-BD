@@ -1,12 +1,13 @@
 <?php
 require_once ("classes/ConectBD/obra.php");
+require_once ("classes/ConectBD/serie.php");
 require_once("classes/Entidades/obra.php");
 require_once("classes/Entidades/filme.php");
 ?>
 <form id="cadastro" name="cadastro" method="post">
     <div class="form-group">
             <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
-            <input name="titulo" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo do Filme">
+            <input name="titulo" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo">
     </div>
     <div class="form-group">
             <label for="exampleInputName2">Sinopse</label>
@@ -71,12 +72,13 @@ require_once("classes/Entidades/filme.php");
 if (isset($_POST['cadastrar'])) {
     $obraDAO = new obraDAO();
     $obra = new obra();
+    $serieDAO= new serieDAO();
+    $seriado=new Serie($_POST['status'],$_POST['titulo'],$_POST['data']);
 
     $obra->set_Titulo($_POST['titulo']);
     $obra->set_Sinopse($_POST['sinopse']);
     $obra->set_Data_Lancamento($_POST['data']);
     $obra->set_Foto($_POST['foto']);
-    $obra->set_Serie(new Serie($_POST['status'],$_POST['titulo'],$_POST['data']));
     $obra->set_FEtaria($_POST['classificacao']);
     if($obra->get_FEtaria()=="Selecione"){
          ?>
@@ -102,12 +104,14 @@ if (isset($_POST['cadastrar'])) {
     else{
         if(!$obraDAO->consultartitulo($obra->get_Titulo(), $obra->get_DataLancamento())){
             if ($obraDAO->cadastrar($obra)) {
+                if($serieDAO->cadastrar($seriado)){                    
                     ?>
                     <script language='javascript' type='text/javascript'>
                         alert('Cadastrado com sucesso');window.location.href='index.php';
                     </script>";
                     <?php
                 }
+            }
         }
         else{
         ?>
