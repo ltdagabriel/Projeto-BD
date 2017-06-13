@@ -45,6 +45,7 @@ if (isset($_GET['erro'])) {
 if (isset($_POST['sair'])){
     $_SESSION['logado'] = '0';
     $_SESSION['nome'] = "";
+    header ("Location: index.php");
 }
 ?>
 <div class="row">
