@@ -1,6 +1,6 @@
-drop schema if exists MyRobbie;
-create schema MyRobbie;
-use MyRobbie;
+drop schema if exists MyHobbie;
+create schema MyHobbie;
+use MyHobbie;
 CREATE TABLE Faixa_Etaria (
     idade VARCHAR(100) PRIMARY KEY
 );

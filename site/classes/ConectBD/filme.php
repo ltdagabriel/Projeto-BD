@@ -20,7 +20,7 @@ class filmeDAO {
 
             return $stmt->execute($param);
         } catch (PDOException $ex) {
-            echo " Falha na inserção de seriado : {$ex->getMessage()} \n";
+            echo " Falha na inserção do filme : {$ex->getMessage()} ";
         }
     }
     function Retorna_Todos(){
