@@ -31,10 +31,8 @@
 <?php
     session_start();
     if(!$_SESSION['logado']){
-        $_SESSION['logado']=0;
-    }
-    
-    
+        $_SESSION['logado']=0;                                                                
+    }    
 ?>
 	<title>MyHobbieFIlmeSeries</title>
 	<meta charset="utf-8">
@@ -107,15 +105,10 @@
                                     if($editar=false){
                                         ?>
                                         <button name="edit" type="submit" class="btn btn-default navbar-right">Editar</button>
-                                        <?php
-                                    }
-                                    else{
-                                        ?>
-                                        <button name="salvar" type="submit" class="btn btn-default navbar-right">Salvar</button>
+                                        <button name="delete" type="submit" class="btn btn-default navbar-right">Excluir</button>
                                         <?php
                                     }
                                     ?>
-                                        <button name="delete" type="submit" class="btn btn-default navbar-right">Excluir</button>
                                 </div>
                                 <?php
                             }
