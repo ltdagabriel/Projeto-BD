@@ -37,7 +37,7 @@
         <div class="row container">
             <div id='conteudo'>
                 <?php 
-                include("read_filme.php");
+                include("read_update_obra.php");
                 ?>
             </div>
             

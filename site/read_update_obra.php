@@ -65,32 +65,6 @@
                                 <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
                             </div>
 
-<<<<<<< HEAD
-                    <div class="navbar-left col-md-8 col-lg-8">
-                        <p>Data de Lançamento: <?php echo $obra->get_DataLancamento();?></p>
-                    </div>
-
-                    <div class="navbar-left col-md-8 col-lg-8">
-                        <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
-                    </div>
-
-                    <?php
-                    if($filme->get_Titulo()==$obra->get_Titulo()){
-                    ?>
-                    <div class="navbar-left col-md-8 col-lg-8">
-                        <p>Trailer: <?php echo $filme->get_trailer();?></p>
-                    </div>
-                        <?php 
-                    }
-                    if($serie->get_Titulo()==$obra->get_Titulo()){
-                        ?>
-                        <div class="panel-default panel navbar-right col-md-8 col-lg-8">
-                            <p>Adiciona info do seriado</p>
-                        </div>
-                        <?php 
-                    }
-                    ?>
-=======
                             <div class="navbar-left col-md-8 col-lg-8">
                                 <h3><?php echo $obra->get_Titulo();?></h3>
                                 <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
@@ -107,8 +81,8 @@
                             }
                             if($serie->get_Titulo()==$obra->get_Titulo()){
                                 ?>
-                                <div class="panel-default panel navbar-right col-md-8 col-lg-8">
-                                    <p>Adiciona info do seriado</p>
+                                <div class="navbar-left col-md-8 col-lg-8">
+                                    <p>Status: <?php echo $serie->get_status();?></p>
                                 </div>
                                 <?php 
                             }
@@ -123,7 +97,6 @@
                             ?>
                         </form>
                     </div>
->>>>>>> origin/master
                 </div>
             </div>
         </div>

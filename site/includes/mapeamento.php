@@ -30,7 +30,7 @@ class mapa {
         $this->logologin='includes/header.php';
         $this->cadastro_serie="CRUDDS/cadastro_serie.php";
         $this->cadastro_filme="CRUDDS/cadastro_filme.php";
-        $this->read_filme="/Projeto-BD/site/read_filme.php";
+        $this->read_filme="/Projeto-BD/site/read_update_obra.php";
         $this->cadastro_usuario="CRUDDS/cadastro.php";
         $this->conectfilme="classes/ConectBD/filme.php";
         $this->conectserie="classes/ConectBD/serie.php";
