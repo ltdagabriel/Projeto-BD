@@ -60,7 +60,7 @@
         <div class="row container">
             <div id='conteudo'>
                 <div class="navbar-left col-md-4 col-lg-4">
-                    <img class="img-responsive" href="<?php echo $obra->get_Foto();?>">
+                    <img class="img-responsive" src="<?php echo $obra->get_Foto();?>">
                 </div>
                 <div class="navbar-left col-md-8 col-lg-8">
                     <h3><?php echo $obra->get_Titulo();?>"</h3>
