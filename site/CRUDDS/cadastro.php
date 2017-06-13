@@ -39,12 +39,12 @@ require_once($map->Entidade_Usuario());
     </div>
     <div class="form-group">
         <label for="inputPassword3">Senha: <a style="color:red">*</a></label>
-        <input name="senha1" id="senha1" type="password" onChange="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
+        <input name="senha1" id="senha1" type="password" onKeyUp="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
         <p></p>
     </div>
     <div class="form-group">
         <label for="inputPassword3">Confirmar senha: <a style="color:red">*</a></label>
-        <input name="senha2" id="senha2" type="password" onChange="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
+        <input name="senha2" id="senha2" type="password" onKeyUp="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
     </div>
     <div class="form-inline">
         <div class="form-group">
