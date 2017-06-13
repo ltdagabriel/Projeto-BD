@@ -12,6 +12,9 @@ class mapa {
     private $cadastro_serie;
     private $cadastro_filme;
     private $cadastro_usuario;
+    private $alterar_serie;
+    private $alterar_filme;
+    private $alterar_usuario;
     private $read_filme;
     private $interfaceobra;
     private $logologin;
@@ -30,6 +33,8 @@ class mapa {
         $this->logologin='includes/header.php';
         $this->cadastro_serie="CRUDDS/cadastro_serie.php";
         $this->cadastro_filme="CRUDDS/cadastro_filme.php";
+        $this->alterar_serie="CRUDDS/alterar_serie.php";
+        $this->alterar_filme="CRUDDS/alterar_filme.php";
         $this->read_filme="/Projeto-BD/site/read_update_obra.php";
         $this->cadastro_usuario="CRUDDS/cadastro.php";
         $this->conectfilme="classes/ConectBD/filme.php";
@@ -65,6 +70,12 @@ class mapa {
     }
     public function Cadastro_Filme(){
         return $this->cadastro_filme;
+    }
+    public function Alterar_Filme(){
+        return $this->alterar_filme;
+    }
+    public function Alterar_Serie(){
+        return $this->alterar_serie;
     }
     public function Info_Obra(){
         return $this->read_filme;

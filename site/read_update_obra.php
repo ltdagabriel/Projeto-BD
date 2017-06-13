@@ -18,10 +18,12 @@
     if($filmeDAO=new filmeDAO()){
         $filme=$filmeDAO->Get($_POST['titulo'],$_POST['data']);
     }
+    $editar=false;
     /*** Variaveis
-     * $serie ---   contem entidade Serie
-     * $filme ---   contem entidade Filme
-     * $obra  ---   contem uma obra 
+     * $serie   ---   contem entidade Serie
+     * $filme   ---   contem entidade Filme
+     * $obra    ---   contem uma obra
+     * $editar  ---   Verifica se o botao editar foi precionado 
      */
     ?>
 <html lang="pt-BR">
@@ -61,36 +63,59 @@
                 <div class=" panel-default panel">
                     <div class="panel-body"
                         <form method="post">
-                            <div class="navbar-left col-md-4 col-lg-4">
-                                <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
-                            </div>
-
-                            <div class="navbar-left col-md-8 col-lg-8">
-                                <h3><?php echo $obra->get_Titulo();?></h3>
-                                <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
-                            </div>
-
-                            <div class="navbar-left col-md-8 col-lg-8">
-                                <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
-                            </div>
-
-                            <?php
-                            if($filme->get_Titulo()==$obra->get_Titulo()){
-                            ?>
-                                <?php 
-                            }
-                            if($serie->get_Titulo()==$obra->get_Titulo()){
+                            <?php 
+                            if($editar=false){
                                 ?>
-                                <div class="navbar-left col-md-8 col-lg-8">
-                                    <p>Status: <?php echo $serie->get_status();?></p>
+                                <div class="navbar-left col-md-4 col-lg-4">
+                                    <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
                                 </div>
-                                <?php 
+
+                                <div class="navbar-left col-md-8 col-lg-8">
+                                    <h3><?php echo $obra->get_Titulo();?></h3>
+                                    <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
+                                </div>
+
+                                <div class="navbar-left col-md-8 col-lg-8">
+                                    <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
+                                </div>
+
+                                <?php
+                                if($filme->get_Titulo()==$obra->get_Titulo()){
+                                ?>
+                                    <?php 
+                                }
+                                if($serie->get_Titulo()==$obra->get_Titulo()){
+                                    ?>
+                                    <div class="navbar-left col-md-8 col-lg-8">
+                                        <p>Status: <?php echo $serie->get_status();?></p>
+                                    </div>
+                                    <?php 
+                                }
+                            }
+                            else{
+                                if($filme->get_Titulo()==$obra->get_Titulo()){
+                                    include ($map->Alterar_Filme());
+                                }
+                                else{
+                                    include ($map->Alterar_Serie());
+                                }
                             }
                             if($_SESSION['logado']==1){
                                 ?>
                                 <div class="col-md-12 col-lg-12 col-sm-12"> 
-                                    <button name="edit" type="submit" class="btn btn-default navbar-right">Editar</button>
-                                    <button name="delete" type="submit" class="btn btn-default navbar-right">Excluir</button>
+                                    <?php 
+                                    if($editar=false){
+                                        ?>
+                                        <button name="edit" type="submit" class="btn btn-default navbar-right">Editar</button>
+                                        <?php
+                                    }
+                                    else{
+                                        ?>
+                                        <button name="salvar" type="submit" class="btn btn-default navbar-right">Salvar</button>
+                                        <?php
+                                    }
+                                    ?>
+                                        <button name="delete" type="submit" class="btn btn-default navbar-right">Excluir</button>
                                 </div>
                                 <?php
                             }
@@ -105,3 +130,22 @@
     
 </body>
 </html> 
+<?php
+if (isset($_POST['edit'])){
+    $editar=true;
+}
+if (isset($_POST['delete'])) {
+    require_once ($this->map->Conect_Obra());
+    $obra= new obraDAO();
+    $titulo=$_POST['titulo'];
+    $data= $_POST['data'];
+    ?>
+    <script language='javascript' type='text/javascript'>
+        var r=confirm('A Obra <?php echo$titulo;?> será removida');
+        if(r==true){
+            <?php $obra->delete($titulo,$data);?>
+            window.location.href='<?php echo $this->map->PageIndex();?>';
+        }
+    </script>
+<?php
+}
