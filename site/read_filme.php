@@ -69,12 +69,19 @@
                     </div>
 
                     <div class="navbar-left col-md-8 col-lg-8">
+                        <p>Data de Lançamento: <?php echo $obra->get_DataLancamento();?></p>
+                    </div>
+
+                    <div class="navbar-left col-md-8 col-lg-8">
                         <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
                     </div>
 
                     <?php
                     if($filme->get_Titulo()==$obra->get_Titulo()){
                     ?>
+                    <div class="navbar-left col-md-8 col-lg-8">
+                        <p>Trailer: <?php echo $filme->get_trailer();?></p>
+                    </div>
                         <?php 
                     }
                     if($serie->get_Titulo()==$obra->get_Titulo()){
