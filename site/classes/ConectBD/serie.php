@@ -2,6 +2,10 @@
 
 require_once("Conexao.php");
 
+    require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+require_once($map->Entidade_Serie());
+
 class serieDAO {
 
     function __construct() {
@@ -30,6 +34,20 @@ class serieDAO {
             return $stmt;
         } catch (PDOException $ex) {
             echo " Falha ao Retornar todos os Seriados : {$ex->getMessage()} \n";
+        }
+    }
+    public function Get($titulo,$data){
+        try {
+            $stmt = $this->pdo->prepare("SELECT stattus,obra_titulo,obra_data FROM serie WHERE obra_titulo = :titulo and obra_data = :data");
+            $param = array(
+                ":titulo" => $titulo,
+                ":data" => $data               
+            );
+            $stmt->execute($param);
+            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            return new serie($row['stattus'],$row['obra_titulo'],$row['obra_data']);
+        } catch (PDOException $ex) {
+            echo " Falha ao Retornar filme : {$ex->getMessage()} \n";
         }
     }
 

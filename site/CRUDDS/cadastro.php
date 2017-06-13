@@ -1,6 +1,8 @@
-<?php
-require_once ("classes/ConectBD/usuario.php");
-require_once("classes/Entidades/usuario.php");
+<?php 
+    require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+require_once ($map->Conect_Usuario());
+require_once($map->Entidade_Usuario());
 
 ?>
 <script type="text/javascript">

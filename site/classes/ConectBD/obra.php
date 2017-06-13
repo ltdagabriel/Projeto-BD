@@ -2,7 +2,10 @@
 
 require_once("Conexao.php");
 require_once("serie.php");
-require_once("filme.php");
+
+    require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+require_once($map->Entidade_Obra());
 
 class obraDAO {
 
@@ -62,43 +65,26 @@ class obraDAO {
 			return null;
         }
     }
-	
-    public function isSerie($titulo){
-        try{
-
-                $stmt = $this->pdo->prepare("SELECT * FROM obra,serie WHERE  titulo = :titulo and titulo = obra_titulo");
-                $param = array(
-                        ":titulo"  => $titulo
-                );
-
-                $stmt->execute($param);
-
-                
-                return ($stmt->rowCount() > 0);
-
-
-        }catch (PDOException $ex) {
-            echo "ERRO 04: {$ex->getMessage()}";
-			return null;
-        }
-    }
-    public function isFilme($titulo){
-        try{
-
-                $stmt = $this->pdo->prepare("SELECT * FROM obra,filme WHERE  titulo = :titulo and titulo = obra_titulo");
-                $param = array(
-                        ":titulo"  => $titulo
-                );
-
-                $stmt->execute($param);
-
-                
-                return ($stmt->rowCount() > 0);
-
-
-        }catch (PDOException $ex) {
-            echo "ERRO 04: {$ex->getMessage()}";
-			return null;
+    public function Get($titulo,$data){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_idade,data_lancamento,data_adicionado,hora_adicionado FROM obra WHERE titulo = :titulo and data_lancamento = :data");
+            $param = array(
+                ":titulo" => $titulo,
+                ":data" => $data               
+            );
+            $stmt->execute($param);
+            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            $obra= new obra();
+            $obra->set_Titulo($row['titulo']);
+            $obra->set_Data_Add($row['data_adicionado']);
+            $obra->set_Data_Lancamento($row['data_lancamento']);
+            $obra->set_FEtaria($row['Faixa_Etaria_idade']);
+            $obra->set_Foto($row['foto']);
+            $obra->set_Sinopse($row['sinopse']);
+            $obra->set_Hora_Add($row['hora_adicionado']);
+            return $obra;
+        } catch (PDOException $ex) {
+            echo " Falha ao Retornar obra : {$ex->getMessage()} \n";
         }
     }
 

@@ -1,6 +1,4 @@
 <?php
-require_once("serie.php");
-require_once("filme.php");
 
 class obra {
 
@@ -59,7 +57,6 @@ class obra {
     public function set_Hora_Add($hora){
         $this->hora_add=$hora;
     }
-
 }
 
 ?>

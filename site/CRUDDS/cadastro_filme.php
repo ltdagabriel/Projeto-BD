@@ -1,8 +1,10 @@
-<?php
-require_once ("classes/ConectBD/obra.php");
-require_once("classes/Entidades/obra.php");
-require_once("classes/ConectBD/filme.php");
-require_once("classes/Entidades/filme.php");
+<?php 
+    require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+require_once ($map->Conect_Filme());
+require_once($map->Entidade_Filme());
+require_once ($map->Conect_Obra());
+require_once($map->Entidade_Obra());
 ?>
 <form id="cadastro" name="cadastro" method="post">
     <div class="form-group">

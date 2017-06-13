@@ -12,8 +12,14 @@ class mapa {
     private $cadastro_serie;
     private $cadastro_filme;
     private $cadastro_usuario;
+    private $read_filme;
     private $interfaceobra;
     private $logologin;
+    private $conectusuario;
+    private $entidadeUsuario;
+    private $entidadeSerie;
+    private $entidadeObra;
+    private $entidadeFilme;
     public function __construct() {
         $this->page1="/Projeto-BD/site/index.php";
         $this->page2="/Projeto-BD/site/Cadastro.php";
@@ -24,10 +30,16 @@ class mapa {
         $this->logologin='includes/header.php';
         $this->cadastro_serie="CRUDDS/cadastro_serie.php";
         $this->cadastro_filme="CRUDDS/cadastro_filme.php";
+        $this->read_filme="/Projeto-BD/site/read_filme.php";
         $this->cadastro_usuario="CRUDDS/cadastro.php";
         $this->conectfilme="classes/ConectBD/filme.php";
         $this->conectserie="classes/ConectBD/serie.php";
         $this->conectobra="classes/ConectBD/obra.php";
+        $this->conectusuario="classes/ConectBD/usuario.php";
+        $this->entidadeUsuario="classes/Entidades/usuario.php";
+        $this->entidadeSerie="classes/Entidades/serie.php";
+        $this->entidadeObra="classes/Entidades/obra.php";
+        $this->entidadeFilme="classes/Entidades/filme.php";
         $this->cadastro_usuario="CRUDDS/cadastro.php";
     }
     public function PageIndex(){
@@ -54,6 +66,9 @@ class mapa {
     public function Cadastro_Filme(){
         return $this->cadastro_filme;
     }
+    public function Info_Obra(){
+        return $this->read_filme;
+    }
     public function Cadastro_Usuario(){
         return $this->cadastro_usuario;
     }
@@ -68,5 +83,20 @@ class mapa {
     }
     public function Conect_Obra(){
         return $this->conectobra;
+    }
+    public function Conect_Usuario(){
+        return $this->conectusuario;
+    }
+    public function Entidade_Usuario(){
+        return $this->entidadeUsuario;
+    }
+    public function Entidade_Obra(){
+        return $this->entidadeObra;
+    }
+    public function Entidade_Filme(){
+        return $this->entidadeFilme;
+    }
+    public function Entidade_Serie(){
+        return $this->entidadeSerie;
     }
 }

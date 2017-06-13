@@ -24,9 +24,19 @@ class UIObra{
                                   <div class="caption">
                                     <h3><?php echo $row["titulo"];?></h3>
                                     <p><?php echo $row["sinopse"];?></p>
-                                    <p><?php echo " recomendado para ".strtr($row["Faixa_Etaria_Idade"],array('+' => 'maiores de','Livre' => "todos",'12'=>"12 anos",'14'=>"14 anos",'16'=>"16 anos",'18'=>"18 anos"));?></p>
+                                    <p><?php echo " recomendado para ".strtr($row["Faixa_Etaria_Idade"],array('+' => 'maiores de ','Livre' => "todos",'12'=>"12 anos",'14'=>"14 anos",'16'=>"16 anos",'18'=>"18 anos"));?></p>
                                     <p>
-                                        <a href="info_obra.php/titulo=<?php echo $row["titulo"];?>&data=<?php echo $row["data_lancamento"];?>" class="btn btn-primary" role="button">Mais Informações</a>
+                                    <form method="post" method="post" action="<?php echo$this->map->Info_Obra();?>">
+                                                <div class="collapse">
+                                                    <div class="form-group">
+                                                        <input value="<?php echo $row["titulo"];?>" name="titulo" type="text" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input value="<?php echo $row["data_lancamento"];?>" name="data" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <button name="info" type="submit" class="btn btn-default">Informações</button>
+                                            </form>
                                         <?php 
                                            if($_SESSION['logado']==1){
                                             ?>

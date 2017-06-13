@@ -1,7 +1,9 @@
 <?php
+    require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
 
 require_once("Conexao.php");
-
+require_once($map->Entidade_Filme());
 class filmeDAO {
 
     function __construct() {
@@ -9,7 +11,7 @@ class filmeDAO {
         $this->pdo = $this->con->Connect();
     }
 
-    function cadastrar(filme $EntFilme) {
+    public function cadastrar(filme $EntFilme) {
         try {
             $stmt = $this->pdo->prepare("INSERT INTO filme VALUE (:trailer, :titulo, :data)");
             $param = array(
@@ -23,7 +25,7 @@ class filmeDAO {
             echo " Falha na inserção do filme : {$ex->getMessage()} ";
         }
     }
-    function Retorna_Todos(){
+    public function Retorna_Todos(){
         try {
             $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM filme,obra WHERE titulo = obra_titulo and data_lancamento = obra_data order by data_adicionado and hora_adicionado desc");
             $stmt->execute();
@@ -32,6 +34,21 @@ class filmeDAO {
             echo " Falha ao Retornar todos os Filmes : {$ex->getMessage()} \n";
         }
     }
+    public function Get($titulo,$data){
+        try {
+            $stmt = $this->pdo->prepare("SELECT trailer,obra_titulo,obra_data FROM filme WHERE obra_titulo = :titulo and obra_data = :data");
+            $param = array(
+                ":titulo" => $titulo,
+                ":data" => $data               
+            );
+            $stmt->execute($param);
+            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            return new filme($row['trailer'],$row['obra_titulo'],$row['obra_data']);
+        } catch (PDOException $ex) {
+            echo " Falha ao Retornar filme : {$ex->getMessage()} \n";
+        }
+    }
+    
 
 }
 
