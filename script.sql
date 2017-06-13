@@ -63,7 +63,6 @@ CREATE TABLE episodio (
     numero INTEGER,
     sinopse VARCHAR(1000),
     video VARCHAR(1000),
-    foto VARCHAR(1000),
     datta date,
     obra_titulo varchar(100),
     data_adicionado DATETIME DEFAULT CURRENT_TIMESTAMP,

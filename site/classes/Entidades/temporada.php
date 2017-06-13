@@ -11,19 +11,19 @@ class temporada {
     public function get_numero() {
         return $this->numero;
     }
-    public function set_numero($status) {
+    public function set_numero($numero) {
         $this->numero=$numero;
     }
     public function get_foto() {
         return $this->foto;
     }
-    public function set_foto($status) {
+    public function set_foto($foto) {
         $this->foto=$foto;
     }
     public function get_trailer() {
         return $this->trailer;
     }
-    public function set_trailer($status) {
+    public function set_trailer($trailer) {
         $this->trailer=$trailer;
     }
     public function get_titulo() {
@@ -38,10 +38,12 @@ class temporada {
     public function set_data($data) {
         $this->obra_data=$data;
     }
-    function __construct($status,$obra_titulo,$obra_data){
-        $this->status=$status;
-        $this->obra_data=$obra_data;
+    function __construct($numero, $foto, $trailer, $obra_titulo, $obra_data){
+        $this->numero=$numero;
+        $this->foto=$foto;
+        $this->trailer=$trailer;
         $this->obra_titulo=$obra_titulo;
+        $this->obra_data=$obra_data;
     }
 
 }
