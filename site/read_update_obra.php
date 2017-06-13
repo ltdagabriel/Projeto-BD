@@ -29,8 +29,7 @@
 <?php
     session_start();
     if(!$_SESSION['logado']){
-        $_SESSION['logado']=0;
-    }
+        $_SESSION['logado']=0                                                                }
     
     
 ?>
@@ -77,6 +76,9 @@
                             <?php
                             if($filme->get_Titulo()==$obra->get_Titulo()){
                             ?>
+                            <div class="navbar-left col-md-8 col-lg-8">
+                                <p>Trailer: <?php echo $filme->get_trailer();?></p>
+                            </div>
                                 <?php 
                             }
                             if($serie->get_Titulo()==$obra->get_Titulo()){
