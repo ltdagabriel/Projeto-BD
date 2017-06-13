@@ -83,22 +83,22 @@ if (isset($_POST['cadastrar'])) {
     if($obra->get_FEtaria()=="Selecione"){
          ?>
             <script language='javascript' type='text/javascript'>
-                alert('Selecione uma Faixa Etaria');window.location.href='Cadastro_Serie.php';
-            </script>";
+                alert('Selecione uma Faixa Etaria');
+            </script>
         <?php
     }
     else if ($obra->get_Titulo()=="" || $obra->get_Titulo()==null){
         ?>
             <script language='javascript' type='text/javascript'>
-                alert('O campo "Titulo" deve ser preenchido');window.location.href='Cadastro_Serie.php';
-            </script>";
+                alert('O campo "Titulo" deve ser preenchido');
+            </script>
         <?php
     }
     else if($obra->get_DataLancamento()=="" || $obra->get_DataLancamento()==null){
         ?>
             <script language='javascript' type='text/javascript'>
-                alert('O campo "Data de Lançamento" deve ser preenchido');window.location.href='Cadastro_Serie.php';
-            </script>";
+                alert('O campo "Data de Lançamento" deve ser preenchido');
+            </script>
         <?php
     }
     else{
@@ -107,8 +107,8 @@ if (isset($_POST['cadastrar'])) {
                 if($serieDAO->cadastrar($seriado)){                    
                     ?>
                     <script language='javascript' type='text/javascript'>
-                        alert('Cadastrado com sucesso');window.location.href='index.php';
-                    </script>";
+                        alert('Cadastrado com sucesso');window.location.href='<?php echo $map->PageIndex();?>';
+                    </script>
                     <?php
                 }
             }
@@ -116,8 +116,8 @@ if (isset($_POST['cadastrar'])) {
         else{
         ?>
             <script language='javascript' type='text/javascript'>
-                alert('Seriado ja se encontar na "Base de Dados"');window.location.href='Cadastro_Serie.php';
-            </script>";
+                alert('Seriado ja se encontar na "Base de Dados"');
+            </script>
         <?php
         }
     }

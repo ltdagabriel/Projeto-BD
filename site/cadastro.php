@@ -1,4 +1,7 @@
-
+<?php 
+    require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+?>
 <html lang="pt-BR">
 <head>
 <?php
@@ -23,18 +26,16 @@
         <script src="style/js/jquery.js"></script>
 <body>
     
-    <div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >
-    <div id="header" class="col-lg-12 col-md-12 col-sm-12">
-        <?php include("includes/header.php");?>
-    </div>
-    <div id='menu' class="col-lg-12 col-md-12">
-        <?php include("includes/menu.php");?>
-    </div>
+<div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >
+    <div class="container">
+        <?php include($map->IncludeLogoLogin());?>
+        <?php include($map->IncludeMenu());?>
 
-    <div id='conteudo'>
-        <div class="container">
-            <div class="row">
-                <?php include("CRUDDS/cadastro.php");?>
+        <div id='conteudo'>
+            <div class="container">
+                <div class="row">
+                    <?php include($map->Cadastro_Usuario());?>
+                </div>
             </div>
         </div>
     </div>

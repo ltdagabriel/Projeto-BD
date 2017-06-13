@@ -1,4 +1,7 @@
-
+<?php 
+    require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+?>
 <html lang="pt-BR">
 <head>
 <?php
@@ -23,37 +26,32 @@
         <script src="style/js/include.js"></script>
         <script src="style/js/jquery-1.10.2.js"></script>
         <script src="style/js/jquery.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                    $("#registre-se").click(function(event) {
-                            $("#conteudo").load("CRUDDS/cadastro.php");
-                    });
-            });
-        </script>
+        
 <body>
     
 <div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >
     <div class="container">
-        
-        <div class="row">
-            <div id="header" class="col-lg-12 col-md-12 col-sm-12">
-                <?php include("includes/header.php");?>
-            </div>
-        </div>
-        <div class="row">
-            <div id='menu' class="col-lg-12 col-md-12">
-                <?php include("includes/menu.php");?>
-            </div>
-        </div>
+        <?php include $map->IncludeLogoLogin();?>
+        <?php include($map->IncludeMenu());?>
+           
         <div class="row container">
             <div id='conteudo'>
-                <?php include("CRUDDS/Select_All_Filmes.php");?>
-                <?php include("CRUDDS/Select_All_Seriados.php");?>
+                <?php 
+                require_once($map->Interface_Obra());
+                require_once($map->Conect_Filme());
+                require_once($map->Conect_Serie());
+                $obra=new UIObra();
+                $filme=new filmeDAO();
+                $serie=new serieDAO();
+                
+                $obra->adicionar($filme->Retorna_Todos(),"Filme");
+                $obra->adicionar($serie->Retorna_Todos(),"Seriado");
+                ?>
             </div>
+            
         </div>
     </div>
 </div>
     
-   
 </body>
 </html> 

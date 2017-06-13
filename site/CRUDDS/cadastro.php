@@ -7,9 +7,9 @@ require_once("classes/Entidades/usuario.php");
     function validarSenha(senha1, senha2, campo) {
         var resultado = document.getElementById(campo);
 
-        senhaPrimaria = document.getElementById(senha1).value;
-        senhaSecundaria = document.getElementById(senha2).value;
-        if (senhaPrimaria == senhaSecundaria) {
+        var senhaPrimaria = document.getElementById(senha1).value;
+        var senhaSecundaria = document.getElementById(senha2).value;
+        if (senhaPrimaria === senhaSecundaria) {
             resultado.innerHTML = "Senhas iguais";
             resultado.style.color = "green";
         } else {
@@ -69,7 +69,7 @@ require_once("classes/Entidades/usuario.php");
 if (isset($_POST['cadastrar'])) {
     $usuarioDAO = new usuarioDAO();
     $usuario = new usuario();
-
+    
     $usuario->set_nome($_POST['nome']);
     $usuario->set_email($_POST['email']);
     $usuario->set_login($_POST['login']);
@@ -79,29 +79,29 @@ if (isset($_POST['cadastrar'])) {
     if($usuario->get_login() == "" || $usuario->get_login() == null){
         ?>
             <script language='javascript' type='text/javascript'>
-                alert('O campo login deve ser preenchido');window.location.href='cadastro.php';
-            </script>";
+                alert('O campo login deve ser preenchido');
+            </script>
         <?php
     }
     else if($_POST['senha2']!=$_POST['senha1'] || $_POST['senha1']=="" || $_POST['senha1'] ==null){
          ?>
         <script language='javascript' type='text/javascript'>
-            alert('Senhas incorreta');window.location.href='cadastro.php';
-        </script>";
+            alert('Senhas incorreta');
+        </script>
         <?php
     }
     else if($_POST['nome']=="" || $_POST['nome']==null){
         ?>
         <script language='javascript' type='text/javascript'>
-            alert('Campo nome deve ser Preenchido');window.location.href='cadastro.php';
-        </script>";
+            alert('Campo nome deve ser Preenchido');
+        </script>
         <?php
     }
     else if($_POST['email']=="" || $_POST['email']==null){
         ?>
         <script language='javascript' type='text/javascript'>
-            alert('Campo E-Mail deve ser Preenchido');window.location.href='cadastro.php';
-        </script>";
+            alert('Campo E-Mail deve ser Preenchido');
+        </script>
         <?php
     }
     else
@@ -110,16 +110,16 @@ if (isset($_POST['cadastrar'])) {
             if ($usuarioDAO->cadastrar($usuario)) {
                 ?>
                 <script language='javascript' type='text/javascript'>
-                    alert('Cadastrado com sucesso');window.location.href='index.php';
-                </script>";
+                    alert('Cadastrado com sucesso');window.location.href='<?php echo $map->PageIndex();?>';
+                </script>
                 <?php
             }     
         }
         else{
              ?>
                 <script language='javascript' type='text/javascript'>
-                    alert('Login em uso');window.location.href='cadastro.php';
-                </script>";
+                    alert('Login em uso');
+                </script>
             <?php
         }
     }
