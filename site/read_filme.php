@@ -58,21 +58,23 @@
            
         <div class="row container">
             <div id='conteudo'>
-                <div class="">
-                    <div class="navbar-left col-md-4 col-lg-4 panel-default panel">
+                <div class=" panel-default panel">
+                    <div class="navbar-left col-md-4 col-lg-4">
                         <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
                     </div>
                     
-                    <div class="panel-default panel navbar-left col-md-8 col-lg-8">
+                    <div class="navbar-left col-md-8 col-lg-8">
                         <h3><?php echo $obra->get_Titulo();?></h3>
-                        <p><?php echo $obra->get_Sinopse();?></p>
+                        <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
                     </div>
+
+                    <div class="navbar-left col-md-8 col-lg-8">
+                        <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
+                    </div>
+
                     <?php
                     if($filme->get_Titulo()==$obra->get_Titulo()){
-                        ?>
-                        <div class="panel-default panel navbar-left col-md-8 col-lg-8">
-                            <p>Seila ve se e filme ou algo do genero</p>
-                        </div>
+                    ?>
                         <?php 
                     }
                     if($serie->get_Titulo()==$obra->get_Titulo()){
