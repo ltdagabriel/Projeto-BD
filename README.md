@@ -9,9 +9,10 @@
 Para a utilização de tal sistema é nescessario seguir alguns passos
 - Nescessario o [XAMP](https://www.apachefriends.org/pt_br/index.html) para o uso de PHP e MySQL
 - Instalar o XAMP em C://, [Exemplo de Instalação](http://www.ambientelivre.com.br/tutoriais-joomla/instalacao-do-xampp-com-o-joomla.html)
-- Clonar repositorio utilizando GitHub exemplo "Imagem1", nescessario para windows [GitHUB Windows](https://desktop.github.com/)
+- Clonar repositorio utilizando [GitHUB](https://desktop.github.com/) exemplo "Imagem1"
 ![Imagem1](Imagem1.png) Imagem1 - Clone Github
-- Salvar repositorio na pasta "C:\xampp\htdocs\"
+- Salvar repositorio na pasta "C:\xampp\htdocs\" assim como na Imagem5
+![Imagem5](pasta.png) Imagem5 - Escolhendo a pasta do Clone
 - Inicializar os Modulos Apache e MySQL, como mostrado na Imagem2
 ![Imagem2](Imagem2.png) Imagem2 - Controle do XAMP
 - Abrir [script](script.sql) Utilizando [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
