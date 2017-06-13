@@ -59,32 +59,44 @@
         <div class="row container">
             <div id='conteudo'>
                 <div class=" panel-default panel">
-                    <div class="navbar-left col-md-4 col-lg-4">
-                        <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
-                    </div>
-                    
-                    <div class="navbar-left col-md-8 col-lg-8">
-                        <h3><?php echo $obra->get_Titulo();?></h3>
-                        <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
-                    </div>
+                    <div class="panel-body"
+                        <form method="post">
+                            <div class="navbar-left col-md-4 col-lg-4">
+                                <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
+                            </div>
 
-                    <div class="navbar-left col-md-8 col-lg-8">
-                        <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
-                    </div>
+                            <div class="navbar-left col-md-8 col-lg-8">
+                                <h3><?php echo $obra->get_Titulo();?></h3>
+                                <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
+                            </div>
 
-                    <?php
-                    if($filme->get_Titulo()==$obra->get_Titulo()){
-                    ?>
-                        <?php 
-                    }
-                    if($serie->get_Titulo()==$obra->get_Titulo()){
-                        ?>
-                        <div class="panel-default panel navbar-right col-md-8 col-lg-8">
-                            <p>Adiciona info do seriado</p>
-                        </div>
-                        <?php 
-                    }
-                    ?>
+                            <div class="navbar-left col-md-8 col-lg-8">
+                                <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
+                            </div>
+
+                            <?php
+                            if($filme->get_Titulo()==$obra->get_Titulo()){
+                            ?>
+                                <?php 
+                            }
+                            if($serie->get_Titulo()==$obra->get_Titulo()){
+                                ?>
+                                <div class="panel-default panel navbar-right col-md-8 col-lg-8">
+                                    <p>Adiciona info do seriado</p>
+                                </div>
+                                <?php 
+                            }
+                            if($_SESSION['logado']==1){
+                                ?>
+                                <div class="col-md-12 col-lg-12 col-sm-12"> 
+                                    <button name="edit" type="submit" class="btn btn-default navbar-right">Editar</button>
+                                    <button name="delete" type="submit" class="btn btn-default navbar-right">Excluir</button>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
