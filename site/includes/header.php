@@ -82,13 +82,13 @@ if (isset($_POST['sair'])){
                 ?>
                 <div class="container col-lg-8 col-md-8 col-sm-8">
                     <div class="row">
-                      <div class="col-md-4 col-lg-4">
+                      <div class="col-md-2 col-lg-2">
                         <div class="img-responsive">
-                            <img src="<?php echo $user->get_foto(); ?>" >
+                            <img src="<?php echo $user->get_foto(); ?>" class="img-responsive">
                         </div>
 
                       </div>
-                        <div class="col-md-8 col-lg-8">
+                        <div class="col-md-10 col-lg-10">
                             <div class="caption">
                                 <h3>Olá novamente <?php echo $user->get_nome(); ?></h3>
                                 <p>
