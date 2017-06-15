@@ -12,6 +12,7 @@ CREATE TABLE obra (
     data_lancamento DATE,
     data_adicionado DATE,
     hora_adicionado TIME,
+	user_view varchar(5),
     primary key(titulo,data_lancamento),
     FOREIGN KEY (Faixa_Etaria_idade)
         REFERENCES Faixa_Etaria (idade)

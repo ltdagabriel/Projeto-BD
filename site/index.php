@@ -8,6 +8,8 @@
     session_start();
     if(!$_SESSION['logado']){
         $_SESSION['logado']=0;
+        $_SESSION['user']="user";
+        $_SESSION['senha']="password";
     }
     
     
