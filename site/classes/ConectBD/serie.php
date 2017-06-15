@@ -57,6 +57,8 @@ class serieDAO {
         try {
             $stmt = $this->pdo->prepare("UPDATE serie SET status= :status WHERE obra_titulo = :titulo_obra and obra_data = :data_obra");
             $param = array(
+                ":obra_data" => $data_obra,
+                ":obra_titulo" => $titulo_obra,
                 ":status" => $status               
             );
 

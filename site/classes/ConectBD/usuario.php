@@ -89,6 +89,28 @@ class usuarioDAO {
         }
 	}
 
+    function atualizar(usuario $entUsuario, $login) {
+        try {
+            $nome = $entUsuario->get_nome();
+            $senha = $entUsuario->get_senha();
+            $foto = $entUsuario->get_foto();
+            $email = $entUsuario->get_email();
+
+            $stmt = $this->pdo->prepare("UPDATE usuario SET nome = :nome, senha = :senha, foto = :foto, email = :email WHERE login = :login");
+            $param = array(
+                ":login" => $login,
+                ":nome" => $nome,
+                ":senha" => $senha,
+                ":foto" => $foto,
+                ":email" => $email
+            );
+
+            return $stmt->execute($param);
+        } catch (PDOException $ex) {
+            echo " Falha ao atualizar dados do usuário: {$ex->getMessage()} \n";
+        }
+    }
+
 }
 
 ?>

@@ -90,11 +90,11 @@ class obraDAO {
 
         function atualizar(obra $entObra, $obra_titulo, $obra_dataLanc) {
         try {
-            $titulo->get_Titulo();
-            $sinopse->get_Sinopse();      
-            $foto->get_Foto();
-            $FEtaria->get_FEtaria();
-            $DataLancamento->get_DataLancamento();
+            $titulo = $entObra->get_Titulo();
+            $sinopse = $entObra->get_Sinopse();      
+            $foto = $entObra->get_Foto();
+            $FEtaria = $entObra->get_FEtaria();
+            $DataLancamento = $entObra->get_DataLancamento();
 
             $stmt = $this->pdo->prepare("UPDATE obra SET titulo = :titulo, sinopse= :sinopse, foto= :foto, idade= :idade, dataL =:dataLancamento WHERE titulo = :obra_titulo and data_lancamento = :obra_dataLanc ");
             $param = array(
@@ -102,7 +102,9 @@ class obraDAO {
                 ":sinopse" => $sinopse,
                 ":foto" => $foto,
                 ":idade" => $FEtaria,
-                ":dataL" => $DataLancamento
+                ":dataL" => $DataLancamento,
+                ":obra_titulo" => $obra_titulo,
+                ":data_lancamento" => $obra_dataLanc
             );
             
             return $stmt->execute($param);            
