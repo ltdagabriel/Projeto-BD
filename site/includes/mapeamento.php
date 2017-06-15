@@ -32,7 +32,7 @@ class mapa {
         $this->menu="includes/menu.php";
         $this->interfaceobra="classes/UserInterface/Obra.php";
         $this->logologin='includes/header.php';
-        $this->perfil='includes/perfil_do_usuario.php';
+        $this->perfil='CRUDDS/alterar_usuario.php';
         $this->cadastro_serie="CRUDDS/cadastro_serie.php";
         $this->cadastro_filme="CRUDDS/cadastro_filme.php";
         $this->alterar_serie="CRUDDS/alterar_serie.php";
@@ -112,7 +112,7 @@ class mapa {
     public function Entidade_Serie(){
         return $this->entidadeSerie;
     }
-    public function Perfil_Usuario(){
+    public function Alterar_Usuario(){
         return $this->perfil;
     }
 }

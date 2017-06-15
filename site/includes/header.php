@@ -116,9 +116,31 @@ if (isset($_POST['sair'])){
                                                     <h3>Perfil</h3>
                                                        <p>Nome: <?php echo $usuario->get_nome();?></p>
                                                        <p>Email: <?php echo $usuario->get_email();?></p>
+                                                       
+                                                       
+                                                        <button class="btn btn-default" data-toggle="modal" data-target="#perfil_editar">Editar</button>
                                                 </div>
 
                                             </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="perfil_editar" class="modal fade editar_serie" tabindex="-1" role="dialog" aria-labelledby="editar_filme">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class=" panel-default panel">
+                                        <div class="panel-body">
+                                            <?php include($map->Alterar_Usuario());?>
                                         </div>
                                     </div>
 
