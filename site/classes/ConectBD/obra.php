@@ -88,6 +88,29 @@ class obraDAO {
         }
     }
 
+        function atualizar(obra $entObra, $obra_titulo, $obra_dataLanc) {
+        try {
+            $titulo->get_Titulo();
+            $sinopse->get_Sinopse();      
+            $foto->get_Foto();
+            $FEtaria->get_FEtaria();
+            $DataLancamento->get_DataLancamento();
+
+            $stmt = $this->pdo->prepare("UPDATE obra SET titulo = :titulo, sinopse= :sinopse, foto= :foto, idade= :idade, dataL =:dataLancamento WHERE titulo = :obra_titulo and data_lancamento = :obra_dataLanc ");
+            $param = array(
+                ":titulo" => $titulo,
+                ":sinopse" => $sinopse,
+                ":foto" => $foto,
+                ":idade" => $FEtaria,
+                ":dataL" => $DataLancamento
+            );
+            
+            return $stmt->execute($param);            
+        } catch (PDOException $ex) {
+            echo " Falha ao atualizar obra: {$ex->getMessage()} ";
+        }
+    }
+
 }
 
 ?>

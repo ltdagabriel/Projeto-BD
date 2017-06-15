@@ -51,6 +51,21 @@ class serieDAO {
         }
     }
 
+        function atualizar(serie $EntSerie, $titulo_obra, $data_obra) {
+        $status = $EntSerie->get_status();
+
+        try {
+            $stmt = $this->pdo->prepare("UPDATE serie SET status= :status WHERE obra_titulo = :titulo_obra and obra_data = :data_obra");
+            $param = array(
+                ":status" => $status               
+            );
+
+            return $stmt->execute($param);
+        } catch (PDOException $ex) {
+            echo " Falha na atualização do seriado : {$ex->getMessage()} \n";
+        }
+    }
+
 }
 
 ?>

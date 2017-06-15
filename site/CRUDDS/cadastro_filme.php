@@ -39,19 +39,6 @@ require_once($map->Entidade_Obra());
             </select>					
     </div>
 
-    <div class="form-group">
-        <label for="exampleInputLink2">Genero</label>
-            <label class="checkbox-inline">
-              <input name="genero1" type="checkbox" id="inlineCheckbox1" value="option1"> Ação
-            </label>
-            <label class="checkbox-inline">
-              <input name="genero2" type="checkbox" id="inlineCheckbox2" value="option2"> Drama
-            </label>
-            <label class="checkbox-inline">
-              <input name="genero3" type="checkbox" id="inlineCheckbox3" value="option3"> Terror
-            </label>
-    </div>
-
     <div class="form-inline">
             <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

@@ -49,6 +49,20 @@ class filmeDAO {
         }
     }
     
+        public function atualizar(filme $EntFilme, $titulo_obra, $data_obra) {
+        $trailer = $EntFilme->get_trailer();
+
+        try {
+            $stmt = $this->pdo->prepare("UPDATE filme SET trailer= :trailer WHERE obra_titulo = :titulo_obra and obra_data = :data_obra");
+            $param = array(
+                ":trailer" => $trailer                
+            );
+
+            return $stmt->execute($param);
+        } catch (PDOException $ex) {
+            echo " Falha na atualização do filme : {$ex->getMessage()} ";
+        }
+    }  
 
 }
 
