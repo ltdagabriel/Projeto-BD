@@ -10,6 +10,9 @@ class usuario {
     private $hora;
     private $ip;
     private $email;
+    public function __construct() {
+        $this->foto="http://www.reggaeraiz.com.br/imagens/visitante-comentario.jpg";
+    }
 
     public function get_login() {
         return $this->login;
