@@ -23,6 +23,7 @@ class mapa {
     private $entidadeSerie;
     private $entidadeObra;
     private $entidadeFilme;
+    private $perfil;
     public function __construct() {
         $this->page1="/Projeto-BD/site/index.php";
         $this->page2="/Projeto-BD/site/Cadastro.php";
@@ -31,6 +32,7 @@ class mapa {
         $this->menu="includes/menu.php";
         $this->interfaceobra="classes/UserInterface/Obra.php";
         $this->logologin='includes/header.php';
+        $this->perfil='includes/perfil_do_usuario.php';
         $this->cadastro_serie="CRUDDS/cadastro_serie.php";
         $this->cadastro_filme="CRUDDS/cadastro_filme.php";
         $this->alterar_serie="CRUDDS/alterar_serie.php";
@@ -109,5 +111,8 @@ class mapa {
     }
     public function Entidade_Serie(){
         return $this->entidadeSerie;
+    }
+    public function Perfil_Usuario(){
+        return $this->perfil;
     }
 }
