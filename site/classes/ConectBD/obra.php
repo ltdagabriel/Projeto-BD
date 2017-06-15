@@ -16,7 +16,7 @@ class obraDAO {
 
     function cadastrar(obra $entObra) {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO obra VALUE (:titulo, :sinopse, :foto, :idade, :dataL, :data, :hora)");
+            $stmt = $this->pdo->prepare("INSERT INTO obra VALUE (:titulo, :sinopse, :foto, :idade, :dataL, :data, :hora,:view)");
             $param = array(
                 ":titulo" => $entObra->get_Titulo(),
                 ":sinopse" => $entObra->get_Sinopse(),
@@ -24,7 +24,8 @@ class obraDAO {
                 ":idade" => $entObra->get_FEtaria(),
                 ":dataL" => $entObra->get_DataLancamento(),
                 ":data" => date("Y/m/d"),
-                ":hora" => date("h:i:s")
+                ":hora" => date("h:i:s"),
+                ":view" => $entObra->get_View()
             );
             
             return $stmt->execute($param);            

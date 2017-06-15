@@ -9,6 +9,11 @@ class obra {
     private $data_lancamento;
     private $data_add;
     private $hora_add;
+    private $view;
+
+    public function __construct() {
+        $this->view="true";
+    }
 
     public function get_Titulo() {
         return $this->titulo;
@@ -56,6 +61,12 @@ class obra {
     }
     public function set_Hora_Add($hora){
         $this->hora_add=$hora;
+    }
+    public function get_View(){
+        return $this->view;
+    }
+    public function set_View($view){
+        $this->view=$view;
     }
 }
 
