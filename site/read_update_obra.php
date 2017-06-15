@@ -61,7 +61,7 @@ $_SESSION['editar']=0;
         <div class="row container">
             <div id='conteudo'>
                 <div class=" panel-default panel">
-                    <div class="panel-body"
+                    <div class="panel-body">
                         <div id="obra_info">
                                 <div class="navbar-left col-md-4 col-lg-4">
                                     <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
