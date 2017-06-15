@@ -1,7 +1,7 @@
 
 <?php 
     require_once(realpath("./includes/mapeamento.php"));
-    $map=new mapa();;
+    $map=new mapa();
     require_once($map->Conect_Filme());
     require_once($map->Conect_Serie());
     require_once($map->Conect_Obra());

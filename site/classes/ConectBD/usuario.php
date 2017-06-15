@@ -1,5 +1,7 @@
 <?php
-
+ require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+require_once($map->Entidade_Usuario());
 require_once("Conexao.php");
 
 class usuarioDAO {
@@ -68,19 +70,26 @@ class usuarioDAO {
         }
     }
 	
-	public function RetornaNome($username){
+	public function Get($username){
 		try{
 			
-			$stmt = $this->pdo->prepare("SELECT nome FROM usuario WHERE login = :username");
+			$stmt = $this->pdo->prepare("SELECT nome,email,senha,foto,datta FROM usuario WHERE login = :username");
 			$param = array(
 				":username"  => $username
 			);
 			
 		 $stmt->execute($param);
 			
-			$dados = $stmt->fetch(PDO::FETCH_ASSOC);
-			
-			return $dados["nome"];
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$user=new usuario();
+                        
+                        $user->set_data($row['datta']);
+                        $user->set_email($row['email']);
+                        $user->set_foto($row['foto']);
+                        $user->set_nome($row['nome']);
+                        $user->set_senha($row['senha']);
+                        
+			return $user;
 			
 			
 		}catch (PDOException $ex) {

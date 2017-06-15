@@ -1,6 +1,9 @@
 <?php
 /* Realizar Login */
-require_once ("classes/ConectBD/usuario.php");
+require_once(realpath("./includes/mapeamento.php"));
+    $map=new mapa();
+require_once ($map->Conect_Usuario());
+require_once ($map->Entidade_Usuario());
 
 $usuarioDAO = new usuarioDAO();
 
@@ -10,6 +13,7 @@ if (isset($_POST['loginSubmit'])) {
 
     $_SESSION['logado'] = '1';
     $_SESSION['user'] = $_POST['username'];
+    $_SESSION['senha'] = $_POST['senha'];
     $_SESSION['nome'] = $usuarioDAO->RetornaNome($_POST['username']);
 	  
 	  header ("Location: index.php");
@@ -57,20 +61,15 @@ if (isset($_POST['sair'])){
         <?php 
         if($_SESSION['logado'] != 1){
         ?>
-        <div class=" col-lg-8 col-md-8 col-sm-8">
+        <div class="col-lg-8 col-md-8 col-sm-8 ">
                 <form class="form-inline" name="cadastro" method="post">
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputName3">Usuario</label>
-                      <input type="login" name="username" class="form-control" id="exampleInputName3" placeholder="Login">
+                      <input value="$_SESSION['user']" type="login" name="username" class="form-control" id="exampleInputName3" placeholder="Login">
                     </div>
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputPassword3">Senha</label>
-                      <input type="password" name="senha" class="form-control" id="exampleInputPassword3" placeholder="Password">
-                    </div>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Lembrar
-                      </label>
+                      <input value="$_SESSION['senha']" type="password" name="senha" class="form-control" id="exampleInputPassword3" placeholder="Password">
                     </div>
                     <button type="submit" name="loginSubmit" class="btn btn-default">Entrar</button>
                 </form>
@@ -79,13 +78,23 @@ if (isset($_POST['sair'])){
         <?php
         }
         else{
-            echo"Bem Vindo ". $_SESSION['nome'];
+            $user=$usuarioDAO->Get($_SESSION['user'])
             ?>
-            <div class="container">
+            <div class="container col-lg-8 col-md-8 col-sm-8">
                 <div class="row">
-                    <form class="form-inline" name="deslogar" method="post">
-                        <button type="submit" name="sair" class="btn btn-default">Sair</button>
-                    </form>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                      <img src="..." alt="...">
+                    </div>
+                  </div>
+                    <div class="col-sm-6 col-md-4">
+                    <div class="caption">
+                        <h3>User Name</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
 
