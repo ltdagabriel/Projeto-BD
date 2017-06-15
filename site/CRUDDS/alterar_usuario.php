@@ -9,11 +9,11 @@ require_once($map->Entidade_Usuario());
 <form method="post">
     <div class="form-group">
             <label for="exampleInputName2">Nome:</label>
-            <input value="<?php echo $usuario->get_nome();?>" name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Seu nome">
+            <input value="<?php echo $usuario->get_nome();?>" name="nome" type="text" class="form-control" id="exampleInputName2">
     </div>
     <div class="form-group">
             <label for="exampleInputEmail2">Email</label>
-            <input value="<?php echo $usuario->get_email();?>" name="email" type="email" class="form-control" id="exampleInputEmail2" placeholder="seuemail@exemplo.com">
+            <input value="<?php echo $usuario->get_email();?>" name="email" type="email" class="form-control" id="exampleInputEmail2">
     </div>
 
     <div class="form-group">
