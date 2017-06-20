@@ -67,18 +67,6 @@ class episodio{
         $this->temporada_numero=$temporada_numero;
     }
 
-    function __construct($nome, $numero, $sinopse, $video, $data_lancamento, $obra_titulo, $obra_data, $temporada_numero){
-        
-        $this->nome=$nome;
-        $this->numero=$numero;
-        $this->sinopse=$sinopse;
-        $this->video=$video;
-        $this->data_lancamento=$data_lancamento;
-        $this->obra_titulo=$obra_titulo;
-        $this->obra_data=$obra_data;
-        $this->temporada_numero=$temporada_numero;
-    }
-
 }
 
 ?>

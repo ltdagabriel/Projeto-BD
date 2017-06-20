@@ -19,9 +19,10 @@ class episodioDAO {
                 ":nome" => $EntEpisodio->get_nome(),
                 ":numero" => $EntEpisodio->get_numero(),
                 ":sinopse" => $EntEpisodio->get_sinopse(),                
-                ":video" => $EntEpisodio->get_video(),                
+                ":video" => $EntEpisodio->get_video(),
                 ":data_lancamento" => $EntEpisodio->get_data_lancamento(),                
                 ":obra_titulo" => $EntEpisodio->get_obra_titulo(),                
+                ":obra_titulo" => date("Y/m/d"),                
                 ":obra_data" => $EntEpisodio->get_obra_data(),                
                 ":temporada_numero" => $EntEpisodio->temporada_numero()                
             );

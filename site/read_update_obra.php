@@ -90,8 +90,10 @@ $_SESSION['editar']=0;
                                 if($serie->get_Titulo()==$obra->get_Titulo()){
                                 /*** Botao para o ususario administrador adicionar episodios ***/
                                 Add_Episodio();
-                                /*** Exibe uma lista de episodios ***/
-                                list_episodio();
+                                /*** 
+                                 * list_episodio();
+                                 * Exibe uma lista de episodios ***/
+                                
                                     ?>
                                     <div class="navbar-left col-md-8 col-lg-8">
                                         <p>Status: <?php echo $serie->get_status();?></p>
@@ -199,9 +201,7 @@ function add_Episodio(){
         <div class="well">
             <h4>Cadastro de Episodio</h4>
             <?php
-            /** 
-             * include(Formulario Episodio);
-             */
+            include("CRUDDS/cadastro_episodio.php");
              ?>
         </div>
       </div>

@@ -1,17 +1,15 @@
-<?php 
-    require_once(realpath("./includes/mapeamento.php"));
-    $map=new mapa();
-require_once ($map->Conect_Serie());
-require_once($map->Entidade_Serie());
-require_once ($map->Conect_Obra());
-require_once($map->Entidade_Obra());
-require_once($map->Conect_Episodio());
-require_once($map->Entidade_Episodio());
-?>
 <form id="cadastro" name="cadastro" method="post">
     <div class="form-group">
-            <label for="exampleInputName2">Nome: <a style="color:red">*</a></label>
+            <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
             <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Nome do Episodio">
+    </div>
+    <div class="form-group">
+            <label for="exampleInputName2">Temporada Numero: <a style="color:red">*</a></label>
+            <input name="temporada_numero" type="text" class="form-control" id="exampleInputName2" placeholder="temporada">
+    </div>
+    <div class="form-group">
+            <label for="exampleInputName2">Numero: <a style="color:red">*</a></label>
+            <input name="numero" type="text" class="form-control" id="exampleInputName2" placeholder="Numero">
     </div>
     <div class="form-group">
             <label for="exampleInputName2">Sinopse</label>
@@ -26,7 +24,7 @@ require_once($map->Entidade_Episodio());
     <div class="form-inline">
             <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button name="cadastrar" type="submit" class="btn btn-default">Enviar</button>
+                      <button name="cadastrar_episodio" type="submit" class="btn btn-default">Enviar</button>
                     </div>
             </div>
             <div class="form-group">
@@ -42,59 +40,31 @@ require_once($map->Entidade_Episodio());
 
 
 <?php
-if (isset($_POST['cadastrar'])) {
-    $obraDAO = new obraDAO();
-    $obra = new obra();
-
-    $filmeDAO= new filmeDAO();
-    $filme=new filme($_POST['video'],$_POST['titulo'],$_POST['data']);
+if (isset($_POST['cadastrar_episodio'])) {
+    $episodioDAO = new episodioDAO();
+    $episodio = new episodio();
+    $episodio->set_nome($_POST['titulo']);
+    $episodio->set_obra_data($obra->get_DataLancamento());
+    $episodio->set_obra_titulo($obra->get_Titulo());
+    $episodio->set_numero($_POST['numero']);
+    $episodio->set_sinopse($_POST['sinopse']);
+    $episodio->set_data_lancamento($_POST['data']);
+    $episodio->set_temporada_numero($_POST['temporada_numero']);
     
-    $obra->set_Titulo($_POST['titulo']);
-    $obra->set_Sinopse($_POST['sinopse']);
-    $obra->set_Data_Lancamento($_POST['data']);
-    $obra->set_Foto($_POST['foto']);
-    
-    $obra->set_FEtaria($_POST['classificacao']);
-    if($obra->get_FEtaria()=="Selecione"){
+    if ($episodioDAO->cadastrar($episodio)) {
+        ?>
+        <script language='javascript' type='text/javascript'>
+            alert('Cadastrado com sucesso');window.location.href='<?php echo $map->PageIndex();?>';
+        </script>
+        <?php
+    }     
+    else{
          ?>
             <script language='javascript' type='text/javascript'>
-                alert('Selecione uma Faixa Etaria');
+                alert('Ja existente');
             </script>
         <?php
-    }
-    else if ($obra->get_Titulo()=="" || $obra->get_Titulo()==null){
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('O campo "Titulo" deve ser preenchido');
-            </script>
-        <?php
-    }
-    else if($obra->get_DataLancamento()=="" || $obra->get_DataLancamento()==null){
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('O campo "Data de Lançamento" deve ser preenchido');
-            </script>
-        <?php
-    }
-    else{
-        if(!$obraDAO->consultartitulo($obra->get_Titulo(), $obra->get_DataLancamento())){
-            if ($obraDAO->cadastrar($obra)) {
-                if($filmeDAO->cadastrar($filme)){
-                    ?>
-                    <script language='javascript' type='text/javascript'>
-                        alert('Cadastrado com sucesso');window.location.href='<?php echo $map->PageIndex();?>';
-                    </script>
-                    <?php
-                }
-            }
-        }
-        else{
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('Filme ja se enconta na "Base de Dados"');
-            </script>";
-        <?php
-        }
     }
 }
+
 ?>
