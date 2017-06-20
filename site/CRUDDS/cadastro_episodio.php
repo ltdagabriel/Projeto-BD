@@ -13,10 +13,22 @@ require_once($map->Entidade_Episodio());
             <label for="exampleInputName2">Nome: <a style="color:red">*</a></label>
             <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Nome do Episodio">
     </div>
+
+    <div class="form-group">
+            <label for="exampleInputName2">Número: <a style="color:red">*</a></label>
+            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Número do Episodio">
+    </div>
+
     <div class="form-group">
             <label for="exampleInputName2">Sinopse</label>
             <textarea name="sinopse" class="form-control" rows="3"></textarea>
     </div>
+
+    <div class="form-group">
+            <label for="exampleInputLink2">Video</label>
+            <input name="video" type="url" class="form-control" id="exampleInputName2" placeholder="youtube.com/algumacoisaaqui">
+    </div>
+
     <div class="form-group">
             <label for="exampleInputData2">Data de Lancamento: <a style="color:red">*</a></label>
             <input name="data" type="date" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
