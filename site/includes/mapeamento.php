@@ -50,7 +50,7 @@ class mapa {
         $this->entidadeSerie="classes/Entidades/serie.php";
         $this->entidadeObra="classes/Entidades/obra.php";
         $this->entidadeFilme="classes/Entidades/filme.php";
-        $this->entidadeEpisodio="classes/Entidades/episodios.php";
+        $this->entidadeEpisodio="classes/Entidades/episodio.php";
         $this->cadastro_usuario="CRUDDS/cadastro.php";
     }
     public function PageIndex(){
