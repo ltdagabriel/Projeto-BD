@@ -107,7 +107,7 @@ if (isset($_POST['cadastrar'])) {
         else{
         ?>
             <script language='javascript' type='text/javascript'>
-                alert('Filme ja se encontar na "Base de Dados"');
+                alert('Filme ja se enconta na "Base de Dados"');
             </script>";
         <?php
         }
