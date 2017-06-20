@@ -8,8 +8,10 @@
     require_once($map->Entidade_Obra());
     require_once($map->Entidade_Filme());
     require_once($map->Entidade_Serie());
+    require_once($map->Conect_Episodio());
     $serie=null;
     $filme=null;
+    $episodio= new EpisodioDAO();
     $obraDAO= new obraDAO();
     $obra=$obraDAO->Get($_POST['titulo'],$_POST['data']);
     if( $serieDAO= new serieDAO() ){
@@ -78,7 +80,11 @@ $_SESSION['editar']=0;
                                 </div>
                                 
                                 <?php
+                                /*** Botao para o ususario administrador adicionar episodios ***/
                                 Add_Episodio();
+                                /*** Exibe uma lista de episodios ***/
+                                list_episodio();
+                                
                                 if($filme->get_Titulo()==$obra->get_Titulo()){
                                 ?>
                                     <?php 
@@ -181,11 +187,26 @@ function add_Episodio(){
         ?>
     <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
         <div class="navbar-left"><h5> Episodios</h5></div>
-        <div class="navbar-left" style="padding-left: 4px"><button type="button" class="btn-default">Adicionar novos</button></div>
+        <div class="navbar-left" style="padding-left: 4px"></div>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio" aria-expanded="false" aria-controls="collapseExample">
+        Adicionar novos
+      </button>
+      <div class="collapse" id="form_episodio">
+        <div class="well">
+            <h4>Cadastro de Episodio</h4>
+            <?php
+            /** 
+             * include(Formulario Episodio);
+             */
+             ?>
+        </div>
+      </div>
+    
     </div>
         <?php
     }
 function list_episodio(){
     ?>
+    
     <?php
 }

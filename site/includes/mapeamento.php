@@ -8,6 +8,7 @@ class mapa {
     private $conectfilme;
     private $conectserie;
     private $conectobra;
+    private $conectepisodio;
     private $menu;
     private $cadastro_serie;
     private $cadastro_filme;
@@ -43,6 +44,7 @@ class mapa {
         $this->conectserie="classes/ConectBD/serie.php";
         $this->conectobra="classes/ConectBD/obra.php";
         $this->conectusuario="classes/ConectBD/usuario.php";
+        $this->conectepisodio="classes/ConectBD/episodio.php";
         $this->entidadeUsuario="classes/Entidades/usuario.php";
         $this->entidadeSerie="classes/Entidades/serie.php";
         $this->entidadeObra="classes/Entidades/obra.php";
@@ -99,6 +101,9 @@ class mapa {
     }
     public function Conect_Usuario(){
         return $this->conectusuario;
+    }
+    public function Conect_Episodio(){
+        return $this->conectepisodio;
     }
     public function Entidade_Usuario(){
         return $this->entidadeUsuario;
