@@ -1,6 +1,6 @@
 <?php
 
-class temporada {
+class episodio{
 
     private $nome;
     private $numero;

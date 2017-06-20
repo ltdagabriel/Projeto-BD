@@ -8,6 +8,7 @@
     require_once($map->Entidade_Obra());
     require_once($map->Entidade_Filme());
     require_once($map->Entidade_Serie());
+    require_once($map->Entidade_Episodio());
     require_once($map->Conect_Episodio());
     $serie=null;
     $filme=null;
@@ -209,6 +210,44 @@ function add_Episodio(){
     }
 function list_episodio(){
     ?>
-    
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <?php
+        $epi=new episodio();
+        $i=1;
+        while($str=$episodio->Retorna_Todos($titulo,$i)){
+            $i=$i+1;
+            if($str){
+                ?>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Temporada <?php echo $i;?>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <?php 
+                        while($epi = $str->fetch(PDO::FETCH_ASSOC)){
+                            ?>
+                        <div class="col-md-4 col-lg-4 com-sm-6">
+                            <p><?php echo $epi->get_sinopse(); ?></p>
+                            <h4><?php echo $epi->get_obra_titulo(); ?></h4>
+                        </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                  </div>
+                </div>
+                <?php
+                
+            }
+        }
+        ?>
+        
+    </div>
     <?php
+      
 }
