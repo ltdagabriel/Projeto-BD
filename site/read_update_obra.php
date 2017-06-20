@@ -81,16 +81,17 @@ $_SESSION['editar']=0;
                                 </div>
                                 
                                 <?php
-                                /*** Botao para o ususario administrador adicionar episodios ***/
-                                Add_Episodio();
-                                /*** Exibe uma lista de episodios ***/
-                                list_episodio();
+                                add_ator();
                                 
                                 if($filme->get_Titulo()==$obra->get_Titulo()){
                                 ?>
                                     <?php 
                                 }
                                 if($serie->get_Titulo()==$obra->get_Titulo()){
+                                /*** Botao para o ususario administrador adicionar episodios ***/
+                                Add_Episodio();
+                                /*** Exibe uma lista de episodios ***/
+                                list_episodio();
                                     ?>
                                     <div class="navbar-left col-md-8 col-lg-8">
                                         <p>Status: <?php echo $serie->get_status();?></p>
@@ -212,7 +213,6 @@ function list_episodio(){
     ?>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <?php
-        $epi=new episodio();
         $i=1;
         while($str=$episodio->Retorna_Todos($titulo,$i)){
             $i=$i+1;
@@ -251,3 +251,30 @@ function list_episodio(){
     <?php
       
 }
+function add_Ator(){
+        ?>
+    <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
+        <div class="navbar-left"><h5> Atores</h5></div>
+        <div class="navbar-left" style="padding-left: 4px">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio" aria-expanded="false" aria-controls="collapseExample">
+                Adicionar novos
+            </button>     
+        </div>
+        
+      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_episodio">
+        <div class="well">
+            <h4>Cadastro de Atores</h4>
+            <?php
+             include("CRUDDS/cadastro_ator.php");
+             ?>
+        </div>
+      </div>
+    
+    </div>
+        <?php
+    }
+    function listar_Ator(){
+        ?>
+    
+        <?php
+    }
