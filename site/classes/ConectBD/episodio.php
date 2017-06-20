@@ -3,8 +3,8 @@
     $map=new mapa();
 
 require_once("Conexao.php");
-require_once($map->Entidade_Filme());
-class EpisodioDAO {
+require_once($map->Entidade_Episodio());
+class episodioDAO {
 
     function __construct() {
         $this->con = new Conexao();
@@ -12,17 +12,23 @@ class EpisodioDAO {
     }
 
    
-    public function Retorna_Todos($titulo_obra,$temp_numero){
+    public function cadastrar(episodio $EntEpisodio) {
         try {
-            $stmt = $this->pdo->prepare("SELECT nome,numero,sinopse,video,foto FROM filme,obra WHERE :titulo = obra_titulo :temp_numero = temporada_numero");
+            $stmt = $this->pdo->prepare("INSERT INTO episodio VALUE (:nome, :numero, :sinopse, :video, :data_lancamento, :obra_titulo, :obra_data, :temporada_numero)");
             $param = array(
-                ":titulo" => $titulo_obra,
-                ":temp_numero" => $temp_numero               
+                ":nome" => $EntEpisodio->get_nome(),
+                ":numero" => $EntEpisodio->get_numero(),
+                ":sinopse" => $EntEpisodio->get_sinopse(),                
+                ":video" => $EntEpisodio->get_video(),                
+                ":data_lancamento" => $EntEpisodio->get_data_lancamento(),                
+                ":obra_titulo" => $EntEpisodio->get_obra_titulo(),                
+                ":obra_data" => $EntEpisodio->get_obra_data(),                
+                ":temporada_numero" => $EntEpisodio->temporada_numero()                
             );
-            $stmt->execute($param);
-            return $stmt;
+
+            return $stmt->execute($param);
         } catch (PDOException $ex) {
-            echo " Falha ao Retornar todos os Episodios : {$ex->getMessage()} \n";
+            echo " Falha na inserção do episodio : {$ex->getMessage()} ";
         }
     }
 
