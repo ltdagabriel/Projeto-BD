@@ -187,11 +187,13 @@ function add_Episodio(){
         ?>
     <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
         <div class="navbar-left"><h5> Episodios</h5></div>
-        <div class="navbar-left" style="padding-left: 4px"></div>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio" aria-expanded="false" aria-controls="collapseExample">
-        Adicionar novos
-      </button>
-      <div class="collapse" id="form_episodio">
+        <div class="navbar-left" style="padding-left: 4px">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio" aria-expanded="false" aria-controls="collapseExample">
+                Adicionar novos
+            </button>     
+        </div>
+        
+      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_episodio">
         <div class="well">
             <h4>Cadastro de Episodio</h4>
             <?php
