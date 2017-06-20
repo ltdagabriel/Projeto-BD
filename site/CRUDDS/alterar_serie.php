@@ -8,16 +8,8 @@ require_once($map->Entidade_Obra());
 ?>
 <form id="alterar" name="alterar" method="post">
     <div class="form-group">
-            <label for="exampleInputName2">Titulo: <a style="color:red">*</a></label>
-            <input value="<?php echo $obra->get_Titulo();?>" name="titulo" type="text" class="form-control" id="exampleInputName2" placeholder="Titulo do Filme">
-    </div>
-    <div class="form-group">
             <label for="exampleInputName2">Sinopse</label>
             <textarea   name="sinopse" class="form-control" rows="3"><?php echo $obra->get_Sinopse();?></textarea>
-    </div>
-    <div class="form-group">
-            <label for="exampleInputData2">Data de Lancamento: <a style="color:red">*</a></label>
-            <input value="<?php echo $obra->get_DataLancamento();?>" name="data" type="date" class="form-control" id="exampleInputName2" placeholder="dia/mes/ano">
     </div>
     <div class="form-group">
             <label for="exampleInputLink2">Imagem de Capa</label>

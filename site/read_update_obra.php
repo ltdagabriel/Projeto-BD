@@ -76,8 +76,9 @@ $_SESSION['editar']=0;
                                 <div class="navbar-left col-md-8 col-lg-8">
                                     <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
                                 </div>
-
+                                
                                 <?php
+                                Add_Episodio();
                                 if($filme->get_Titulo()==$obra->get_Titulo()){
                                 ?>
                                     <?php 
@@ -175,4 +176,16 @@ if (isset($_POST['delete'])) {
         }
     </script>
 <?php
+}
+function add_Episodio(){
+        ?>
+    <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
+        <div class="navbar-left"><h5> Episodios</h5></div>
+        <div class="navbar-left" style="padding-left: 4px"><button type="button" class="btn-default">Adicionar novos</button></div>
+    </div>
+        <?php
+    }
+function list_episodio(){
+    ?>
+    <?php
 }
