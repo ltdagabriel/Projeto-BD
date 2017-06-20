@@ -26,7 +26,7 @@ require_once($map->Entidade_Usuario());
         <p></p>
     </div>
     <div class="form-group">
-        <label for="inputPassword3">Confirmar Nova Senha: <a style="color:red">*</a></label>
+        <label for="inputPassword3">Confirmar Nova Senha: </label>
         <input name="senha2" id="senha2" type="password" onKeyUp="validarSenha('senha1', 'senha2', 'resultadoCadastro');" class="form-control" placeholder="******">
     </div>
     <div class="form-inline">
