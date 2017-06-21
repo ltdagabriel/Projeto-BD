@@ -95,7 +95,7 @@ if (isset($_POST['cadastrar'])) {
         else{
         ?>
             <script language='javascript' type='text/javascript'>
-                alert('Seriado ja se encontar na "Base de Dados"');
+                alert('Seriado ja se enconta na "Base de Dados"');
             </script>
         <?php
         }

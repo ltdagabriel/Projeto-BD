@@ -7,7 +7,7 @@ require_once ($map->Conect_Obra());
 require_once($map->Entidade_Obra());
 ?>
 <form id="alterar" name="alterar" method="post">
-        <div class="form-group">
+    <div class="form-group">
             <label for="exampleInputName2">Sinopse</label>
             <textarea   name="sinopse" class="form-control" rows="3"><?php echo $obra->get_Sinopse();?></textarea>
     </div>
