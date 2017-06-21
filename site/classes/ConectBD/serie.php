@@ -50,7 +50,7 @@ class serieDAO {
             $row=$stmt->fetch(PDO::FETCH_ASSOC);
             return new serie($row['stattus'],$row['obra_titulo'],$row['obra_data']);
         } catch (PDOException $ex) {
-            echo " Falha ao Retornar filme : {$ex->getMessage()} \n";
+            echo " Falha ao Retornar Serie : {$ex->getMessage()} \n";
         }
     }
 

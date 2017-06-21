@@ -43,6 +43,28 @@ class temporadaDAO {
         }
     }
 
+    public function atualizar(temporada $EntTemporada, $obra_titulo, $obra_data, $numero) {
+        $foto = $EntEpisodio->get_foto();
+        $trailer = $EntEpisodio->get_trailer();
+
+
+        try {
+            $stmt = $this->pdo->prepare("UPDATE temporada SET foto = :foto, trailer =:trailer WHERE obra_titulo = :obra_titulo and obra_data = :obra_data and numero = :numero");
+            $param = array(
+                ":obra_data" => $obra_data,
+                ":obra_titulo" => $obra_titulo,               
+                ":numero" => $numero,                
+                ":foto" => $foto,                
+                ":trailer" => $trailer                        
+            );
+
+            return $stmt->execute($param);
+        } catch (PDOException $ex) {
+            echo " Falha na atualização da temporada : {$ex->getMessage()} ";
+        }
+
+    }
+
 }
 
 ?>

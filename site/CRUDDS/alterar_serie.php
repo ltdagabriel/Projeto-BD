@@ -17,7 +17,7 @@ require_once($map->Entidade_Obra());
     </div>
     <div class="form-group">
             <label for="exampleInputLink2">Status</label>
-            <input value="<?php echo $serie->get_status();?>" name="status" type="text" class="form-control" id="exampleInputName2" placeholder="youtube.com/asdasd">
+            <input value="<?php echo $serie->get_status();?>" name="status" type="text" class="form-control" id="exampleInputName2">
     </div>
     <div class="form-group">
             <label>Faixa Etaria: <a style="color:red">*</a></label>
