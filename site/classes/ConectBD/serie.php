@@ -29,8 +29,11 @@ class serieDAO {
     }
     function Retorna_Todos(){
         try {
-            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie,obra WHERE titulo = obra_titulo and data_lancamento = obra_data order by data_adicionado and hora_adicionado desc");
-            $stmt->execute();
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie,obra WHERE titulo = obra_titulo and data_lancamento = obra_data and user_view != :view order by data_adicionado and hora_adicionado desc");
+            $param= array(
+                ":view"=>"false"
+            );
+            $stmt->execute($param);
             return $stmt;
         } catch (PDOException $ex) {
             echo " Falha ao Retornar todos os Seriados : {$ex->getMessage()} \n";

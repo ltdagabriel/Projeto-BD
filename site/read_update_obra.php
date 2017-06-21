@@ -1,6 +1,10 @@
 
 <?php 
-    require_once(realpath("./includes/mapeamento.php"));
+if(!isset($_COOKIE['sessao'])){
+    session_start();
+    $_COOKIE['sessao']=1;
+}
+require_once(realpath("./includes/mapeamento.php"));
     $map=new mapa();
     require_once($map->Conect_Filme());
     require_once($map->Conect_Serie());
@@ -14,12 +18,19 @@
     $filme=null;
     $episodio= new EpisodioDAO();
     $obraDAO= new obraDAO();
-    $obra=$obraDAO->Get($_POST['titulo'],$_POST['data']);
+    if(isset($_GET['titulo'])){
+        $_SESSION['titulo']=$_GET['titulo'];
+    }
+    if(isset($_GET['data'])){
+        $_SESSION['data']=$_GET['data'];
+    }
+    
+    $obra=$obraDAO->Get($_SESSION['titulo'],$_SESSION['data']);
     if( $serieDAO= new serieDAO() ){
-        $serie=$serieDAO->Get($_POST['titulo'],$_POST['data']);
+        $serie=$serieDAO->Get($_SESSION['titulo'],$_SESSION['data']);
     }
     if($filmeDAO=new filmeDAO()){
-        $filme=$filmeDAO->Get($_POST['titulo'],$_POST['data']);
+        $filme=$filmeDAO->Get($_SESSION['titulo'],$_SESSION['data']);
     }
     $editar;
     
@@ -33,7 +44,7 @@
 <html lang="pt-BR">
 <head>
 <?php
-    session_start();
+    
     if(!$_SESSION['logado']){
         $_SESSION['logado']=0;                                                                
     }
@@ -53,7 +64,7 @@ $_SESSION['editar']=0;
         <script src="style/js/include.js"></script>
         <script src="style/js/jquery-1.10.2.js"></script>
         <script src="style/js/jquery.js"></script>
-        
+</head>  
 <body>
     
 <div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >
@@ -81,19 +92,21 @@ $_SESSION['editar']=0;
                                 </div>
                                 
                                 <?php
-                                add_ator();
                                 
                                 if($filme->get_Titulo()==$obra->get_Titulo()){
                                 ?>
                                     <?php 
                                 }
                                 if($serie->get_Titulo()==$obra->get_Titulo()){
-                                /*** Botao para o ususario administrador adicionar episodios ***/
-                                Add_Episodio();
-                                /*** 
-                                 * list_episodio();
-                                 * Exibe uma lista de episodios ***/
                                 
+                                    ?>
+                                         <div class="navbar-right col-md-12 col-sm-12 col-lg-12">
+                                             <?php
+                                                add_temporada();
+                                                list_temporada();
+                                             ?>
+                                         </div>
+                                         <?php
                                     ?>
                                     <div class="navbar-left col-md-8 col-lg-8">
                                         <p>Status: <?php echo $serie->get_status();?></p>
@@ -114,6 +127,8 @@ $_SESSION['editar']=0;
                                          <button class="btn btn-default" data-toggle="modal" data-target="#editar_filme">Editar</button> 
                                          <?php
                                          }else{
+                                            
+                                             
                                          ?>
                                          <button  class="btn btn-default" data-toggle="modal" data-target="#editar_serie">Editar</button>
                                          <?php
@@ -171,9 +186,10 @@ $_SESSION['editar']=0;
     </div>
 </body>
 </html>
+
 <?php
 if (isset($_POST['delete'])) {
-    require_once ($this->map->Conect_Obra());
+    require_once ($map->Conect_Obra());
     $obra= new obraDAO();
     $titulo=$_POST['titulo'];
     $data= $_POST['data'];
@@ -182,15 +198,76 @@ if (isset($_POST['delete'])) {
         var r=confirm('A Obra <?php echo$titulo;?> será removida');
         if(r==true){
             <?php $obra->delete($titulo,$data);?>
-            window.location.href='<?php echo $this->map->PageIndex();?>';
+            window.location.href='<?php echo $map->PageIndex();?>';
         }
     </script>
 <?php
 }
+function add_temporada(){
+    ?>
+    <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
+        <div class="navbar-left"><h5> Temporada</h5></div>
+        <div class="navbar-left" style="padding-left: 4px">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_temporada" aria-expanded="false" aria-controls="collapseExample">
+                Adicionar novos
+            </button>     
+        </div>
+        
+      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_temporada">
+        <div class="well">
+            <h4>Cadastro de Temporada</h4>
+            <?php
+            include("CRUDDS/cadastro_temporada.php");
+             ?>
+        </div>
+      </div>
+    
+    </div>
+        <?php
+    }
+    function list_temporada(){
+    ?>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        
+    <?php
+        include_once ("classes/ConectBD/temporada.php");
+        include_once ("classes/Entidades/temporada.php");
+        $temporadaDAO=new temporadaDAO();
+        $list=$temporadaDAO->Retorna_Todos($_SESSION['titulo'], $_SESSION['data']);
+        
+        if($list){
+            while($row = $list->fetch(PDO::FETCH_ASSOC)){
+                
+            ?>
+            <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Temporada <?php echo $row['numero'];?>
+                          <?php add_Episodio();?>
+                      </a>
+                    </h4>
+                  </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+    <?php
+                              list_episodio($row['numero']);
+                       
+    ?>
+                    </div>
+                </div>
+            </div>
+    <?php
+            }
+        }
+    ?>
+        </div>
+    <?php
+    }
 function add_Episodio(){
         ?>
     <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
-        <div class="navbar-left"><h5> Episodios</h5></div>
+        <div class="navbar-left"><h5>-> Episodios <-</h5></div>
         <div class="navbar-left" style="padding-left: 4px">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio" aria-expanded="false" aria-controls="collapseExample">
                 Adicionar novos
@@ -209,59 +286,32 @@ function add_Episodio(){
     </div>
         <?php
     }
-function list_episodio(){
-    ?>
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <?php
-        $i=1;
-        while($str=$episodio->Retorna_Todos($titulo,$i)){
-            $i=$i+1;
-            if($str){
-                ?>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          Temporada <?php echo $i;?>
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        <?php 
-                        while($epi = $str->fetch(PDO::FETCH_ASSOC)){
-                            ?>
-                        <div class="col-md-4 col-lg-4 com-sm-6">
-                            <p><?php echo $epi->get_sinopse(); ?></p>
-                            <h4><?php echo $epi->get_obra_titulo(); ?></h4>
-                        </div>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                  </div>
-                </div>
-                <?php
-                
-            }
-        }
+function list_episodio($numero){
+    require_once 'classes/ConectBD/episodio.php';
+    $episodio=new episodioDAO();
+    $str=$episodio->Retorna_Todos($_SESSION['titulo'],$numero);          
+    while($epi = $str->fetch(PDO::FETCH_ASSOC)){
         ?>
-        
+    <div class="col-md-4 col-lg-4 com-sm-6">
+        <p>doideiraaaaaaaaaaaaaaaaaaaa</p>
+        <p><?php echo $epi->get_sinopse(); ?></p>
+        <h4><?php echo $epi->get_obra_titulo(); ?></h4>
     </div>
-    <?php
-      
+        <?php
+    }
+    ?>   
 }
 function add_Ator(){
         ?>
     <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
         <div class="navbar-left"><h5> Atores</h5></div>
         <div class="navbar-left" style="padding-left: 4px">
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio" aria-expanded="false" aria-controls="collapseExample">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_ator" aria-expanded="false" aria-controls="collapseExample">
                 Adicionar novos
             </button>     
         </div>
         
-      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_episodio">
+      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_ator">
         <div class="well">
             <h4>Cadastro de Atores</h4>
             <?php

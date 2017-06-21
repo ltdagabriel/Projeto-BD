@@ -6,6 +6,7 @@
 <head>
 <?php
     session_start();
+    $_COOKIE['sessao']=1;
     if(!$_SESSION['logado']){
         $_SESSION['logado']=0;
         $_SESSION['user']="user";

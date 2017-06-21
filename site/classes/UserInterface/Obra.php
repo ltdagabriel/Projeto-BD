@@ -26,7 +26,7 @@ class UIObra{
                                     <p><?php echo $row["sinopse"];?></p>
                                     <p><?php echo " recomendado para ".strtr($row["Faixa_Etaria_Idade"],array('+' => 'maiores de ','Livre' => "todos",'12'=>"12 anos",'14'=>"14 anos",'16'=>"16 anos",'18'=>"18 anos"));?></p>
                                     <p>
-                                    <form method="post" action="<?php echo$this->map->Info_Obra();?>">
+                                    <form method="get" action="<?php echo$this->map->Info_Obra();?>">
                                                 <div class="collapse">
                                                     <div class="form-group">
                                                         <input value="<?php echo $row["titulo"];?>" name="titulo" type="text" class="form-control">
@@ -72,15 +72,8 @@ class UIObra{
             $obra= new obraDAO();
             $titulo=$_POST['titulo'];
             $data= $_POST['data'];
-            ?>
-            <script language='javascript' type='text/javascript'>
-                var r=confirm('A Obra <?php echo$titulo;?> será removida');
-                if(r==true){
-                    <?php $obra->delete($titulo,$data);?>
-                    window.location.href='<?php echo $this->map->PageIndex();?>';
-                }
-            </script>
-        <?php
+            $obra->delete($titulo,$data);
+            
         }
     }
 }

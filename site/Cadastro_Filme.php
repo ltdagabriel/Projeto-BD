@@ -1,3 +1,4 @@
+
 <?php 
     require_once(realpath("./includes/mapeamento.php"));
     $map=new mapa();
@@ -5,7 +6,10 @@
 <html lang="pt-BR">
 <head>
 <?php
+    if(!isset($_COOKIE['sessao'])){
     session_start();
+    $_COOKIE['sessao']=1;
+}
     if($_SESSION['logado']!=1){
         header ("Location: index.php");
     }

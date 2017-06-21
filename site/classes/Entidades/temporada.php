@@ -38,13 +38,7 @@ class temporada {
     public function set_data($data) {
         $this->obra_data=$data;
     }
-    function __construct($numero, $foto, $trailer, $obra_titulo, $obra_data){
-        $this->numero=$numero;
-        $this->foto=$foto;
-        $this->trailer=$trailer;
-        $this->obra_titulo=$obra_titulo;
-        $this->obra_data=$obra_data;
-    }
+   
 
 }
 

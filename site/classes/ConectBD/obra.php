@@ -53,7 +53,7 @@ class obraDAO {
     function delete($titulo,$data){
         try{
 
-                $stmt = $this->pdo->prepare("UPDATE FROM obra SET user_view='false' WHERE titulo = :titulo and data_lancamento = :data ");
+                $stmt = $this->pdo->prepare("UPDATE obra SET user_view='false' WHERE titulo = :titulo and data_lancamento = :data ");
                 $param = array(
                         ":titulo"  => $titulo,
                         ":data"  => $data
@@ -68,9 +68,10 @@ class obraDAO {
     }
     public function Get($titulo,$data){
         try {
-            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_idade,data_lancamento,data_adicionado,hora_adicionado FROM obra WHERE titulo = :titulo and data_lancamento = :data");
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_idade,data_lancamento,data_adicionado,hora_adicionado FROM obra WHERE titulo = :titulo and data_lancamento = :data and user_view != :view ");
             $param = array(
                 ":titulo" => $titulo,
+                ":view" => "false",
                 ":data" => $data               
             );
             $stmt->execute($param);
