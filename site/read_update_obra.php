@@ -3,6 +3,7 @@
 if(!isset($_COOKIE['sessao'])){
     session_start();
     $_COOKIE['sessao']=1;
+    
 }
 require_once(realpath("./includes/mapeamento.php"));
     $map=new mapa();
@@ -45,9 +46,7 @@ require_once(realpath("./includes/mapeamento.php"));
 <head>
 <?php
     
-    if(!$_SESSION['logado']){
-        $_SESSION['logado']=0;                                                                
-    }
+    
 $_SESSION['editar']=0;    
 ?>
 	<title>MyHobbieFIlmeSeries</title>
@@ -98,19 +97,18 @@ $_SESSION['editar']=0;
                                     <?php 
                                 }
                                 if($serie->get_Titulo()==$obra->get_Titulo()){
-                                
-                                    ?>
-                                         <div class="navbar-right col-md-12 col-sm-12 col-lg-12">
-                                             <?php
-                                                add_temporada();
-                                                list_temporada();
-                                             ?>
-                                         </div>
-                                         <?php
-                                    ?>
+                                ?>
                                     <div class="navbar-left col-md-8 col-lg-8">
                                         <p>Status: <?php echo $serie->get_status();?></p>
                                     </div>
+                                    <div class="navbar-right col-md-12 col-sm-12 col-lg-12">
+                                         <?php
+                                         if($_SESSION['logado']==1){   
+                                            add_temporada();
+                                         }
+                                            list_temporada();
+                                         ?>
+                                     </div>
                                     <?php 
                                 }
                             
@@ -206,10 +204,10 @@ if (isset($_POST['delete'])) {
 function add_temporada(){
     ?>
     <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
-        <div class="navbar-left"><h5> Temporada</h5></div>
-        <div class="navbar-left" style="padding-left: 4px">
+        <div class="navbar-left"><h5>Temporadas</h5></div>
+        <div class="navbar-right" style="padding-left: 4px">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_temporada" aria-expanded="false" aria-controls="collapseExample">
-                Adicionar novos
+                ADD Temporada
             </button>     
         </div>
         
@@ -235,46 +233,46 @@ function add_temporada(){
         $temporadaDAO=new temporadaDAO();
         $list=$temporadaDAO->Retorna_Todos($_SESSION['titulo'], $_SESSION['data']);
         
-        if($list){
-            while($row = $list->fetch(PDO::FETCH_ASSOC)){
-                
+    if($list){
+        while($row = $list->fetch(PDO::FETCH_ASSOC)){           
             ?>
-            <div class="panel panel-default">
+            <div class="panel">
                   <div class="panel-heading" role="tab" id="headingThree">
                     <h4 class="panel-title">
-                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          Temporada <?php echo $row['numero'];?>
-                          <?php add_Episodio();?>
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree<?php echo $row['numero'];?>" aria-expanded="false" aria-controls="collapseThree">
+                          <h4>Temporada <?php echo $row['numero'];?></h4>
+                          
                       </a>
                     </h4>
                   </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div id="collapseThree<?php echo $row['numero'];?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                     <div class="panel-body">
-    <?php
-                              list_episodio($row['numero']);
-                       
-    ?>
+        <?php
+        if($_SESSION['logado']==1){   
+            add_Episodio($row['numero']);
+        }
+                                  
+        list_episodio($row['numero']);                       
+        ?>
                     </div>
                 </div>
             </div>
-    <?php
-            }
+        <?php
         }
+    }
     ?>
         </div>
     <?php
     }
-function add_Episodio(){
+function add_Episodio($temporada_numero){
         ?>
-    <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
-        <div class="navbar-left"><h5>-> Episodios <-</h5></div>
-        <div class="navbar-left" style="padding-left: 4px">
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio" aria-expanded="false" aria-controls="collapseExample">
-                Adicionar novos
+    <div class="navbar-right" style="padding-left: 4px">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio<?php echo $temporada_numero; ?>" aria-expanded="false" aria-controls="collapseExample">
+                ADD Episodio
             </button>     
         </div>
         
-      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_episodio">
+      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_episodio<?php echo $temporada_numero; ?>">
         <div class="well">
             <h4>Cadastro de Episodio</h4>
             <?php
@@ -282,8 +280,6 @@ function add_Episodio(){
              ?>
         </div>
       </div>
-    
-    </div>
         <?php
     }
 function list_episodio($numero){
@@ -292,14 +288,13 @@ function list_episodio($numero){
     $str=$episodio->Retorna_Todos($_SESSION['titulo'],$numero);          
     while($epi = $str->fetch(PDO::FETCH_ASSOC)){
         ?>
-    <div class="col-md-4 col-lg-4 com-sm-6">
-        <p>doideiraaaaaaaaaaaaaaaaaaaa</p>
-        <p><?php echo $epi->get_sinopse(); ?></p>
-        <h4><?php echo $epi->get_obra_titulo(); ?></h4>
+    <div class="col-md-3 col-lg-3 com-sm-6">
+        
+        <h4><?php echo $epi['nome']." ".$epi['numero']; ?></h4>
+        <p><?php echo $epi['sinopse']; ?></p>
     </div>
         <?php
-    }
-    ?>   
+    }  
 }
 function add_Ator(){
         ?>

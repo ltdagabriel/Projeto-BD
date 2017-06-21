@@ -61,7 +61,7 @@ class episodio{
     }
 
     public function get_temporada_numero() {
-        return $this->obra_temporada_numero;
+        return $this->temporada_numero;
     }
     public function set_temporada_numero($temporada_numero) {
         $this->temporada_numero=$temporada_numero;

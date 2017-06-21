@@ -14,7 +14,7 @@ class episodioDAO {
    
     public function cadastrar(episodio $EntEpisodio) {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO episodio VALUE (:nome, :numero, :sinopse, :video, :data_lancamento, :obra_titulo, :obra_data, :temporada_numero)");
+            $stmt = $this->pdo->prepare("INSERT INTO episodio VALUE (:nome, :numero, :sinopse, :video, :data_lancamento, :obra_titulo,:data_adicionado, :obra_data, :temporada_numero)");
             $param = array(
                 ":nome" => $EntEpisodio->get_nome(),
                 ":numero" => $EntEpisodio->get_numero(),
@@ -22,9 +22,9 @@ class episodioDAO {
                 ":video" => $EntEpisodio->get_video(),
                 ":data_lancamento" => $EntEpisodio->get_data_lancamento(),                
                 ":obra_titulo" => $EntEpisodio->get_obra_titulo(),                
-                ":obra_titulo" => date("Y/m/d"),                
+                ":data_adicionado" => date("Y/m/d"),                
                 ":obra_data" => $EntEpisodio->get_obra_data(),                
-                ":temporada_numero" => $EntEpisodio->temporada_numero()                
+                ":temporada_numero" => $EntEpisodio->get_temporada_numero()               
             );
 
             return $stmt->execute($param);
@@ -34,10 +34,10 @@ class episodioDAO {
     }
     public function Retorna_Todos($titulo_obra,$temp_numero){
         try {
-            $stmt = $this->pdo->prepare("SELECT nome,numero,sinopse,video,foto FROM filme,obra WHERE :titulo = obra_titulo :temp_numero = temporada_numero");
+            $stmt = $this->pdo->prepare("SELECT nome,numero,sinopse,video FROM episodio WHERE :titulo = obra_titulo and :numero = temporada_numero");
             $param = array(
                 ":titulo" => $titulo_obra,
-                ":temp_numero" => $temp_numero               
+                ":numero" => $temp_numero               
             );
             $stmt->execute($param);
             return $stmt;
