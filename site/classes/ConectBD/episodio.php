@@ -46,6 +46,31 @@ class episodioDAO {
         }
     }
 
+    public function atualizar(episodio $EntEpisodio, $obra_titulo, $obra_data, $temporada_numero, $numero) {
+        $nome = $EntEpisodio->get_nome();
+        $sinopse = $EntEpisodio->get_sinopse();
+        $video = $EntEpisodio->get_video();
+        $data_lancamento = $EntEpisodio->get_data_lancamento();
+
+        try {
+            $stmt = $this->pdo->prepare("UPDATE episodio SET nome= :nome, sinopse = :sinopse, video = :video, data_lancamento =:data_lancamento WHERE obra_titulo = :obra_titulo and obra_data = :obra_data and temporada_numero = :temporada_numero and numero = :numero");
+            $param = array(
+                ":obra_data" => $obra_data,
+                ":obra_titulo" => $obra_titulo,
+                ":temporada_numero" => $temporada_numero,                
+                ":numero" => $numero,                
+                ":nome" => $nome,                
+                ":sinopse" => $sinopse,                
+                ":video" => $video,                
+                ":data_lancamento" => $data_lancamento             
+            );
+
+            return $stmt->execute($param);
+        } catch (PDOException $ex) {
+            echo " Falha na atualização do episodio : {$ex->getMessage()} ";
+        }
+
+    }
 }
 
 ?>
