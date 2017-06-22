@@ -1,19 +1,14 @@
 <form id="cadastro" name="cadastro" method="get">
+    
     <div class="form-group">
-            <label for="exampleInputName2">Nome <a style="color:red">*</a></label>
-            <input name="nome" type="text" class="form-control" id="exampleInputName2" placeholder="Nome do Personagem">
+            <label for="exampleInputLink2">Comentário</label>
+            <textarea name="texto" type="fieldtext" class="form-control" id="exampleInputName2"> </textarea>
     </div>
-
-    <div class="form-group">
-            <label for="exampleInputLink2">Foto</label>
-            <input name="foto" type="url" class="form-control" id="exampleInputName2" placeholder="<imagemlink>">
-    </div>
-
 
     <div class="form-inline">
             <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button name="cadastrar_personagem" type="submit" class="btn btn-default">Enviar</button>
+                      <button name="comentar" type="submit" class="btn btn-default">Enviar</button>
                     </div>
             </div>
             <div class="form-group">
@@ -27,16 +22,19 @@
     </div>
 </form>
 
-<?php
-if (isset($_GET['cadastrar_personagem'])) {
-    require_once 'classes/Entidades/personagem.php';
-    require_once 'classes/ConectBD/personagem.php';
-    $personagemDAO = new personagemDAO();
-    $personagem = new personagem();
-    $personagem->set_nome($_GET['nome']);
-    $personagem->set_foto($_GET['foto']);
 
-    if ($personagemDAO->cadastrar($personagem)) {
+<?php
+if (isset($_GET['comentar'])) {
+    require_once 'classes/ConectBD/comentario.php';
+
+    $comentarioDAO = new comentarioDAO();
+
+    $texto = $_GET['texto'];
+    $login = $_SESSION['login'];
+    $datta = date("Y/m/d");
+    $obra_titulo = $_SESSION['titulo'];
+    $obra_data = $_SESSION['data'];
+    if ($comentarioDAO->comentar($texto, $login, $datta, $obra_titulo, $obra_data)) {
         ?>
         <script language='javascript' type='text/javascript'>
             alert('Cadastrado com sucesso');
