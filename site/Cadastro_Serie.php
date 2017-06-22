@@ -26,6 +26,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="style/js/include.js"></script>
         <script src="style/js/jquery-1.10.2.js"></script>
+        <script src="style/js/bootbox.min.js"></script>
         <script src="style/js/jquery.js"></script>
 <body>
 <div class="container col-lg-12 col-md-12 com-sm-12" style="padding:15px" >

@@ -1,36 +1,23 @@
-<?php 
-    require_once(realpath("./includes/mapeamento.php"));
-    $map=new mapa();
-require_once ($map->Conect_Serie());
-require_once($map->Entidade_Serie());
-require_once ($map->Conect_Obra());
-require_once($map->Entidade_Obra());
-require_once ($map->Conect_Temporada());
-require_once($map->Entidade_Temporada());
-require_once ($map->Conect_Episodio());
-require_once($map->Entidade_Episodio());
-
-?>
 <form id="alterar" name="alterar" method="post">
 
     <div class="form-group">
         <label for="exampleInputLink2">Nome</label>
-        <input value="<?php echo $episodio->get_nome();?>" name="nome" type="text" class="form-control" id="exampleInputName2">
+        <input  name="nome" type="text" class="form-control" id="exampleInputName2">
     </div>
 
     <div class="form-group">
         <label for="exampleInputName2">Sinopse</label>
-        <textarea   name="sinopse" class="form-control" rows="3"><?php echo $episodio->get_sinopse();?></textarea>
+        <textarea   name="sinopse" class="form-control" rows="3"></textarea>
     </div>
 
     <div class="form-group">
             <label for="exampleInputLink2">Video</label>
-            <input value="<?php echo $episodio->get_video();?>" name="foto" type="url" class="form-control" id="exampleInputName2" placeholder="http://linkdovideo.com">
+            <input  name="foto" type="url" class="form-control" id="exampleInputName2" placeholder="http://linkdovideo.com">
     </div>
 
      <div class="form-group">
             <label for="exampleInputData2">Data de Lancamento</label>
-            <input value="<?php echo $episodio->get_data_lancamento();?>" name="data" type="date" class="form-control" id="exampleInputName2">
+            <input  name="data" type="date" class="form-control" id="exampleInputName2">
     </div>
 
 

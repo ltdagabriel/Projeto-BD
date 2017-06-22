@@ -32,7 +32,32 @@ class episodioDAO {
             echo " Falha na inserção do episodio : {$ex->getMessage()} ";
         }
     }
-    public function Retorna_Todos($titulo_obra,$temp_numero){
+    public function delete($titulo,$data,$t_numero,$numero){
+        try{
+
+                $stmt = $this->pdo->prepare(""
+                        . "DELETE "
+                        . "from episodio "
+                        . "WHERE        obra_titulo = :titulo and"
+                                    . " obra_data = :data and"
+                                    . " temporada_numero = :t_numero and"
+                                    . " numero = :numero ");
+                $param = array(
+                        ":titulo"  => $titulo,
+                        ":data"  => $data,
+                        ":t_numero" => $t_numero,
+                        ":numero"   => $numero
+                );
+
+                $stmt->execute($param);
+
+        }catch (PDOException $ex) {
+            echo "Deu para apagar Não: {$ex->getMessage()}";
+			return null;
+        }
+    }
+
+        public function Retorna_Todos($titulo_obra,$temp_numero){
         try {
             $stmt = $this->pdo->prepare("SELECT nome,numero,sinopse,video FROM episodio WHERE :titulo = obra_titulo and :numero = temporada_numero");
             $param = array(
