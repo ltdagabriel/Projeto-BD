@@ -142,7 +142,7 @@ $_SESSION['editar']=0;
                                                         <input value="<?php echo $row["data_lancamento"];?>" name="data" type="text" class="form-control">
                                                     </div>
                                                 </div>
-                                                <button name="delete" type="submit" class="btn btn-default">Excluir</button>
+                                                <button name="delete" type="submit" class="btn btn-danger">Excluir</button>
                                         </form>
                                     </div>
                                 </div>
@@ -150,6 +150,7 @@ $_SESSION['editar']=0;
                             }
                             ?>
                         </div>
+                        <?php comentar();?>
                     </div>
                 </div>
             </div>
@@ -218,8 +219,7 @@ if(isset($_POST['delete_episodio'])){
                 window.location.href='read_update_obra.php';
         }
     </script>
-<?php
-    
+<?php   
 }
 if(isset($_POST['delete_temporada'])){
     $titulo=$_POST['titulo'];
@@ -231,16 +231,13 @@ if(isset($_POST['delete_temporada'])){
         if(ans==true){
         
         <?php
-        $temporada->delete($titulo, $data,$numero);
+        $temporadaDAO->delete($titulo, $data,$numero);
         ?>
                 window.location.href='read_update_obra.php';
         }
     </script>
-<?php
-    
+<?php   
 }
-
-
 function add_temporada(){
     ?>
     <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
@@ -263,7 +260,7 @@ function add_temporada(){
     </div>
         <?php
     }
-function list_temporada(){
+    function list_temporada(){
     ?>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         
@@ -277,24 +274,27 @@ function list_temporada(){
         while($row = $list->fetch(PDO::FETCH_ASSOC)){           
             ?>
             <div class="panel">
+                <?php if($_SESSION['logado']==1){?>
+                <form method="post" class="navbar-right">
+                <div class="collapse">
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $row['numero'];?>" name="numero" type="text" class="form-control">
+                    </div>
+                </div>
+                <button name="delete_temporada" type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                </form>
+                <?php }?>
                   <div class="panel-heading" role="tab" id="headingThree">
                     <h4 class="panel-title">
                       <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree<?php echo $row['numero'];?>" aria-expanded="false" aria-controls="collapseThree">
                           <h4>Temporada <?php echo $row['numero'];?></h4>
-                          <form method="post" class="navbar-right">
-                            <div class="collapse">
-                                <div class="form-group">
-                                    <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input value="<?php echo $row['numero'];?>" name="numero" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <button name="delete_temporada" type="submit" class="btn btn-sm btn-default">Excluir</button>
-                          </form>
+                          
                       </a>
                     </h4>
                   </div>
@@ -316,14 +316,14 @@ function list_temporada(){
     ?>
         </div>
     <?php
-    }    
+    }
 function add_Episodio($temporada_numero){
     $obra_titulo_2=$_SESSION['titulo'];    
     $obra_data_2=$_SESSION['data'];    
     ?>
     
-    <div class="navbar-right" style="padding-left: 4px">
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio<?php echo $temporada_numero; ?>" aria-expanded="false" aria-controls="collapseExample">
+        <div class="navbar-right"">
+            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio<?php echo $temporada_numero; ?>" aria-expanded="false" aria-controls="collapseExample">
                 ADD Episodio
             </button>     
         </div>
@@ -338,7 +338,8 @@ function add_Episodio($temporada_numero){
       </div>
         <?php
     }
-function editar_episodio($numero,$numero_temporada){
+  
+    function editar_episodio($numero,$numero_temporada){
     $obra_titulo=$_SESSION['titulo'];    
     $obra_data=$_SESSION['data'];    
     ?>
@@ -349,17 +350,17 @@ function editar_episodio($numero,$numero_temporada){
             </button>     
         </div>
         
-      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_episodio_editar<?php echo $numero_temporada; ?>">
+      <div class="collapse col-lg-12 col-md-12 col-sm-10" id="form_episodio_editar<?php echo $numero_temporada; ?>">
         <div class="well">
             <h4>Editar Episodio</h4>
             <?php
-            include("CRUDDS/alterar_episodio.php");
+            /**include("CRUDDS/alterar_episodio.php");**/
              ?>
         </div>
       </div>
         <?php
     }
-function list_episodio($numero){
+    function list_episodio($numero){
     require_once 'classes/ConectBD/episodio.php';
     $episodio=new episodioDAO();
     $str=$episodio->Retorna_Todos($_SESSION['titulo'],$numero);          
@@ -394,7 +395,7 @@ function list_episodio($numero){
                         <input value="<?php echo $epi['numero'];?>" name="numero" type="text" class="form-control">
                     </div>
                 </div>
-                <button name="delete_episodio" type="submit" class="btn btn-sm btn-default">Excluir</button>
+                <button name="delete_episodio" type="submit" class="btn btn-sm btn-danger">Excluir</button>
                 
             </form>
                 <?php
@@ -409,4 +410,7 @@ function list_episodio($numero){
     ?>
     </div>
     <?php 
+}
+function comentar(){
+    
 }

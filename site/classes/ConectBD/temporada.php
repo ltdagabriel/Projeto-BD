@@ -10,7 +10,28 @@ class temporadaDAO {
         $this->con = new Conexao();
         $this->pdo = $this->con->Connect();
     }
+    public function delete($titulo,$data,$numero){
+        try{
 
+                $stmt = $this->pdo->prepare(""
+                        . "DELETE "
+                        . "from temporada "
+                        . "WHERE        obra_titulo = :titulo and"
+                                    . " obra_data = :data and"
+                                    . " numero = :numero ");
+                $param = array(
+                        ":titulo"  => $titulo,
+                        ":data"  => $data,
+                        ":numero"   => $numero
+                );
+
+                $stmt->execute($param);
+
+        }catch (PDOException $ex) {
+            echo "Deu para apagar Não: {$ex->getMessage()}";
+			return null;
+        }
+    }
    
     public function cadastrar(temporada $enttemporada) {
         try {
