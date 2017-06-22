@@ -25,7 +25,7 @@ require_once($map->Entidade_Episodio());
 
     <div class="form-group">
             <label for="exampleInputLink2">Video</label>
-            <input value="<?php echo $episodio->get_video();?>" name="foto" type="url" class="form-control" id="exampleInputName2" placeholder="http://linkdovideo.com">
+            <input value="<?php echo $episodio->get_video();?>" name="video" type="url" class="form-control" id="exampleInputName2" placeholder="http://linkdovideo.com">
     </div>
 
      <div class="form-group">
