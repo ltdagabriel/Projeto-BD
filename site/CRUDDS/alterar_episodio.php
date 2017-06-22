@@ -12,7 +12,11 @@
 
     <div class="form-group">
             <label for="exampleInputLink2">Video</label>
+<<<<<<< HEAD
             <input  name="foto" type="url" class="form-control" id="exampleInputName2" placeholder="http://linkdovideo.com">
+=======
+            <input value="<?php echo $episodio->get_video();?>" name="video" type="url" class="form-control" id="exampleInputName2" placeholder="http://linkdovideo.com">
+>>>>>>> 620f20e598100829a4c562fce340e8c702e83efe
     </div>
 
      <div class="form-group">
