@@ -28,25 +28,21 @@ class comentarioDAO {
     }
               
 
-    function atualizar(usuario $entUsuario, $login) {
+    function atualizar($texto, $obra_titulo, $obra_data, $login, $datta) {
         try {
-            $nome = $entUsuario->get_nome();
-            $senha = $entUsuario->get_senha();
-            $foto = $entUsuario->get_foto();
-            $email = $entUsuario->get_email();
 
-            $stmt = $this->pdo->prepare("UPDATE usuario SET nome = :nome, senha = :senha, foto = :foto, email = :email WHERE login = :login");
+            $stmt = $this->pdo->prepare("UPDATE comentario SET texto = :texto WHERE login = :login and datta = :datta and obra_titulo = :obra_titulo and obra_data = :obra_data");
             $param = array(
+                ":texto" => $texto,
                 ":login" => $login,
-                ":nome" => $nome,
-                ":senha" => $senha,
-                ":foto" => $foto,
-                ":email" => $email
+                ":datta" => $datta,
+                ":obra_titulo" => $obra_titulo,
+                ":obra_data" => $obra_data
             );
 
             return $stmt->execute($param);
         } catch (PDOException $ex) {
-            echo " Falha ao atualizar dados do usuário: {$ex->getMessage()} \n";
+            echo " Falha ao atualizar comentario: {$ex->getMessage()} \n";
         }
     }
 
