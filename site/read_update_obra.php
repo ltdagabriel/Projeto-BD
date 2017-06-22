@@ -265,14 +265,17 @@ function add_temporada(){
     <?php
     }
 function add_Episodio($temporada_numero){
-        ?>
+    $obra_titulo_2=$_SESSION['titulo'];    
+    $obra_data_2=$_SESSION['data'];    
+    ?>
+    
     <div class="navbar-right" style="padding-left: 4px">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_episodio<?php echo $temporada_numero; ?>" aria-expanded="false" aria-controls="collapseExample">
                 ADD Episodio
             </button>     
         </div>
         
-      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_episodio<?php echo $temporada_numero; ?>">
+      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="form_episodio<?php echo $temporada_numero; ?>">
         <div class="well">
             <h4>Cadastro de Episodio</h4>
             <?php
@@ -286,40 +289,65 @@ function list_episodio($numero){
     require_once 'classes/ConectBD/episodio.php';
     $episodio=new episodioDAO();
     $str=$episodio->Retorna_Todos($_SESSION['titulo'],$numero);          
+    ?>
+    <div class="col-md-11 col-lg-11 com-sm-11 navbar-left">
+    <?php 
+    
     while($epi = $str->fetch(PDO::FETCH_ASSOC)){
         ?>
-    <div class="col-md-3 col-lg-3 com-sm-6">
-        
-        <h4><?php echo $epi['nome']." ".$epi['numero']; ?></h4>
-        <p><?php echo $epi['sinopse']; ?></p>
-    </div>
-        <?php
-    }  
-}
-function add_Ator(){
-        ?>
-    <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
-        <div class="navbar-left"><h5> Atores</h5></div>
-        <div class="navbar-left" style="padding-left: 4px">
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form_ator" aria-expanded="false" aria-controls="collapseExample">
-                Adicionar novos
-            </button>     
-        </div>
-        
-      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_ator">
-        <div class="well">
-            <h4>Cadastro de Atores</h4>
-            <?php
-             include("CRUDDS/cadastro_ator.php");
-             ?>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+           <?php /** COLOCAR VIDEO**/?> 
+          <div class="caption">
+            <h3><?php echo $epi['nome']." ".$epi['numero'];?></h3>
+            <p><?php echo $epi["sinopse"];?></p>
+        <?php 
+               if($_SESSION['logado']==1){
+                ?>
+            <form method="get" class="navbar-right">
+                <div class="collapse">
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $numero;?>" name="temp_numero" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $epi['numero'];?>" name="numero" type="text" class="form-control">
+                    </div>
+                </div>
+                <button name="editar" type="submit" class="btn btn-sm btn-default">Editar</button>
+            </form>    
+            <form method="post" class="navbar-right">
+                <div class="collapse">
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $numero;?>" name="temp_numero" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $epi['numero'];?>" name="numero" type="text" class="form-control">
+                    </div>
+                </div>
+                <button name="delete" type="submit" class="btn btn-sm btn-default">Excluir</button>
+            </form>
+                <?php
+               }
+            ?>
         </div>
       </div>
-    
     </div>
-        <?php
-    }
-    function listar_Ator(){
-        ?>
     
         <?php
     }
+    ?>
+    </div>
+    <?php 
+}
