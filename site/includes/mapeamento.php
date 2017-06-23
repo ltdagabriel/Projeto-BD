@@ -26,6 +26,7 @@ class mapa {
     private $entidadeFilme;
     private $entidadeEpisodio;
     private $perfil;
+    private $alterar_comentario;
     public function __construct() {
         $this->page1="/Projeto-BD/site/index.php";
         $this->page2="/Projeto-BD/site/Cadastro.php";
@@ -52,6 +53,7 @@ class mapa {
         $this->entidadeFilme="classes/Entidades/filme.php";
         $this->entidadeEpisodio="classes/Entidades/episodio.php";
         $this->cadastro_usuario="CRUDDS/cadastro.php";
+        $this->alterar_comentario="CRUDDS/alterar_comentario.php";
     }
     public function PageIndex(){
         return $this->page1;
@@ -124,5 +126,8 @@ class mapa {
     }
     public function Alterar_Usuario(){
         return $this->perfil;
+    }    
+    public function Conect_Comentario(){
+        return $this->alterar_comentario;
     }
 }
