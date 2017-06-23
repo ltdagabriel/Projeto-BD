@@ -45,6 +45,28 @@ class comentarioDAO {
             echo " Falha ao alterar comentário! {$ex->getMessage()} \n";
         }
     }
+    public function delete($titulo,$data,$data2){
+        try{
+
+                $stmt = $this->pdo->prepare(""
+                        . "DELETE "
+                        . "from comentario "
+                        . "WHERE        obra_titulo = :titulo and"
+                                    . " obra_data = :data and"
+                                    . " datta=:data2 ");
+                $param = array(
+                        ":titulo"  => $titulo,
+                        ":data"  => $data,
+                        ":data2" => $data2
+                );
+
+                $stmt->execute($param);
+
+        }catch (PDOException $ex) {
+            echo "Deu para apagar Não: {$ex->getMessage()}";
+			return null;
+        }
+    }
 
     function exibe_comentario($obra_titulo, $obra_data, $login){
         try {

@@ -467,7 +467,7 @@ function mostra_comentario(){
             </form>
             
             <?php
-            alterar_comentario($coment['datta']);
+            alterar_comentario($coment['datta'],$coment['texto']);
         }
         ?>
         </div>
@@ -494,7 +494,7 @@ if(isset($_POST['delete_comentario'])){
 <?php   
 }
 
-function alterar_comentario($data){
+function alterar_comentario($data,$comentario){
     ?>
     <div class="navbar-right"">
             <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#alterar_comentario<?php echo$data; ?>" aria-expanded="false" aria-controls="collapseExample">
