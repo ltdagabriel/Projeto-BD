@@ -364,7 +364,7 @@ function add_Episodio($temporada_numero){
       </div>
         <?php
     }
-    function list_episodio($numero){
+function list_episodio($numero){
     require_once 'classes/ConectBD/episodio.php';
     $episodio=new episodioDAO();
     $str=$episodio->Retorna_Todos($_SESSION['titulo'],$numero);          
@@ -451,11 +451,43 @@ function mostra_comentario(){
             <div class="col-lg-12 col-md-12">
                 <p> <?php echo $coment['texto']; ?> </p>
             </div>
-
+            <form method="post" class="navbar-right">
+                <div class="collapse">
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $coment['datta'];?>" name="data" type="text" class="form-control">
+                    </div>
+                </div>
+                <button name="delete_comentario" type="submit" class="btn btn-sm btn-danger">Excluir</button>
+            </form>
+            
             <?php
+            alterar_comentario($coment['datta']);
         }
         ?>
         </div>
     </div>
     <?php 
+}
+function alterar_comentario($data){
+    ?>
+    <div class="navbar-right"">
+            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#alterar_comentario<?php echo$data; ?>" aria-expanded="false" aria-controls="collapseExample">
+                alterar
+            </button>     
+        </div>
+        
+      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="#alterar_comentario<?php echo$data; ?>">
+        <div class="well">
+            <?php
+            include("CRUDDS/alterar_comentario.php");
+             ?>
+        </div>
+      </div>
+    <?php
 }
