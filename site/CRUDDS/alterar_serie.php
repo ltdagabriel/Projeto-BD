@@ -35,7 +35,7 @@ require_once($map->Entidade_Obra());
     <div class="form-inline">
             <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button name="cadastrar" type="submit" class="btn btn-default">Atualizar</button>
+                      <button name="alterar_serie" type="submit" class="btn btn-default">Atualizar</button>
                     </div>
             </div>
             
@@ -47,58 +47,34 @@ require_once($map->Entidade_Obra());
 
 
 <?php
-if (isset($_POST['cadastrar'])) {
+if (isset($_POST['alterar_serie'])) {
     $obraDAO = new obraDAO();
     $obra = new obra();
     $serieDAO= new serieDAO();
-    $seriado=new Serie($_POST['status'],$_POST['titulo'],$_POST['data']);
+    $seriado=new Serie($_POST['status']," "," ");
 
-    $obra->set_Titulo($_POST['titulo']);
     $obra->set_Sinopse($_POST['sinopse']);
-    $obra->set_Data_Lancamento($_POST['data']);
     $obra->set_Foto($_POST['foto']);
     $obra->set_FEtaria($_POST['classificacao']);
-    if($obra->get_FEtaria()=="Selecione"){
-         ?>
-            <script language='javascript' type='text/javascript'>
-                alert('Selecione uma Faixa Etaria');
-            </script>
-        <?php
-    }
-    else if ($obra->get_Titulo()=="" || $obra->get_Titulo()==null){
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('O campo "Titulo" deve ser preenchido');
-            </script>
-        <?php
-    }
-    else if($obra->get_DataLancamento()=="" || $obra->get_DataLancamento()==null){
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('O campo "Data de Lançamento" deve ser preenchido');
-            </script>
-        <?php
+    if(!$obraDAO->consultartitulo($obra->get_Titulo(), $obra->get_DataLancamento())){
+        $x=$obraDAO->atualizar($obra,$_SESSION['titulo'],$_SESSION['data']);
+        $y=$serieDAO->atualizar($seriado,$_SESSION['titulo'],$_SESSION['data']);
+            if($x && $y){
+                ?>
+                <script language='javascript' type='text/javascript'>
+                    alert('Alterado com sucesso');window.location.href='read_update_obra.php';
+                </script>
+                <?php
+            }
+
     }
     else{
-        if(!$obraDAO->consultartitulo($obra->get_Titulo(), $obra->get_DataLancamento())){
-            $x=$obraDAO->alterar($obra,$titulo_obra,$data_obra);
-            $y=$filmeDAO->alterar($filme,$titulo_obra,$data_obra);
-                if($x && $y){
-                    ?>
-                    <script language='javascript' type='text/javascript'>
-                        alert('Alterado com sucesso');window.location.href='<?php echo $map->PageIndex();?>';
-                    </script>
-                    <?php
-                }
-            
-        }
-        else{
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('Seriado ja se enconta na "Base de Dados"');
-            </script>
-        <?php
-        }
+    ?>
+        <script language='javascript' type='text/javascript'>
+            alert('Falhou"');
+        </script>
+    <?php
     }
+    
 }
 ?>

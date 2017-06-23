@@ -92,22 +92,20 @@ class obraDAO {
 
         function atualizar(obra $entObra, $obra_titulo, $obra_dataLanc) {
         try {
-            $titulo = $entObra->get_Titulo();
             $sinopse = $entObra->get_Sinopse();      
             $foto = $entObra->get_Foto();
             $FEtaria = $entObra->get_FEtaria();
-            $DataLancamento = $entObra->get_DataLancamento();
 
-            $stmt = $this->pdo->prepare("UPDATE obra SET titulo = :titulo, sinopse= :sinopse, foto= :foto, idade= :idade, dataL =:dataLancamento WHERE titulo = :obra_titulo and data_lancamento = :obra_dataLanc ");
-            $param = array(
-                ":titulo" => $titulo,
-                ":sinopse" => $sinopse,
-                ":foto" => $foto,
-                ":idade" => $FEtaria,
-                ":dataL" => $DataLancamento,
-                ":obra_titulo" => $obra_titulo,
-                ":data_lancamento" => $obra_dataLanc
-            );
+            $stmt = $this->pdo->prepare("UPDATE obra "
+                    . "SET sinopse=:sinopse,foto = :foto,Faixa_Etaria_Idade=:faixa "
+                    . "WHERE titulo = :titulo and data_lancamento = :data ");
+                $param = array(
+                        ":titulo"  => $obra_titulo,
+                        ":sinopse"  => $sinopse,
+                        ":foto"  => $foto,
+                        ":faixa"  => $FEtaria,
+                        ":data"  => $obra_dataLanc
+                );
             
             return $stmt->execute($param);            
         } catch (PDOException $ex) {

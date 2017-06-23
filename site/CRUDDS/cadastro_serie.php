@@ -51,7 +51,7 @@ require_once($map->Entidade_Obra());
                     </div>
             </div>
             <div class="form-group">
-            <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios!          </span>
+            <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios! </span>
             </div>
     </div>
 </form>

@@ -222,9 +222,11 @@ if(isset($_POST['delete_episodio'])){
 <?php   
 }
 if(isset($_POST['delete_temporada'])){
+    require_once 'classes/ConectBD/temporada.php';
     $titulo=$_POST['titulo'];
     $data= $_POST['data'];
     $numero= $_POST['numero'];
+    $temporadaDAO=new temporadaDAO();
     ?>
     <script language='javascript' type='text/javascript'>
     var ans=confirm("tem certeza que deseja apagar?");
@@ -288,6 +290,7 @@ function add_temporada(){
                     </div>
                 </div>
                 <button name="delete_temporada" type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                
                 </form>
                 <?php }?>
                   <div class="panel-heading" role="tab" id="headingThree">
@@ -316,7 +319,8 @@ function add_temporada(){
     ?>
         </div>
     <?php
-    }
+}
+
 function add_Episodio($temporada_numero){
     $obra_titulo_2=$_SESSION['titulo'];    
     $obra_data_2=$_SESSION['data'];    

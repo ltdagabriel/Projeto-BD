@@ -54,16 +54,17 @@ class serieDAO {
         }
     }
 
-        function atualizar(serie $EntSerie, $titulo_obra, $data_obra) {
+        function atualizar(serie $EntSerie, $obra_titulo, $obra_dataLanc) {
         $status = $EntSerie->get_status();
 
         try {
-            $stmt = $this->pdo->prepare("UPDATE serie SET status= :status WHERE obra_titulo = :titulo_obra and obra_data = :data_obra");
-            $param = array(
-                ":obra_data" => $data_obra,
-                ":obra_titulo" => $titulo_obra,
-                ":status" => $status               
-            );
+            $stmt = $this->pdo->prepare("UPDATE serie "
+                    . "SET stattus=:status WHERE obra_titulo = :titulo and obra_data = :data ");
+                $param = array(
+                        ":titulo"  => $obra_titulo,
+                        ":status"  => $status,
+                        ":data"  => $obra_dataLanc
+                );
 
             return $stmt->execute($param);
         } catch (PDOException $ex) {
