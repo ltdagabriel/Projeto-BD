@@ -35,7 +35,7 @@ require_once($map->Entidade_Obra());
     <div class="form-inline">
             <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button name="cadastrar" type="submit" class="btn btn-default">Alterar</button>
+                      <button name="alterar_filme" type="submit" class="btn btn-default">Alterar</button>
                     </div>
             </div>
             
@@ -47,19 +47,17 @@ require_once($map->Entidade_Obra());
 
 
 <?php
-if (isset($_POST['cadastrar'])) {
+if (isset($_POST['alterar_filme'])) {
     $obraDAO = new obraDAO();
     $obra = new obra();
 
     $filmeDAO= new filmeDAO();
-    $filme=new filme($_POST['video'],$_POST['titulo'],$_POST['data']);
+    $filme=new filme($_POST['video']," "," ");
     
-    $obra->set_Titulo($_POST['titulo']);
     $obra->set_Sinopse($_POST['sinopse']);
-    $obra->set_Data_Lancamento($_POST['data']);
     $obra->set_Foto($_POST['foto']);
-    
     $obra->set_FEtaria($_POST['classificacao']);
+
     if($obra->get_FEtaria()=="Selecione"){
          ?>
             <script language='javascript' type='text/javascript'>
@@ -67,28 +65,14 @@ if (isset($_POST['cadastrar'])) {
             </script>
         <?php
     }
-    else if ($obra->get_Titulo()=="" || $obra->get_Titulo()==null){
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('O campo "Titulo" deve ser preenchido');
-            </script>
-        <?php
-    }
-    else if($obra->get_DataLancamento()=="" || $obra->get_DataLancamento()==null){
-        ?>
-            <script language='javascript' type='text/javascript'>
-                alert('O campo "Data de Lançamento" deve ser preenchido');
-            </script>
-        <?php
-    }
     else{
         if(!$obraDAO->consultartitulo($obra->get_Titulo(), $obra->get_DataLancamento())){
-            $x=$obraDAO->alterar($obra,$titulo_obra,$data_obra);
-            $y=$filmeDAO->alterar($filme,$titulo_obra,$data_obra);
+            $x=$obraDAO->atualizar($obra,$_SESSION['titulo'],$_SESSION['data']);
+            $y=$filmeDAO->atualizar($filme,$_SESSION['titulo'],$_SESSION['data']);
                 if($x && $y){
                     ?>
                     <script language='javascript' type='text/javascript'>
-                        alert('Alterado com sucesso');window.location.href='<?php echo $map->PageIndex();?>';
+                        alert('Alterado com sucesso');window.location.href='read_update_obra.php';
                     </script>
                     <?php
                 }
@@ -97,7 +81,7 @@ if (isset($_POST['cadastrar'])) {
         else{
         ?>
             <script language='javascript' type='text/javascript'>
-                alert('Filme ja se encontar na "Base de Dados"');
+                alert('Falhou!!');
             </script>";
         <?php
         }

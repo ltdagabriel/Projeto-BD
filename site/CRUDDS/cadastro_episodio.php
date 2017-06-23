@@ -16,7 +16,7 @@ if(isset($_GET['sinopse2'])){
 if(isset($_GET['video2'])){
     $video2=$_GET['video2'];
 }
-if(isset($_GET['sinopse2'])){
+if(isset($_GET['data2'])){
     $data2=$_GET['data2'];
 }
 ?>

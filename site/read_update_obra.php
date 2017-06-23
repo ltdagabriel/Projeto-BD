@@ -358,7 +358,7 @@ function add_Episodio($temporada_numero){
         <div class="well">
             <h4>Editar Episodio</h4>
             <?php
-            /**include("CRUDDS/alterar_episodio.php");**/
+            include("CRUDDS/alterar_episodio.php");
              ?>
         </div>
       </div>

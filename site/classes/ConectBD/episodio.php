@@ -32,6 +32,24 @@ class episodioDAO {
             echo " Falha na inserção do episodio : {$ex->getMessage()} ";
         }
     }
+    public function Get($titulo_obra,$temp_numero,$numero){
+        try {
+            $stmt = $this->pdo->prepare("SELECT nome,datta,sinopse,video "
+                    . "FROM episodio "
+                    . "WHERE :titulo = obra_titulo and "
+                    . ":temp_numero = temporada_numero and "
+                    . "numero=:numero");
+            $param = array(
+                ":titulo" => $titulo_obra,
+                ":temp_numero" => $temp_numero,               
+                ":numero" => $numero               
+            );
+            $stmt->execute($param);
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo " Falha ao Retornar todos os Episodios : {$ex->getMessage()} \n";
+        }
+    }
     public function delete($titulo,$data,$t_numero,$numero){
         try{
 
@@ -69,6 +87,7 @@ class episodioDAO {
         } catch (PDOException $ex) {
             echo " Falha ao Retornar todos os Episodios : {$ex->getMessage()} \n";
         }
+        
     }
 
     public function atualizar(episodio $EntEpisodio, $obra_titulo, $obra_data, $temporada_numero, $numero) {
@@ -78,7 +97,12 @@ class episodioDAO {
         $data_lancamento = $EntEpisodio->get_data_lancamento();
 
         try {
-            $stmt = $this->pdo->prepare("UPDATE episodio SET nome= :nome, sinopse = :sinopse, video = :video, data_lancamento =:data_lancamento WHERE obra_titulo = :obra_titulo and obra_data = :obra_data and temporada_numero = :temporada_numero and numero = :numero");
+            $stmt = $this->pdo->prepare("UPDATE episodio "
+                    . "SET nome = :nome, sinopse = :sinopse, video = :video, datta =:data_lancamento "
+                    . "WHERE obra_titulo = :obra_titulo and "
+                            . "obra_data = :obra_data and "
+                            . "temporada_numero = :temporada_numero and"
+                            . " numero = :numero");
             $param = array(
                 ":obra_data" => $obra_data,
                 ":obra_titulo" => $obra_titulo,

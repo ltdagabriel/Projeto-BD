@@ -56,7 +56,9 @@ class filmeDAO {
         $trailer = $EntFilme->get_trailer();
 
         try {
-            $stmt = $this->pdo->prepare("UPDATE filme SET trailer= :trailer WHERE obra_titulo = :titulo_obra and obra_data = :data_obra ");
+            $stmt = $this->pdo->prepare("UPDATE filme "
+                        . "SET trailer= :trailer "
+                        . "WHERE obra_titulo = :obra_titulo and obra_data = :obra_data ");
             $param = array(
                 ":obra_data" => $data_obra,
                 ":obra_titulo" => $titulo_obra,
