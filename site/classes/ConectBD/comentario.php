@@ -48,7 +48,7 @@ class comentarioDAO {
 
     function exibe_comentario($obra_titulo, $obra_data, $login){
         try {
-            $stmt = $this->pdo->prepare("SELECT texto FROM comentario WHERE usuario_login = :login and obra_titulo = :obra_titulo and obra_data = :obra_data");
+            $stmt = $this->pdo->prepare("SELECT texto,datta FROM comentario WHERE usuario_login = :login and obra_titulo = :obra_titulo and obra_data = :obra_data");
             $param = array(
                 ":login" => $login,
                 ":obra_titulo" => $obra_titulo,
