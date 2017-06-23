@@ -460,7 +460,7 @@ function mostra_comentario(){
                         <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input value="<?php echo $coment['datta'];?>" name="data" type="text" class="form-control">
+                        <input value="<?php echo $coment['datta'];?>" name="data_coment" type="text" class="form-control">
                     </div>
                 </div>
                 <button name="delete_comentario" type="submit" class="btn btn-sm btn-danger">Excluir</button>
@@ -474,6 +474,26 @@ function mostra_comentario(){
     </div>
     <?php 
 }
+if(isset($_POST['delete_comentario'])){
+    require_once 'classes/ConectBD/temporada.php';
+    $titulo=$_POST['titulo'];
+    $data= $_POST['data'];
+    $data2= $_POST['data_coment'];
+    $temporadaDAO=new temporadaDAO();
+    ?>
+    <script language='javascript' type='text/javascript'>
+    var ans=confirm("tem certeza que deseja apagar?");
+        if(ans==true){
+        
+        <?php
+        $comentarioDAO->delete($titulo, $data,$data2);
+        ?>
+                window.location.href='read_update_obra.php';
+        }
+    </script>
+<?php   
+}
+
 function alterar_comentario($data){
     ?>
     <div class="navbar-right"">
