@@ -31,7 +31,7 @@ if (isset($_GET['comentar'])) {
 
     $texto = $_GET['texto'];
     $login = $_SESSION['user'];
-    $datta = date("Y/m/d").date("h:i:s");
+    $datta = date("Y-m-d H:i:s");
     $obra_titulo = $_SESSION['titulo'];
     $obra_data = $_SESSION['data'];
     if ($comentarioDAO->comentar($texto, $login, $datta, $obra_titulo, $obra_data)) {

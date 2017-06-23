@@ -442,19 +442,20 @@ function mostra_comentario(){
     $comentario=new comentarioDAO();
     $str=$comentario->exibe_comentario($_SESSION['titulo'],$_SESSION['data'],$_SESSION['user']);          
     ?>
-    <div class="col-md-11 col-lg-11 com-sm-11 navbar-left">
-    <?php 
-    
-    while($coment = $str->fetch(PDO::FETCH_ASSOC)){
+    <div class="col-md-11 col-lg-11 com-sm-11">
+        <div class="caption">
+        <?php 
+
+        while($coment = $str->fetch(PDO::FETCH_ASSOC)){
+            ?>
+        <div class="col-lg-6 col-md-4">
+            <p> <?php echo $coment['texto']; ?> </p>
+        </div>
+
+            <?php
+        }
         ?>
-    <div class="col-lg-6 col-md-4">
-        <p> <?php echo $coment['texto']; ?> </p>
-    </div>
-    </div>
-    
-        <?php
-    }
-    ?>
+        </div>
     </div>
     <?php 
 }
