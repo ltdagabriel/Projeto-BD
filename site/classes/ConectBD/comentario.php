@@ -28,7 +28,7 @@ class comentarioDAO {
     }
               
 
-    function atualizar($texto, $obra_titulo, $obra_data, $login, $datta) {
+    function alterar_comentario($texto, $obra_titulo, $obra_data, $login, $datta) {
         try {
 
             $stmt = $this->pdo->prepare("UPDATE comentario SET texto = :texto WHERE login = :login and datta = :datta and obra_titulo = :obra_titulo and obra_data = :obra_data");
@@ -42,7 +42,7 @@ class comentarioDAO {
 
             return $stmt->execute($param);
         } catch (PDOException $ex) {
-            echo " Falha ao atualizar comentario: {$ex->getMessage()} \n";
+            echo " Falha ao alterar comentário! {$ex->getMessage()} \n";
         }
     }
 
