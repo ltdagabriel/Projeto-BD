@@ -37,14 +37,14 @@ if (isset($_GET['comentar'])) {
     if ($comentarioDAO->comentar($texto, $login, $datta, $obra_titulo, $obra_data)) {
         ?>
         <script language='javascript' type='text/javascript'>
-            alert('Cadastrado com sucesso');
+            alert('Comentado!');
         </script>
         <?php
     }     
     else{
          ?>
             <script language='javascript' type='text/javascript'>
-                alert('Ja existente');
+                alert('Este comentário já foi feito!');
             </script>
         <?php
     }
