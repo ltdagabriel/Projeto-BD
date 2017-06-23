@@ -150,7 +150,7 @@ $_SESSION['editar']=0;
                             }
                             ?>
                         </div>
-                        <?php comentar();?>
+                        <?php comentar(); mostra_comentario();?>
                     </div>
                 </div>
             </div>
@@ -412,5 +412,45 @@ function add_Episodio($temporada_numero){
     <?php 
 }
 function comentar(){
+    $obra_titulo_2=$_SESSION['titulo'];    
+    $obra_data_2=$_SESSION['data'];    
+    ?>
     
+        <div class="navbar-right"">
+            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#form_comentario" aria-expanded="false" aria-controls="collapseExample">
+                Comentário
+            </button>     
+        </div>
+        
+      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="form_comentario">
+        <div class="well">
+            <h4>Comentar</h4>
+            <?php
+            include("CRUDDS/comentario.php");
+             ?>
+        </div>
+      </div>
+        <?php
+}
+
+function mostra_comentario(){
+    require_once 'classes/ConectBD/comentario.php';
+    $comentario=new comentarioDAO();
+    $str=$comentario->exibe_comentario($_SESSION['titulo'],$_SESSION['data'],$_SESSION['user']);          
+    ?>
+    <div class="col-md-11 col-lg-11 com-sm-11 navbar-left">
+    <?php 
+    
+    while($coment = $str->fetch(PDO::FETCH_ASSOC)){
+        ?>
+    <div class="col-lg-6 col-md-4">
+        <p> <?php echo $coment['texto']; ?> </p>
+    </div>
+    </div>
+    
+        <?php
+    }
+    ?>
+    </div>
+    <?php 
 }
