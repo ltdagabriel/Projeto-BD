@@ -51,5 +51,5 @@ $y=$comentarioDAO->alterar_comentario($texto, $_SESSION['titulo'], $_SESSION['da
     <?php
         }
     }
-}
+
 ?>

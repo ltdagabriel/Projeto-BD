@@ -475,11 +475,11 @@ function mostra_comentario(){
     <?php 
 }
 if(isset($_POST['delete_comentario'])){
-    require_once 'classes/ConectBD/temporada.php';
+    require_once 'classes/ConectBD/comentario.php';
     $titulo=$_POST['titulo'];
     $data= $_POST['data'];
     $data2= $_POST['data_coment'];
-    $temporadaDAO=new temporadaDAO();
+    $comentarioDAO=new comentarioDAO();
     ?>
     <script language='javascript' type='text/javascript'>
     var ans=confirm("tem certeza que deseja apagar?");
@@ -496,13 +496,13 @@ if(isset($_POST['delete_comentario'])){
 
 function alterar_comentario($data,$comentario){
     ?>
-    <div class="navbar-right"">
+    <div class="navbar-right">
             <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#alterar_comentario<?php echo$data; ?>" aria-expanded="false" aria-controls="collapseExample">
                 alterar
             </button>     
         </div>
         
-      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="#alterar_comentario<?php echo$data; ?>">
+      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="alterar_comentario<?php echo$data; ?>">
         <div class="well">
             <?php
             include("CRUDDS/alterar_comentario.php");
