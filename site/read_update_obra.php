@@ -123,7 +123,7 @@ $_SESSION['editar']=0;
                                 </h3>
                                 <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
                             </div>
-                            <?php personagem();?>
+                            <?php /**personagem();**/?>
 
                             <div class="navbar-left col-md-8 col-lg-8">
                                 <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
@@ -515,6 +515,7 @@ function atores(){
 }
 function personagem(){
     add_personagem();
+    list_personagem();
 }
 function add_personagem(){
     $obra_titulo_2=$_SESSION['titulo'];    
@@ -533,5 +534,63 @@ function add_personagem(){
              ?>
         </div>
       </div>
+    <?php
+}
+function list_personagem(){
+     ?>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        
+    <?php
+        include_once ("classes/ConectBD/personagem.php");
+        include_once ("classes/Entidades/personagem.php");
+        $personagemDAO=new personagemDAO();
+        $list=$personagemDAO->Retorna_Todos($_SESSION['titulo'], $_SESSION['data']);
+        
+    if($list){
+        while($row = $list->fetch(PDO::FETCH_ASSOC)){           
+            ?>
+            <div class="panel">
+                <?php if($_SESSION['logado']==1){?>
+                <form method="post" class="navbar-right">
+                <div class="collapse">
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input value="<?php echo $row['nome'];?>" name="personagem_nome" type="text" class="form-control">
+                    </div>
+                </div>
+                <button name="delete_personagem" type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                
+                </form>
+                <?php }?>
+                  <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree<?php echo $row['numero'];?>" aria-expanded="false" aria-controls="collapseThree">
+                          <h4>Temporada <?php echo $row['numero'];?></h4>
+                          
+                      </a>
+                    </h4>
+                  </div>
+                <div id="collapseThree<?php echo $row['numero'];?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+        <?php
+        if($_SESSION['logado']==1){   
+            add_Episodio($row['numero']);
+        }
+                                  
+        list_episodio($row['numero']);                       
+        ?>
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
+    }
+    ?>
+        </div>
     <?php
 }
