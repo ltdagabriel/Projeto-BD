@@ -179,3 +179,72 @@ insert into genero(nome) values
 			('suspense'),
 			('misterio'),
 			('fantasia');
+			
+insert into usuario values
+			('caionakai','Caio','caio@teste.com','123','','01012001','010101','01'),
+			('gabriel','Gabriel','gabriel@teste.com','123','','01012001','010101','01');
+
+insert into obra values
+			('Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','','+16',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 01012001, 010101),
+			('Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','','Livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ), 01012001, 010101),
+			('Van Helsing',' A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','','+14',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ), 01012001, 010101);
+
+insert into genero_obra values
+			('terror', 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+            ('aventura', 'Moana', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
+			('acao', 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ));			
+			
+insert into personagem values 
+			('Jon Snow',''),
+			('Gregor Clegane', ''),
+			('Daenerys Targaryen', ''),
+			('Arya Stark', ''),
+			('Sansa Stark', ''),
+			('Moana', '');
+
+insert into filme values
+			('', 'Moana', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ));
+			
+insert into personagem_obra values
+			('Moana','Moana', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
+			('Jon Snow','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			('Gregor Clegane','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			('Daenerys Targaryen','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			('Arya Stark','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			('Sansa Stark','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+			
+insert into ator values
+			(001, 'Emilia Clarke', 31, '', 'feminino', 'Emilia Isabelle Euphemia Rose Clarke é uma atriz inglesa conhecida pela sua interpretação da personagem Daenerys Targaryen na série de televisão Game of Thrones, da HBO.'),
+			(002, 'Sophie Turner', 21, '', 'feminino', 'Sophie Turner é uma atriz britânica, mais conhecida por interpretar Sansa Stark na série de televisão Game of Thrones.'),
+			(003, 'Kit Harington', 31, '', 'masculino', 'Christopher Catesby "Kit" Harington é um ator inglês de televisão, teatro e cinema. Mais conhecido por interpretar Jon Snow, um dos protagonistas da série Game Of Thrones transmitida desde 2011 pela emissora norte-americana HBO.');
+			(004, 'Auli Cravalho', 16, '', 'feminino', '(Kohala, 22 de novembro de 2000) é uma atriz e cantora estadunidense. Estreou como atriz interpretando a personagem principal do filme animado de 2016 Moana.');
+			
+insert into personagem_ator values
+			(001, 'Daenerys Targaryen'),
+			(002, 'Sansa Stark'),
+			(003, 'Jon Snow'),
+			(004, 'Moana');
+			
+insert into serie values
+			('Completo', 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),
+			('Em lançamento', 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+			
+insert into temporada values
+			('', '', 1, 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),
+			('', '', 1, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			('', '', 2, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+
+insert into episodio values
+			('Ep1', 1, '', '', STR_TO_DATE( "31/07/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),  1),
+			('Ep2', 2, '', '', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep3', 3, '', '', STR_TO_DATE( "30/09/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep4', 4, '', '', STR_TO_DATE( "7/10/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep5', 5, '', '', STR_TO_DATE( "14/10/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep6', 6, '', '', STR_TO_DATE( "21/10/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001,STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep7', 7, '', '', STR_TO_DATE( "28/10/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001,STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep8', 8, '', '', STR_TO_DATE( "4/11/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep9', 9, '', '', STR_TO_DATE( "11/11/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),1),
+			('Ep10', 10, '', '', STR_TO_DATE( "18/11/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep11', 11, '', '', STR_TO_DATE( "25/11/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep12', 12, '', '', STR_TO_DATE( "2/12/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001,STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),  1),
+			('Ep13', 13, '', '', STR_TO_DATE( "9/12/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1);
