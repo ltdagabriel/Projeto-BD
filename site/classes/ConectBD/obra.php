@@ -50,6 +50,58 @@ class obraDAO {
             echo "Falha na consulta: {$ex->getMessage()} \n";
         }
     }
+    function all_coments(){
+         try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM obra O WHERE user_view='true' and NOT EXISTS "
+                    . "(SELECT * FROM usuario U WHERE U.login NOT IN "
+                    . "(SELECT C.usuario_login FROM comentario C WHERE O.titulo=C.obra_titulo and O.data_lancamento=C.obra_data) )");
+            $stmt->execute();
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
+    function by_ator($ator){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM obra O WHERE user_view='true' and titulo IN "
+                    . "(SELECT obra_titulo FROM personagem_obra P2,personagem_ator P WHERE P2.personagem_nome=P.personagem_nome and ator_codigo IN "
+                    . "(SELECT codigo FROM ator A WHERE A.nome=:ator) )");
+            $stmt->execute(array( ":ator"=>$ator));
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
+    function obras_genero_idade($idade,$genero){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento "
+                    . "FROM obra WHERE user_view='true' and titulo and Faixa_Etaria_Idade=:idade IN"
+                    . " (SELECT obra_titulo FROM genero_obra "
+                                . "WHERE genero_nome=:genero and "
+                                . " obra_titulo=titulo and obra_data = data_lancamento)"
+                    );
+                                
+            $param = array(
+                        ":idade"  => $idade,
+                        ":genero"  => $genero
+                );
+            $stmt->execute($param);
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
+    function all_not_coments(){
+         try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM obra O WHERE  user_view='true' and NOT EXISTS "
+                    . "(SELECT * FROM usuario U WHERE U.login IN "
+                    . "(SELECT C.usuario_login FROM comentario C WHERE O.titulo=C.obra_titulo and O.data_lancamento=C.obra_data) )");
+            $stmt->execute();
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
     function delete($titulo,$data){
         try{
 

@@ -39,6 +39,34 @@ class serieDAO {
             echo " Falha ao Retornar todos os Seriados : {$ex->getMessage()} \n";
         }
     }
+    public function mais_3_temporada(){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie S,obra WHERE titulo = obra_titulo and data_lancamento = obra_data and user_view != :view and 3<="
+                    . "(SELECT count(*) FROM temporada T WHERE T.obra_titulo=S.obra_titulo and T.obra_data=S.obra_data)");
+            $param= array(
+                ":view"=>"false"
+            );
+            $stmt->execute($param);
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo " mais_3_temporada : {$ex->getMessage()} \n";
+        }
+    }
+    public function series_temporada_status($temp,$status){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie S,obra WHERE titulo = obra_titulo and data_lancamento = obra_data and user_view != :view and stattus=:stat and :temp<"
+                    . "(SELECT count(*) FROM temporada T WHERE T.obra_titulo=S.obra_titulo and T.obra_data=S.obra_data)");
+            $param= array(
+                ":view"=>"false",
+                ":temp"=>$temp,
+                ":stat"=>$status,
+            );
+            $stmt->execute($param);
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo " mais_1_temporada_completo : {$ex->getMessage()} \n";
+        }
+    }
     public function Get($titulo,$data){
         try {
             $stmt = $this->pdo->prepare("SELECT stattus,obra_titulo,obra_data FROM serie WHERE obra_titulo = :titulo and obra_data = :data");

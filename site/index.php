@@ -44,9 +44,18 @@
                 require_once($map->Interface_Obra());
                 require_once($map->Conect_Filme());
                 require_once($map->Conect_Serie());
+                require_once($map->Conect_Obra());
                 $obra=new UIObra();
                 $filme=new filmeDAO();
                 $serie=new serieDAO();
+                $obraDAO=new obraDAO();
+                
+                $obra->adicionar($obraDAO->all_coments(),"obras comentadas por todos");
+                $obra->adicionar($obraDAO->all_not_coments(),"obras nao comentadas");
+                $obra->adicionar($obraDAO->obras_genero_idade("+16","terror"),"terror para +16");
+                $obra->adicionar($obraDAO->by_ator("Mohana"),"Filmes que o ator mohana esta");
+                $obra->adicionar($serie->mais_3_temporada(),"obras com mais de 3 temporadas");
+                $obra->adicionar($serie->series_temporada_status(1,"Completo"),"obras com pelo menos 1 temporadas e status concluido");
                 
                 $obra->adicionar($filme->Retorna_Todos(),"Filme");
                 $obra->adicionar($serie->Retorna_Todos(),"Seriado");

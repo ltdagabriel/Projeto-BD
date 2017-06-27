@@ -63,6 +63,7 @@ class temporadaDAO {
             echo " Falha ao Retornar todos os Episodios : {$ex->getMessage()} \n";
         }
     }
+    
 
     public function atualizar(temporada $EntTemporada, $obra_titulo, $obra_data, $numero) {
         $foto = $EntEpisodio->get_foto();

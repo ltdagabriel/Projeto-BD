@@ -123,7 +123,8 @@ $_SESSION['editar']=0;
                                 </h3>
                                 <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
                             </div>
-                            <?php /**personagem();**/?>
+                            <?php favorito(); 
+                            /**personagem();**/?>
 
                             <div class="navbar-left col-md-8 col-lg-8">
                                 <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
@@ -593,4 +594,28 @@ function list_personagem(){
     ?>
         </div>
     <?php
+}
+function favorito(){
+    include_once 'classes/ConectBD/favorito.php';
+    $favorito=new favoritaDAO();
+    if($favorito->consultar()==false){
+    ?>
+    <form tipe="get" onsubmit="<?php $favorito->cadastrar();?>">
+        <button  name="add_fav" class="btn btn-sm bg-success" type="submit" >ADD Favorito</button>
+    </form>
+    <?php
+    }
+    else{
+        ?>
+    <form tipe="get" onsubmit="<?php $favorito->remover();?>">
+       <button type="button" name="rem_fav" class="btn btn-sm bg-success" type="submit" >REMOVE Favorito</button>
+    </form><?php
+       }
+}
+
+function deseja_assistir(){
+    
+}
+function assistiu(){
+    
 }
