@@ -123,7 +123,7 @@ $_SESSION['editar']=0;
                                 </h3>
                                 <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
                             </div>
-                            <?php atores();?>
+                            <?php personagem();?>
 
                             <div class="navbar-left col-md-8 col-lg-8">
                                 <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
@@ -512,4 +512,26 @@ function alterar_comentario($data,$comentario){
 }
 function atores(){
     
+}
+function personagem(){
+    add_personagem();
+}
+function add_personagem(){
+    $obra_titulo_2=$_SESSION['titulo'];    
+    $obra_data_2=$_SESSION['data'];    
+    ?>
+    
+        <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#form_personagem" aria-expanded="false" aria-controls="collapseExample">
+            ADD Personagem
+        </button>
+        
+      <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_personagem">
+        <div class="well">
+            <h4>Cadastro de Personagem</h4>
+            <?php
+            include("CRUDDS/cadastro_personagem.php");
+             ?>
+        </div>
+      </div>
+    <?php
 }

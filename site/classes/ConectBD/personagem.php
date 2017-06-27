@@ -3,7 +3,7 @@
     $map=new mapa();
 
 require_once("Conexao.php");
-require_once($map->Entidade_Personagem());
+require_once("classes/Entidades/personagem.php");
 class personagemDAO {
 
     function __construct() {
