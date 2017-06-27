@@ -31,7 +31,7 @@ class comentarioDAO {
     function alterar_comentario($texto, $obra_titulo, $obra_data, $login, $datta) {
         try {
 
-            $stmt = $this->pdo->prepare("UPDATE comentario SET texto = :texto WHERE login = :login and datta = :datta and obra_titulo = :obra_titulo and obra_data = :obra_data");
+            $stmt = $this->pdo->prepare("UPDATE comentario SET texto = :texto WHERE usuario_login = :login and datta = :datta and obra_titulo = :obra_titulo and obra_data = :obra_data");
             $param = array(
                 ":texto" => $texto,
                 ":login" => $login,

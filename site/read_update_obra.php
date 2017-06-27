@@ -445,29 +445,38 @@ function mostra_comentario(){
     <div class="col-md-11 col-lg-11 com-sm-11">
         <div class="caption label-info">
         <?php 
-
+        $usuarioDAO=new usuarioDAO();
+        $user=new usuario();
+        $user=$usuarioDAO->Get($_SESSION['user']);
         while($coment = $str->fetch(PDO::FETCH_ASSOC)){
+            
             ?>
-            <div class="col-lg-12 col-md-12">
-                <p> <?php echo $coment['texto']; ?> </p>
-            </div>
-            <form method="post" class="navbar-right">
-                <div class="collapse">
-                    <div class="form-group">
-                        <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
+            <div class="col-lg-12 col-md-12 col-sm-12" >
+                <div class="well">
+                    <p><?php echo $user->get_nome();?> comentou: <?php echo $_SESSION['data'];?></p>
+                    <p><?php echo $coment['texto']?>
+                    <?php echo alterar_comentario($coment['datta'],$coment['texto']);?> </p>
+                <form method="post" class="navbar-right">
+                    <div class="collapse">
+                        <div class="form-group">
+                            <input value="<?php echo $_SESSION['titulo'];?>" name="titulo" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input value="<?php echo $coment['datta'];?>" name="data_coment" type="text" class="form-control">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input value="<?php echo $_SESSION['data'];?>" name="data" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input value="<?php echo $coment['datta'];?>" name="data_coment" type="text" class="form-control">
-                    </div>
+                    <button name="delete_comentario" type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                </form>
                 </div>
-                <button name="delete_comentario" type="submit" class="btn btn-sm btn-danger">Excluir</button>
-            </form>
+ 
+            </div>
+            
             
             <?php
-            alterar_comentario($coment['datta'],$coment['texto']);
+            
         }
         ?>
         </div>
@@ -496,13 +505,13 @@ if(isset($_POST['delete_comentario'])){
 
 function alterar_comentario($data,$comentario){
     ?>
-    <div class="navbar-right">
-            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#alterar_comentario<?php echo$data; ?>" aria-expanded="false" aria-controls="collapseExample">
-                alterar
-            </button>     
-        </div>
+    
+            <a href"#" class="btn" type="button" data-toggle="collapse" data-target="#alterar_comentario<?php echo strtr($data,array( " " =>"_", "/" => "_", "-" => "_", ":" => "_")); ?>" aria-expanded="false" aria-controls="collapseExample">
+               <img src="http://icon-icons.com/icons2/685/PNG/128/edit_icon-icons.com_61193.png" style="width:1em" >
+            </a>     
         
-      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="alterar_comentario<?php echo$data; ?>">
+        
+      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="alterar_comentario<?php echo strtr($data,array( " " =>"_", "/" => "_", "-" => "_", ":" => "_")); ?>">
         <div class="well">
             <?php
             include("CRUDDS/alterar_comentario.php");

@@ -14,7 +14,7 @@ require_once ($map->Conect_Comentario());
     <div class="form-inline">
             <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button name="alterar_comentario" type="submit" class="btn btn-default">Alterar</button>
+                      <button name="alterar_comentario<?php echo strtr($data,array( " " =>"_", "/" => "_", "-" => "_", ":" => "_")); ?>" type="submit" class="btn btn-default">Alterar</button>
                     </div>
             </div>
             
@@ -26,7 +26,7 @@ require_once ($map->Conect_Comentario());
 
 
 <?php
-if (isset($_POST['alterar_comentario'])) {
+if (isset($_POST['alterar_comentario'.strtr($data,array( " " =>"_", "/" => "_", "-" => "_", ":" => "_"))])) {
     $comentarioDAO = new comentarioDAO();
     
     $texto = $_POST['comentario'];
@@ -38,7 +38,7 @@ $y=$comentarioDAO->alterar_comentario($texto, $_SESSION['titulo'], $_SESSION['da
     if($y){
         ?>
         <script language='javascript' type='text/javascript'>
-            alert('Comentário alterado!');window.location.href='read_update_obra.php';
+           window.location.href='read_update_obra.php';
         </script>
         <?php
     }
