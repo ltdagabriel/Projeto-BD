@@ -185,9 +185,9 @@ insert into usuario values
 			('gabriel','Gabriel','gabriel@teste.com','123','', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ),010101,'01');
 
 insert into obra values
-			('Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','','+16',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 01012001, 010101,'true'),
-			('Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','','Livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ), 01012001, 010101,'true'),
-			('Van Helsing',' A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','','+14',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ), 01012001, 010101,'true');
+			('Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','http://segredosdomundo.r7.com/wp-content/uploads/2015/04/1100.jpg','+16',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 01012001, 010101,'true'),
+			('Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','https://lumiere-a.akamaihd.net/v1/images/moana-fallback_fde4d101.jpeg','Livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ), 01012001, 010101,'true'),
+			('Van Helsing',' A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','https://static.omelete.uol.com.br/media/extras/conteudos/vanhelsing01.jpg','+14',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ), 01012001, 010101,'true');
 
 insert into genero_obra values
 			('terror', 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
@@ -231,8 +231,10 @@ insert into serie values
 			
 insert into temporada values
 			('', '', 1, 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),
-			('', '', 1, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
-			('', '', 2, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+            ('', '', 1, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+            ('', '', 2, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+            ('', '', 3, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+            ('', '', 4, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
 
 insert into episodio values
 			('Ep1', 1, '', '', STR_TO_DATE( "31/07/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),  1),
