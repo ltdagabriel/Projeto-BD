@@ -54,7 +54,10 @@
                 $obra->adicionar($obraDAO->all_not_coments(),"obras nao comentadas");
                 $obra->adicionar($obraDAO->obras_genero_idade("+16","terror"),"terror para +16");
                 $obra->adicionar($obraDAO->by_ator("Auli Cravalho"),"Filmes que o ator Auli Cravalho esta");
+                $obra->adicionar($obraDAO->all_by_genero("feminino"),"Obras apenas com mulheres atuando");
                 $obra->adicionar($serie->mais_3_temporada(),"obras com mais de 3 temporadas");
+                $obra->adicionar($serie->menores_by_idade('40'),"obras com atores com idade inferior a 40 anos");
+                $obra->adicionar($serie->titulo_minimo_temporada("Game of Thrones", 1)," seriados com titulo = Game of Trhones com pelo menos 1 temporada");
                 $obra->adicionar($serie->series_temporada_status(1,"Completo"),"obras com pelo menos 1 temporadas e status concluido");
                 
                 $obra->adicionar($filme->Retorna_Todos(),"Filme");

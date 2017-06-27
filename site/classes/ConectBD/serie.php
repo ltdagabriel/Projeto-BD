@@ -52,6 +52,32 @@ class serieDAO {
             echo " mais_3_temporada : {$ex->getMessage()} \n";
         }
     }
+    public function titulo_minimo_temporada($titulo,$temporada){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie S,obra WHERE titulo = obra_titulo and data_lancamento = obra_data and user_view != :view and titulo=:titulo and :temp <="
+                    . "(SELECT count(*) FROM temporada T WHERE T.obra_titulo=S.obra_titulo and T.obra_data=S.obra_data)");
+            $param= array(
+                ":view"=>"false",
+                ":temp"=>$temporada,
+                ":titulo"=>$titulo,
+            );
+            $stmt->execute($param);
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo " mais_1_temporada_completo : {$ex->getMessage()} \n";
+        }
+    }
+    public function menores_by_idade($idade){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM obra O WHERE user_view='true' and NOT EXISTS "
+                    . "(SELECT obra_titulo FROM personagem_obra P2,personagem_ator P WHERE P2.personagem_nome=P.personagem_nome and O.titulo=obra_titulo and ator_codigo IN "
+                    . "(SELECT codigo FROM ator A WHERE A.idade >= :idade) )");
+            $stmt->execute(array( ":idade"=>$idade));
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
     public function series_temporada_status($temp,$status){
         try {
             $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie S,obra WHERE titulo = obra_titulo and data_lancamento = obra_data and user_view != :view and stattus=:stat and :temp >="

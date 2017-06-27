@@ -91,6 +91,17 @@ class obraDAO {
             echo "Falha na consulta: {$ex->getMessage()} \n";
         }
     }
+    function all_by_genero($sexo){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM obra O WHERE user_view='true' and NOT EXISTS "
+                    . "(SELECT obra_titulo FROM personagem_obra P2,personagem_ator P WHERE P2.personagem_nome=P.personagem_nome and O.titulo=obra_titulo and ator_codigo IN "
+                    . "(SELECT codigo FROM ator A WHERE A.sexo != :sexo) )");
+            $stmt->execute(array( ":sexo"=>$sexo));
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
     function all_not_coments(){
          try {
             $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM obra O WHERE  user_view='true' and NOT EXISTS "
