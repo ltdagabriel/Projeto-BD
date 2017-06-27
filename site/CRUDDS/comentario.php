@@ -1,24 +1,11 @@
 <form id="cadastro" name="cadastro" method="get">
-    
+    <div class="form-group ">
+        <textarea name="texto" type="fieldtext" class="form-control" placeholder=".col-xs-10" rows="3"> </textarea>
+    </div> 
     <div class="form-group">
-            <label for="exampleInputLink2">Comentário</label>
-            <textarea name="texto" type="fieldtext" class="form-control" id="exampleInputName2"> </textarea>
-    </div>
-
-    <div class="form-inline">
-            <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button name="comentar" type="submit" class="btn btn-default">Enviar</button>
-                    </div>
-            </div>
-            <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button name="limpar" type="reset" class="btn btn-default">Limpar</button>
-                    </div>
-            </div>
-            <div class="form-group">
-            <span class="style1" style="color:red">* Campos com * s&atilde;o obrigat&oacute;rios!          </span>
-            </div>
+        <div class="col-sm-offset-2 navbar-right">
+          <button name="comentar" type="submit" class="btn btn-default">Enviar</button>
+        </div>
     </div>
 </form>
 

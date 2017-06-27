@@ -75,82 +75,77 @@ $_SESSION['editar']=0;
         <div class="row container">
             <div id='conteudo'>
                 <div class=" panel-default panel">
+                    <?php
+                    if($_SESSION['logado']==1){
+                        ?>
+                        <div class="col-md-12 col-lg-12 col-sm-12"> 
+                            <div >    
+                                 <p> </p> 
+                                <?php
+                                $titulo_obra=$obra->get_Titulo();
+                                $data_obra=$obra->get_DataLancamento();
+                                 ?>
+                                 <form method="post" class="navbar-right">
+                                        <div class="collapse">
+                                            <div class="form-group">
+                                                <input value="<?php echo $row["titulo"];?>" name="titulo" type="text" class="form-control">
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <input value="<?php echo $row["data_lancamento"];?>" name="data" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <button name="delete" type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                </form>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <div class="panel-body">
                         <div id="obra_info">
-                                <div class="navbar-left col-md-4 col-lg-4">
-                                    <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
-                                </div>
-                            
-
-                                <div class="navbar-left col-md-8 col-lg-8">
-                                    <h3><?php echo $obra->get_Titulo();?></h3>
-                                    <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
-                                </div>
-
-                                <div class="navbar-left col-md-8 col-lg-8">
-                                    <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
-                                </div>
-                                
+                            <div class="navbar-left col-md-4 col-lg-4">
+                                <img class="img-responsive img-rounded" src="<?php echo $obra->get_Foto();?>">
+                            </div>
+                            <div class="navbar-left col-md-8 col-lg-8">
+                                <h3><?php echo $obra->get_Titulo();?>
                                 <?php
-                                
-                                if($filme->get_Titulo()==$obra->get_Titulo()){
-                                ?>
-                                    <?php 
+                                if($_SESSION['logado']==1){
+                                    if($filme->get_Titulo()==$obra->get_Titulo()){
+                                        ?><a href="#"  data-toggle="modal" data-target="#editar_filme"><img src="http://icon-icons.com/icons2/685/PNG/128/edit_icon-icons.com_61193.png" style="width:1em" ></a> <?php
+                                    }
+                                    else{ 
+                                        ?><a href="#" data-toggle="modal" data-target="#editar_serie"><img src="http://icon-icons.com/icons2/685/PNG/128/edit_icon-icons.com_61193.png" style="width:1em" ></a><?php
+                                    }
                                 }
-                                if($serie->get_Titulo()==$obra->get_Titulo()){
                                 ?>
-                                    <div class="navbar-left col-md-8 col-lg-8">
-                                        <p>Status: <?php echo $serie->get_status();?></p>
-                                    </div>
-                                    <div class="navbar-right col-md-12 col-sm-12 col-lg-12">
-                                         <?php
-                                         if($_SESSION['logado']==1){   
-                                            add_temporada();
-                                         }
-                                            list_temporada();
-                                         ?>
-                                     </div>
-                                    <?php 
-                                }
-                            
-                            if($_SESSION['logado']==1){
-                                ?>
-                                <div class="col-md-12 col-lg-12 col-sm-12"> 
-                                    <div class="navbar-right"    
-                                         <p> </p> 
-                                        <?php
-                                        $titulo_obra=$obra->get_Titulo();
-                                        $data_obra=$obra->get_DataLancamento();
-                                         if($filme->get_Titulo()==$obra->get_Titulo()){
-                                         ?>
-                                         <button class="btn btn-default" data-toggle="modal" data-target="#editar_filme">Editar</button> 
-                                         <?php
-                                         }else{
-                                            
-                                             
-                                         ?>
-                                         <button  class="btn btn-default" data-toggle="modal" data-target="#editar_serie">Editar</button>
-                                         <?php
-                                         }
-                                         ?>
-                                         <form method="post" class="navbar-right">
-                                                <div class="collapse">
-                                                    <div class="form-group">
-                                                        <input value="<?php echo $row["titulo"];?>" name="titulo" type="text" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input value="<?php echo $row["data_lancamento"];?>" name="data" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <button name="delete" type="submit" class="btn btn-danger">Excluir</button>
-                                        </form>
-                                    </div>
+
+                                </h3>
+                                <p>Sinopse: <?php echo $obra->get_Sinopse();?></p>
+                            </div>
+                            <?php atores();?>
+
+                            <div class="navbar-left col-md-8 col-lg-8">
+                                <p>Faixa Etária: <?php echo $obra->get_FEtaria();?></p>
+                            </div>
+
+                            <?php
+                            if($serie->get_Titulo()==$obra->get_Titulo()){
+                            ?>
+                                <div class="navbar-left col-md-12 col-lg-12">
+                                    <p>Status: <?php echo $serie->get_status();?></p>
+                                    <?php
+                                    if($_SESSION['logado']==1){   
+                                        add_temporada();
+                                     }
+                                     list_temporada(); 
+                                     ?>
                                 </div>
                                 <?php
                             }
                             ?>
                         </div>
-                        <?php comentar(); mostra_comentario();?>
+                        <?php comentar();?>
                     </div>
                 </div>
             </div>
@@ -242,14 +237,12 @@ if(isset($_POST['delete_temporada'])){
 }
 function add_temporada(){
     ?>
+    <div style="padding-left: 4px">
+        <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#form_temporada" aria-expanded="false" aria-controls="collapseExample">
+            ADD Temporada
+        </button>     
+    </div>
     <div class="col-sm-12 col-lg-12 col-md-12 navbar navbar-left">        
-        <div class="navbar-left"><h5>Temporadas</h5></div>
-        <div class="navbar-right" style="padding-left: 4px">
-            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#form_temporada" aria-expanded="false" aria-controls="collapseExample">
-                ADD Temporada
-            </button>     
-        </div>
-        
       <div class="collapse col-lg-12 col-md-12 col-sm-12" id="form_temporada">
         <div class="well">
             <h4>Cadastro de Temporada</h4>
@@ -420,19 +413,17 @@ function comentar(){
     $obra_data_2=$_SESSION['data'];    
     ?>
     
-        <div class="navbar-right"">
-            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#form_comentario" aria-expanded="false" aria-controls="collapseExample">
-                Comentário
-            </button>     
-        </div>
         
-      <div class="collapse col-lg-10 col-md-10 col-sm-10" id="form_comentario">
+      <div class="col-lg-12 col-md-12 col-sm-12" id="form_comentario">
         <div class="well">
             <h4>Comentar</h4>
             <?php
             include("CRUDDS/comentario.php");
              ?>
         </div>
+          <?php
+          mostra_comentario();
+          ?>
       </div>
         <?php
 }
@@ -440,22 +431,21 @@ function comentar(){
 function mostra_comentario(){
     require_once 'classes/ConectBD/comentario.php';
     $comentario=new comentarioDAO();
-    $str=$comentario->exibe_comentario($_SESSION['titulo'],$_SESSION['data'],$_SESSION['user']);          
+    $str=$comentario->exibe_comentario($_SESSION['titulo'],$_SESSION['data']);          
     ?>
-    <div class="col-md-11 col-lg-11 com-sm-11">
-        <div class="caption label-info">
+    <div>
         <?php 
         $usuarioDAO=new usuarioDAO();
         $user=new usuario();
-        $user=$usuarioDAO->Get($_SESSION['user']);
+        
         while($coment = $str->fetch(PDO::FETCH_ASSOC)){
-            
+           $user=$usuarioDAO->Get($coment['usuario_login']); 
             ?>
-            <div class="col-lg-12 col-md-12 col-sm-12" >
+            <div >
                 <div class="well">
-                    <p><?php echo $user->get_nome();?> comentou: <?php echo $_SESSION['data'];?></p>
+                    <p><?php echo $user->get_nome();?> comentou: <?php echo $coment['datta'];?></p>
                     <p><?php echo $coment['texto']?>
-                    <?php echo alterar_comentario($coment['datta'],$coment['texto']);?> </p>
+                    <?php if($coment['usuario_login']==$_SESSION['user']){ echo alterar_comentario($coment['datta'],$coment['texto']);?> </p>
                 <form method="post" class="navbar-right">
                     <div class="collapse">
                         <div class="form-group">
@@ -470,6 +460,7 @@ function mostra_comentario(){
                     </div>
                     <button name="delete_comentario" type="submit" class="btn btn-sm btn-danger">Excluir</button>
                 </form>
+                    <?php } ?>
                 </div>
  
             </div>
@@ -479,7 +470,6 @@ function mostra_comentario(){
             
         }
         ?>
-        </div>
     </div>
     <?php 
 }
@@ -519,4 +509,7 @@ function alterar_comentario($data,$comentario){
         </div>
       </div>
     <?php
+}
+function atores(){
+    
 }
