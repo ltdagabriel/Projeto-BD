@@ -53,7 +53,7 @@
                 $obra->adicionar($obraDAO->all_coments(),"obras comentadas por todos");
                 $obra->adicionar($obraDAO->all_not_coments(),"obras nao comentadas");
                 $obra->adicionar($obraDAO->obras_genero_idade("+16","terror"),"terror para +16");
-                $obra->adicionar($obraDAO->by_ator("Mohana"),"Filmes que o ator mohana esta");
+                $obra->adicionar($obraDAO->by_ator("Auli Cravalho"),"Filmes que o ator Auli Cravalho esta");
                 $obra->adicionar($serie->mais_3_temporada(),"obras com mais de 3 temporadas");
                 $obra->adicionar($serie->series_temporada_status(1,"Completo"),"obras com pelo menos 1 temporadas e status concluido");
                 

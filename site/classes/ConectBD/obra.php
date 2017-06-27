@@ -75,7 +75,7 @@ class obraDAO {
     function obras_genero_idade($idade,$genero){
         try {
             $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento "
-                    . "FROM obra WHERE user_view='true' and titulo and Faixa_Etaria_Idade=:idade IN"
+                    . "FROM obra WHERE user_view='true' and Faixa_Etaria_Idade=:idade and titulo IN"
                     . " (SELECT obra_titulo FROM genero_obra "
                                 . "WHERE genero_nome=:genero and "
                                 . " obra_titulo=titulo and obra_data = data_lancamento)"

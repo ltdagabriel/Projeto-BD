@@ -54,7 +54,7 @@ class serieDAO {
     }
     public function series_temporada_status($temp,$status){
         try {
-            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie S,obra WHERE titulo = obra_titulo and data_lancamento = obra_data and user_view != :view and stattus=:stat and :temp<"
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM serie S,obra WHERE titulo = obra_titulo and data_lancamento = obra_data and user_view != :view and stattus=:stat and :temp >="
                     . "(SELECT count(*) FROM temporada T WHERE T.obra_titulo=S.obra_titulo and T.obra_data=S.obra_data)");
             $param= array(
                 ":view"=>"false",
