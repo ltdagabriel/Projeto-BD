@@ -250,3 +250,7 @@ insert into episodio values
 			('Ep11', 11, '', '', STR_TO_DATE( "25/11/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
 			('Ep12', 12, '', '', STR_TO_DATE( "2/12/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001,STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),  1),
 			('Ep13', 13, '', '', STR_TO_DATE( "9/12/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1);
+
+insert into assistiu values
+			('gabriel', 01012001, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			('caionakai', 01012001, 'Moana', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ));
