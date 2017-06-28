@@ -181,18 +181,23 @@ insert into genero(nome) values
 			('fantasia');
 			
 insert into usuario values
-			('caionakai','Caio','caio@teste.com','123','', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ),01010,'01'),
-			('gabriel','Gabriel','gabriel@teste.com','123','', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ),010101,'01');
+			('caionakai','Caio','caionakai@alunos.utfpr.edu.br','123','', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ),01010,'01'),
+			('gabriel','Gabriel','choptian@alunos.utfpr.edu.br','123','', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ),010101,'01'),
+			('andreluis','André','andreluis@utfpr.edu.br','123','', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ),010101,'01');
 
 insert into obra values
 			('Game of Thrones','Baseada nos livros de George R.R. Martin, a série mostra duas famílias poderosas disputando um jogo mortal pelo controle dos Sete Reinos de Westeros para assumir o Trono de Ferro','http://segredosdomundo.r7.com/wp-content/uploads/2015/04/1100.jpg','+16',STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 01012001, 010101,'true'),
 			('Moana','Uma jovem decide velejar através do Oceano Pacífico, com a ajuda de um semi-deus, em uma viagem que pode mudar a vida de todos.','https://lumiere-a.akamaihd.net/v1/images/moana-fallback_fde4d101.jpeg','Livre',STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ), 01012001, 010101,'true'),
-			('Van Helsing',' A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','https://static.omelete.uol.com.br/media/extras/conteudos/vanhelsing01.jpg','+14',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ), 01012001, 010101,'true');
+			('Van Helsing',' A narrativa é protagonizada por Vanessa que, cinco anos após sua morte, Assim, Vanessa Van Helsing se torna a última esperança da humanidade para recuperar o mundo destes sanguinários seres.','https://static.omelete.uol.com.br/media/extras/conteudos/vanhelsing01.jpg','+14',STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ), 01012001, 010101,'true'),
+			('Z Nation',' Z Nation é uma série de televisão americana dos gêneros ação e comédia zumbi exibida pelo Syfy, produzida por The Asylum e criada por Karl Schaefer e Craig Engler. A primeira temporada tem 13 episódios e estreou em 12 de setembro de 2014.','http://www.gstatic.com/tv/thumb/tvbanners/13150168/p13150168_b_v8_aa.jpg','+16',STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ), 01012001, 010101,'true');
 
 insert into genero_obra values
 			('terror', 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
             ('aventura', 'Moana', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" )),
-			('acao', 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" ));			
+			('acao', 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),		
+			('comedia', 'Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" )),	
+			('terror', 'Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ));
+	
 			
 insert into personagem values 
 			('Jon Snow',''),
@@ -200,7 +205,9 @@ insert into personagem values
 			('Daenerys Targaryen', ''),
 			('Arya Stark', ''),
 			('Sansa Stark', ''),
-			('Moana', '');
+			('Moana', ''),
+			('Roberta', ''),
+			('Murphy', '');
 
 insert into filme values
 			('', 'Moana', STR_TO_DATE( "05/01/2017", "%d/%m/%Y" ));
@@ -212,29 +219,39 @@ insert into personagem_obra values
 			('Daenerys Targaryen','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
 			('Arya Stark','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
 			('Sansa Stark','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+			('Roberta','Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" )),
+			('Murphy','Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ));
 			
 insert into ator values
 			(001, 'Emilia Clarke', 31, '', 'feminino', 'Emilia Isabelle Euphemia Rose Clarke é uma atriz inglesa conhecida pela sua interpretação da personagem Daenerys Targaryen na série de televisão Game of Thrones, da HBO.'),
 			(002, 'Sophie Turner', 21, '', 'feminino', 'Sophie Turner é uma atriz britânica, mais conhecida por interpretar Sansa Stark na série de televisão Game of Thrones.'),
 			(003, 'Kit Harington', 31, '', 'masculino', 'Christopher Catesby "Kit" Harington é um ator inglês de televisão, teatro e cinema. Mais conhecido por interpretar Jon Snow, um dos protagonistas da série Game Of Thrones transmitida desde 2011 pela emissora norte-americana HBO.'),
-			(004, 'Auli Cravalho', 16, '', 'feminino', '(Kohala, 22 de novembro de 2000) é uma atriz e cantora estadunidense. Estreou como atriz interpretando a personagem principal do filme animado de 2016 Moana.');
+			(004, 'Auli Cravalho', 16, '', 'feminino', '(Kohala, 22 de novembro de 2000) é uma atriz e cantora estadunidense. Estreou como atriz interpretando a personagem principal do filme animado de 2016 Moana.'),
+			(005, 'Kellita Smith', 48, '', 'feminino', 'Kellita Smith é uma atriz e modelo estadunidense. Seu principal trabalho é como Tenente Roberta Warren no seriado Z Nation. Seu último trabalho foi no filme Z Nation de 2014. Smith nasceu em Chicago, Illinois'),
+			(006, 'Keith Allan', 48, '', 'masculino', 'Nenhum.');
 			
 insert into personagem_ator values
 			(001, 'Daenerys Targaryen'),
 			(002, 'Sansa Stark'),
 			(003, 'Jon Snow'),
-			(004, 'Moana');
+			(004, 'Moana'),
+			(005, 'Roberta'),
+			(006, 'Murphy');
 			
 insert into serie values
 			('Completo', 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),
-			('Em lançamento', 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+			('Em lançamento', 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+			('Completo', 'Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ));
 			
 insert into temporada values
 			('', '', 1, 'Van Helsing', STR_TO_DATE( "23/09/2016", "%d/%m/%Y" )),
             ('', '', 1, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
             ('', '', 2, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
             ('', '', 3, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
-            ('', '', 4, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+            ('', '', 4, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
+            ('', '', 1, 'Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" )),
+            ('', '', 2, 'Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" )),
+            ('', '', 3, 'Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ));
 
 insert into episodio values
 			('Ep1', 1, '', '', STR_TO_DATE( "31/07/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),  1),
@@ -249,7 +266,10 @@ insert into episodio values
 			('Ep10', 10, '', '', STR_TO_DATE( "18/11/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
 			('Ep11', 11, '', '', STR_TO_DATE( "25/11/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
 			('Ep12', 12, '', '', STR_TO_DATE( "2/12/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001,STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ),  1),
-			('Ep13', 13, '', '', STR_TO_DATE( "9/12/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1);
+			('Ep13', 13, '', '', STR_TO_DATE( "9/12/2016", "%d/%m/%Y" ), 'Game of Thrones', 01012001, STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ), 1),
+			('Ep', 1, '', '', STR_TO_DATE( "12/12/2014", "%d/%m/%Y" ), 'Z Nation', 01012001, STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ), 1),
+			('Ep', 2, '', '', STR_TO_DATE( "12/12/2014", "%d/%m/%Y" ), 'Z Nation', 01012001, STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ), 1),
+			('Ep', 3, '', '', STR_TO_DATE( "12/12/2014", "%d/%m/%Y" ), 'Z Nation', 01012001, STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ), 1);
 
 insert into assistiu values
 			('gabriel', 01012001, 'Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
