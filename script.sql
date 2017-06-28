@@ -218,7 +218,7 @@ insert into personagem_obra values
 			('Gregor Clegane','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
 			('Daenerys Targaryen','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
 			('Arya Stark','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
-			('Sansa Stark','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" ));
+			('Sansa Stark','Game of Thrones', STR_TO_DATE( "17/04/2011", "%d/%m/%Y" )),
 			('Roberta','Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" )),
 			('Murphy','Z Nation', STR_TO_DATE( "12/09/2014", "%d/%m/%Y" ));
 			
