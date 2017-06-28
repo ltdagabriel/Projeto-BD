@@ -50,15 +50,15 @@
                 $serie=new serieDAO();
                 $obraDAO=new obraDAO();
                 
-                $obra->adicionar($obraDAO->all_coments(),"obras comentadas por todos");
-                $obra->adicionar($obraDAO->all_not_coments(),"obras nao comentadas");
-                $obra->adicionar($obraDAO->obras_genero_idade("+16","terror"),"terror para +16");
-                $obra->adicionar($obraDAO->by_ator("Auli Cravalho"),"Filmes que o ator Auli Cravalho esta");
-                $obra->adicionar($obraDAO->all_by_genero("feminino"),"Obras apenas com mulheres atuando");
-                $obra->adicionar($serie->mais_3_temporada(),"obras com mais de 3 temporadas");
-                $obra->adicionar($serie->menores_by_idade('40'),"obras com atores com idade inferior a 40 anos");
-                $obra->adicionar($serie->titulo_minimo_temporada("Game of Thrones", 1)," seriados com titulo = Game of Trhones com pelo menos 1 temporada");
-                $obra->adicionar($serie->series_temporada_status(1,"Completo"),"obras com pelo menos 1 temporadas e status concluido");
+                $obra->adicionar($obraDAO->all_coments(),"Todas as obras que foram comentadas por todos os usuários");
+                $obra->adicionar($obraDAO->all_not_coments(),"Todas as obras que não foram comentadas nenhuma vez");
+                $obra->adicionar($obraDAO->obras_genero_idade("+16","terror"),"Todas as obras de terror com faixa etária +16");
+                $obra->adicionar($obraDAO->by_ator("Auli Cravalho"),"Todas as obras que o ator Auli Cravalho representa algum personagem");
+                $obra->adicionar($obraDAO->all_by_genero("feminino"),"Todas as obras onde todos os atores são mulheres");
+                $obra->adicionar($serie->mais_3_temporada(),"Todas as séries com mais de 3 temporadas");
+                $obra->adicionar($serie->menores_by_idade('40'),"Todas as séries onde todos os atores tem menos de 40 anos");
+                $obra->adicionar($serie->titulo_minimo_temporada("Game of Thrones", 1),"Todas as séries com título = Game of Thrones e pelo menos 1 temporada");
+                $obra->adicionar($serie->series_temporada_status(1,"Completo"),"Todas as séries com pelo menos 1 temporada e status completo");
                 
                 $obra->adicionar($filme->Retorna_Todos(),"Filme");
                 $obra->adicionar($serie->Retorna_Todos(),"Seriado");
