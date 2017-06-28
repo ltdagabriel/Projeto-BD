@@ -45,7 +45,9 @@
                 require_once($map->Conect_Filme());
                 require_once($map->Conect_Serie());
                 require_once($map->Conect_Obra());
+                require_once($map->Conect_Usuario());
                 $obra=new UIObra();
+                $user=new usuarioDAO();
                 $filme=new filmeDAO();
                 $serie=new serieDAO();
                 $obraDAO=new obraDAO();
@@ -55,6 +57,9 @@
                 $obra->adicionar($obraDAO->obras_genero_idade("+16","terror"),"terror para +16");
                 $obra->adicionar($obraDAO->by_ator("Auli Cravalho"),"Filmes que o ator Auli Cravalho esta");
                 $obra->adicionar($obraDAO->all_by_genero("feminino"),"Obras apenas com mulheres atuando");
+                if($user->consultarUsername($_SESSION['user'])){
+                    $obra->adicionar($obraDAO->all_coment_not_view($_SESSION['user']),"Todas as obras que eu comentei mas nao assisti");
+                }
                 $obra->adicionar($serie->mais_3_temporada(),"obras com mais de 3 temporadas");
                 $obra->adicionar($serie->menores_by_idade('40'),"obras com atores com idade inferior a 40 anos");
                 $obra->adicionar($serie->titulo_minimo_temporada("Game of Thrones", 1)," seriados com titulo = Game of Trhones com pelo menos 1 temporada");

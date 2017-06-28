@@ -10,9 +10,9 @@ class UIObra{
     public function adicionar($array,$tituloobra){
         ?>
         <div class="panel panel-default ">
-            <h4 style="padding-left: 5px">Todos os <?php echo$tituloobra;?></h4>
+            <h4 style="padding-left: 5px"><a style="text-decoration: none" role="button" data-toggle="collapse" href="#<?php echo strtr($tituloobra,array(' ' => "_", "=" =>"_","+" =>"_","-" =>"_")) ?>" aria-expanded="false"><?php echo$tituloobra;?></a></h4>
             <div class="panel-collapse">
-              <div class="panel-body">
+              <div class="collapse panel-body" id="<?php echo strtr($tituloobra,array(' ' => "_", "=" =>"_","+" =>"_","-" =>"_")) ?>">
                 <?php
                 if($array){
                     while($row = $array->fetch(PDO::FETCH_ASSOC)){

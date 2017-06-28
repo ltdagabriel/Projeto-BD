@@ -61,6 +61,19 @@ class obraDAO {
             echo "Falha na consulta: {$ex->getMessage()} \n";
         }
     }
+    function all_coment_not_view($user){
+        try {
+            $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento "
+                                . "FROM obra O,comentario C "
+                                . "WHERE user_view='true' and C.obra_titulo = O.titulo and C.obra_data=O.data_lancamento and NOT EXISTS "
+                                            . "(SELECT * FROM assistiu A "
+                                            . "WHERE A.usuario_login = :login and obra_titulo = O.titulo and obra_data= O.data_lancamento )");
+            $stmt->execute(array(":login" =>$user));
+            return $stmt;
+        } catch (PDOException $ex) {
+            echo "Falha na consulta: {$ex->getMessage()} \n";
+        }
+    }
     function by_ator($ator){
         try {
             $stmt = $this->pdo->prepare("SELECT titulo,sinopse,foto,Faixa_Etaria_Idade,data_lancamento FROM obra O WHERE user_view='true' and titulo IN "
